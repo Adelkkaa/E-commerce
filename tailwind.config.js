@@ -44,12 +44,17 @@ module.exports = {
         ],
 
         titleS: [
-          "1.4rem",
+          "16px",
           {
-            fontWeight: "600",
+            fontWeight: "700",
           },
         ],
-        textS: ["1.2rem"],
+        textS: [
+          "12px",
+          {
+            fontWeight: 400,
+          },
+        ],
         textM: ["1.4rem"],
         textL: ["1.6rem"],
         textXl: [
@@ -157,6 +162,17 @@ module.exports = {
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",
+        },
+        ".fillBlue svg": {
+          fill: "#3A71C3",
+          path: {
+            stroke: "#3A71C3",
+          },
+        },
+        ".strokeBlue svg": {
+          path: {
+            stroke: "#3A71C3",
+          },
         },
       });
     },

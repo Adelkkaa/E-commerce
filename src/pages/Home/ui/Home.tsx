@@ -1,3 +1,9 @@
+import { ProductCard } from "@/features/ProductCard";
+
 export const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <ProductCard />
+    </div>
+  );
 };
