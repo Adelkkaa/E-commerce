@@ -12,11 +12,21 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
+
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
+      screens: {
+        mb: "360px",
+        ml: "460px",
+        md: "768px",
+        tb: "980px",
+        lg: "1024px",
+        dk: "1300px",
+        xl: "1680px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +61,10 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        blueCustom: "#3A71C3",
+        grayCustom: "#A4B1BB",
+        whiteCustom: "#F8F8F8",
+        blackCustom: "#000000",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -73,5 +87,28 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addComponents, addUtilities }) {
+      addComponents({
+        ".container": {
+          margin: "0 auto",
+          transition: "all 0.2s ease-out",
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          padding: "0px",
+          "@screen mb": {
+            maxWidth: "100%",
+          },
+          "@screen dk": {
+            maxWidth: "1500px",
+          },
+          "@screen xl": {
+            maxWidth: "1500px",
+          },
+        },
+      });
+    },
+  ],
 };
