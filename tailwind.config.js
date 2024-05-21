@@ -17,6 +17,7 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+
     extend: {
       screens: {
         mb: "360px",
@@ -26,6 +27,37 @@ module.exports = {
         lg: "1024px",
         dk: "1300px",
         xl: "1680px",
+      },
+      fontSize: {
+        h1: [
+          "40px",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h2: ["40px"],
+        h3: [
+          "16px",
+          {
+            fontWeight: "700",
+          },
+        ],
+
+        titleS: [
+          "1.4rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        textS: ["1.2rem"],
+        textM: ["1.4rem"],
+        textL: ["1.6rem"],
+        textXl: [
+          "2rem",
+          {
+            fontWeight: "600",
+          },
+        ],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -107,6 +139,24 @@ module.exports = {
           "@screen xl": {
             maxWidth: "1500px",
           },
+        },
+        ".subContainer": {
+          margin: "0 auto",
+          "@screen mb": {
+            maxWidth: "100%",
+          },
+          "@screen dk": {
+            maxWidth: "1500px",
+          },
+          "@screen xl": {
+            maxWidth: "1500px",
+          },
+        },
+        ".fullWidth": {
+          width: "100vw",
+          position: "relative",
+          left: "50%",
+          transform: "translateX(-50%)",
         },
       });
     },

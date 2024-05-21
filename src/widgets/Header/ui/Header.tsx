@@ -4,7 +4,7 @@ import { HeaderInput } from "@/features/HeaderInput";
 import mainLogo from "@/shared/assets/images/MainLogo.jpg";
 import ProfileIcon from "@/shared/assets/images/Profile.svg";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
-import { navigationLinks } from "../constants/navigationLinks";
+import { navigationLinks } from "../../../shared/constants/navigationLinks";
 
 export const Header = () => {
   const { pathname } = useLocation();
