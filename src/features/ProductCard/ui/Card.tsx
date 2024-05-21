@@ -1,9 +1,12 @@
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
+import { useToast } from "@/shared/hooks/use-toast";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 import cardImage from "./mockCard.png";
 
 export const ProductCard = () => {
+  const { toast } = useToast();
+
   return (
     <Card className="group w-[230px] min-h-[288px] cursor-pointer ">
       <CardContent className="flex items-center justify-center w-full bg-whiteCustom relative">
@@ -12,7 +15,15 @@ export const ProductCard = () => {
           <Button variant="icon" size="icon" className="hover:fillBlue">
             <HeartIcon />
           </Button>
-          <Button>Добавить в заказ</Button>
+          <Button
+            onClick={() =>
+              toast({
+                title: "Товар успешно добавлен в корзину",
+              })
+            }
+          >
+            Добавить в заказ
+          </Button>
           <Button variant="icon" size="icon" className="hover:strokeBlue">
             <EyeIcon />
           </Button>
