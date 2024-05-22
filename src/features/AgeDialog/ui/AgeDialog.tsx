@@ -6,7 +6,6 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  Typography,
 } from "@/shared/ui";
 import { FC, useEffect, useState } from "react";
 
@@ -29,7 +28,7 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified }) => {
   };
   return (
     <AlertDialog open={showAgeDialog}>
-      <AlertDialogContent className="p-[50px] pt-[18px] min-w-[700px] gap-7">
+      <AlertDialogContent className="p-[50px] pt-[18px] min-w-[700px] gap-7 !rounded-[10px]">
         <AlertDialogHeader>
           <AlertDialogDescription className="text-textAlertTitle !text-blueCustom mb-7 select-none">
             18+
@@ -42,13 +41,13 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified }) => {
         <AlertDialogFooter className="flex items-center !justify-center gap-7">
           <AlertDialogAction
             onClick={() => handleClickButton(true)}
-            className="flex-1 bg-grayCustom text-white font-bold text-[20px]"
+            className="flex-1 bg-blueCustom text-white font-bold text-[20px]"
           >
             Мне больше 18 лет
           </AlertDialogAction>
           <AlertDialogCancel
             onClick={() => handleClickButton(false)}
-            className="flex-1 bg-blueCustom text-white font-bold text-[20px]"
+            className="flex-1 bg-grayCustom text-white font-bold text-[20px]"
           >
             Мне нет 18 лет
           </AlertDialogCancel>
