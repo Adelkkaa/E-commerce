@@ -55,12 +55,22 @@ module.exports = {
             fontWeight: 400,
           },
         ],
-        textM: ["1.4rem"],
+        textM: ["20px",
+        {
+          fontWeight: 400,
+        },],
         textL: ["1.6rem"],
         textXl: [
           "2rem",
           {
             fontWeight: "600",
+          },
+        ],
+        textAlertTitle: [
+          "200px",
+          {
+            fontWeight: "900",
+            lineHeight: '200px'
           },
         ],
       },

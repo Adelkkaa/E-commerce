@@ -9,7 +9,8 @@ export type Variant =
   | "titleS"
   | "textM"
   | "textL"
-  | "textXl";
+  | "textXl"
+  | 'textAlertTitle';
 
 interface Props {
   variant: Variant;
@@ -28,6 +29,7 @@ const tags: Record<Variant, ElementType> = {
   textL: "p",
   titleS: "p",
   textXl: "p",
+  textAlertTitle: 'p'
 };
 
 const sizes: Record<Variant, string> = {
@@ -39,6 +41,7 @@ const sizes: Record<Variant, string> = {
   textL: "text-textL",
   titleS: "text-titleS",
   textXl: "text-textXl",
+  textAlertTitle: 'text-textAlertTitle'
 };
 
 export const Typography = forwardRef<ReactElement, Props>(

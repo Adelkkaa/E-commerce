@@ -84,6 +84,12 @@
   font-weight: 700;
 }
 
+@font-face {
+  font-family: "Akrobat";
+  src: url("/fonts/Akrobat-Black.otf") format("opentype");
+  font-weight: 900;
+}
+
 html,
 body,
 #root,
