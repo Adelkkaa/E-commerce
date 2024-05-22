@@ -169,7 +169,7 @@ module.exports = {
           },
         },
         ".fullWidth": {
-          width: "100vw",
+          width: 'calc(100vw - 16px)',
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",
