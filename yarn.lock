@@ -2588,6 +2588,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-loading-skeleton: "npm:^3.4.0"
     react-router-dom: "npm:^6.23.1"
     tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.3"
@@ -5311,6 +5312,15 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
+  languageName: node
+  linkType: hard
+
+"react-loading-skeleton@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "react-loading-skeleton@npm:3.4.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/dca2c60d38abd57e658ff5abb02cf62c08b51e09e4c83e107a1fec3ad58d6f0068846b4149ee452d472e35c831b31a00e8cdbdb066dd35c8b47b803fbad1f834
   languageName: node
   linkType: hard
 

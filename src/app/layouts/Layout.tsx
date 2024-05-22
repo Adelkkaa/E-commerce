@@ -1,3 +1,4 @@
+import "react-loading-skeleton/dist/skeleton.css";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "@/widgets/Header";
