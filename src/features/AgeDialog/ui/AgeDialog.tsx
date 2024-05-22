@@ -11,10 +11,10 @@ import {
 import { FC, useEffect, useState } from "react";
 
 interface IAgeDialog {
-  setIsVerified: (arg: boolean) => void
+  setIsVerified: (arg: boolean) => void;
 }
 
-export const AgeDialog: FC<IAgeDialog> = ({setIsVerified}) => {
+export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified }) => {
   const [showAgeDialog, setShowAgeDialog] = useState(false);
 
   useEffect(() => {
@@ -23,33 +23,33 @@ export const AgeDialog: FC<IAgeDialog> = ({setIsVerified}) => {
   }, []);
 
   const handleClickButton = (result: boolean) => {
-    localStorage.setItem("isVerifiedAge", String(result))
-    setShowAgeDialog(false)
-    setIsVerified(result)
-  }
+    localStorage.setItem("isVerifiedAge", String(result));
+    setShowAgeDialog(false);
+    setIsVerified(result);
+  };
   return (
     <AlertDialog open={showAgeDialog}>
-      <AlertDialogContent className="p-[50px] min-w-[700px]">
+      <AlertDialogContent className="p-[50px] pt-[18px] min-w-[700px] gap-7">
         <AlertDialogHeader>
-          <AlertDialogDescription className="flex flex-col gap-8 mb-8">
-            <Typography
-              variant="textAlertTitle"
-              as={"span"}
-              className="text-blueCustom"
-            >
-              18+
-            </Typography>
-            <Typography variant="textM" as={"span"} className="text-black">
-              Сайт содержит информацию для лиц совершеннолетнего возраста. Для
-              продолжения просмотра сайта необходимо подтвердить свой возвраст
-            </Typography>
+          <AlertDialogDescription className="text-textAlertTitle !text-blueCustom mb-7 select-none">
+            18+
+          </AlertDialogDescription>
+          <AlertDialogDescription className="text-textM !text-black select-none">
+            Сайт содержит информацию для лиц совершеннолетнего возраста. <br />
+            Для продолжения просмотра сайта необходимо подтвердить свой возвраст
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex items-center !justify-center gap-7">
-          <AlertDialogAction onClick={() => handleClickButton(true)} className="flex-1 bg-grayCustom text-white font-bold text-[20px]">
+          <AlertDialogAction
+            onClick={() => handleClickButton(true)}
+            className="flex-1 bg-grayCustom text-white font-bold text-[20px]"
+          >
             Мне больше 18 лет
           </AlertDialogAction>
-          <AlertDialogCancel onClick={() => handleClickButton(false)} className="flex-1 bg-blueCustom text-white font-bold text-[20px]">
+          <AlertDialogCancel
+            onClick={() => handleClickButton(false)}
+            className="flex-1 bg-blueCustom text-white font-bold text-[20px]"
+          >
             Мне нет 18 лет
           </AlertDialogCancel>
         </AlertDialogFooter>

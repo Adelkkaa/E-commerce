@@ -58,6 +58,7 @@ module.exports = {
         textM: ["20px",
         {
           fontWeight: 400,
+          lineHeight: '25px'
         },],
         textL: ["1.6rem"],
         textXl: [
