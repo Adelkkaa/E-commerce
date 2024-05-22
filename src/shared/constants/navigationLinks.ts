@@ -33,6 +33,18 @@ export const allLinks = [
     searchBreadcrumb: "productId",
     description: "Информация о товаре",
   },
+  {
+    title: "Согласие на обработку персональных данных",
+    href: "/agreement",
+    searchBreadcrumb: "/agreement",
+    description: "Согласие на обработку персональных данных",
+  },
+  {
+    title: "Политика конфиденциальности",
+    href: "/policy",
+    searchBreadcrumb: "/policy",
+    description: "Политика конфиденциальности",
+  },
 ];
 
 export const redirectLinks = ["/product"];

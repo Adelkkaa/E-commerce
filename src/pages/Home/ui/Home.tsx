@@ -1,12 +1,12 @@
-import { ProductCardSkeleton } from "@/entities/ProdductCardSkeleton";
+import { ProductCardSkeleton } from "@/entities/ProductCardSkeleton";
 import { ProductCard } from "@/features/ProductCard";
 
 
 export const Home = () => {
   return (
-    <div>
+    <section>
       <ProductCard />
       <ProductCardSkeleton />
-    </div>
+    </section>
   );
 };

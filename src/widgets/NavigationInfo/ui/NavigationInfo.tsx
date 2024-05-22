@@ -11,7 +11,7 @@ export const NavigationInfo = () => {
     Object.entries(params).length > 0
       ? Object.keys(params)[0] === link.searchBreadcrumb
       : link.href === pathname,
-  )?.description;
+  )?.description || '404';
   useDocumentTitle(currentDesc || 'e-commerce');
 
 
