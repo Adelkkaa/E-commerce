@@ -5,6 +5,8 @@ import { Layout } from "../layouts/Layout";
 
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
+const Cart = lazy(() => import("@/pages/Cart"));
+const Product = lazy(() => import("@/pages/Product"));
 
 const routes: RouteObject[] = [
   {
@@ -14,6 +16,18 @@ const routes: RouteObject[] = [
   {
     path: "/about",
     element: <About />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
+  },
+  {
+    path: "/contacts",
+    element: <Cart />,
+  },
+  {
+    path: "/product/:productId",
+    element: <Product />,
   },
   {
     path: "*",

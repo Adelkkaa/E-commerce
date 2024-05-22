@@ -1,3 +1,12 @@
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "./Breadcrumb";
 export { Button } from "./Button";
 export {
   Card,

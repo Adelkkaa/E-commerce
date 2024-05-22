@@ -4,7 +4,7 @@ import { HeaderInput } from "@/features/HeaderInput";
 import mainLogo from "@/shared/assets/images/MainLogo.jpg";
 import ProfileIcon from "@/shared/assets/images/Profile.svg";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
-import { navigationLinks } from "../../../shared/constants/navigationLinks";
+import { headerLinks } from "../../../shared/constants/navigationLinks";
 
 export const Header = () => {
   const { pathname } = useLocation();
@@ -16,7 +16,7 @@ export const Header = () => {
       </Link>
       <div className="flex w-full gap-[81px]">
         <nav className="flex gap-[44px]">
-          {navigationLinks.map((item) => (
+          {headerLinks.map((item) => (
             <Link
               key={item.href}
               className={clsx("text-[20px] hover:text-blueCustom font-bold", {
