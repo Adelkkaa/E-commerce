@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { Breadcrumb } from "@/features/Breadcrumb";
 import { allLinks } from "@/shared/constants/navigationLinks";
 import { Typography } from "@/shared/ui";
+import useDocumentTitle from "@/shared/hooks/use-documentTitle";
 
 export const NavigationInfo = () => {
   const { pathname } = useLocation();
@@ -11,6 +12,8 @@ export const NavigationInfo = () => {
       ? Object.keys(params)[0] === link.searchBreadcrumb
       : link.href === pathname,
   )?.description;
+  useDocumentTitle(currentDesc || 'e-commerce');
+
 
   return (
     <div className="fullWidth py-[49px] bg-whiteCustom ">
