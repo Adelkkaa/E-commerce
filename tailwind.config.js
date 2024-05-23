@@ -42,6 +42,12 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        titleXS: [
+          "14px",
+          {
+            fontWeight: "700",
+          },
+        ],
 
         titleS: [
           "16px",

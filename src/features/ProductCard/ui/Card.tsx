@@ -8,7 +8,7 @@ export const ProductCard = () => {
   const { toast } = useToast();
 
   return (
-    <Card className="group w-[230px] min-h-[288px] max-h-[288px] cursor-pointer ">
+    <Card className="group max-w-[230px] w-[230px] min-h-[288px] max-h-[288px] cursor-pointer ">
       <CardContent className="flex items-center justify-center w-full bg-whiteCustom relative">
         <img src={cardImage} alt="card" className="w-[198px] h-[188px]" />
         <div className="absolute bottom-0 p-2 opacity-0 group-hover:opacity-100 w-full flex justify-center gap-[8px]">
