@@ -36,6 +36,7 @@ export {
   CardTitle,
 } from "./Card";
 export { Checkbox } from "./Checkbox";
+export { Input as ControlledInput } from "./ControlledInput";
 export { Input, type InputProps } from "./Input";
 export { MaskedInput } from "./MaskedInput";
 export {

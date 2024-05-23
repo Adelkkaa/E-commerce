@@ -624,6 +624,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "@hookform/resolvers@npm:3.4.2"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: 10c0/cb8a3e0cc1c9aeaf2adad585f29badf342a96da9cfdf4efa1168aadb7ef52f440cac5cc6fedf0fda6a52effd27a5c859692c89bb99ed5c76d03064aea1f0d684
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -2840,6 +2849,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "e-commerce@workspace:."
   dependencies:
+    "@hookform/resolvers": "npm:^3.4.2"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-alert-dialog": "npm:^1.0.5"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
@@ -2873,6 +2883,7 @@ __metadata:
     typescript: "npm:^5.2.2"
     vite: "npm:^5.2.0"
     vite-plugin-svgr: "npm:^4.2.0"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -6997,5 +7008,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.23.8":
+  version: 3.23.8
+  resolution: "zod@npm:3.23.8"
+  checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
   languageName: node
   linkType: hard
