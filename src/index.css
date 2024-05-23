@@ -99,6 +99,7 @@ body,
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
   width: 100%;
+  scrollbar-gutter: stable;
 }
 
 @layer base {
