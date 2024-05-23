@@ -49,17 +49,25 @@ module.exports = {
             fontWeight: "700",
           },
         ],
-        textS: [
+        textXS: [
           "12px",
           {
             fontWeight: 400,
           },
         ],
-        textM: ["20px",
-        {
-          fontWeight: 400,
-          lineHeight: '25px'
-        },],
+        textS: [
+          "14px",
+          {
+            fontWeight: 400,
+          },
+        ],
+        textM: [
+          "20px",
+          {
+            fontWeight: 400,
+            lineHeight: "25px",
+          },
+        ],
         textL: ["1.6rem"],
         textXl: [
           "2rem",
@@ -71,7 +79,13 @@ module.exports = {
           "200px",
           {
             fontWeight: "900",
-            lineHeight: '200px'
+            lineHeight: "200px",
+          },
+        ],
+        buttonM: [
+          "16px",
+          {
+            fontWeight: "700",
           },
         ],
       },
@@ -169,7 +183,7 @@ module.exports = {
           },
         },
         ".fullWidth": {
-          width: 'calc(100vw - 16px)',
+          width: "calc(100vw - 16px)",
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",
