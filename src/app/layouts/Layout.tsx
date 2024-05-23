@@ -1,10 +1,11 @@
 import "react-loading-skeleton/dist/skeleton.css";
 import { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { AgeDialog } from "@/features/AgeDialog";
+import { Footer } from "@/widgets/Footer";
 import { Header } from "@/widgets/Header";
 import { NavigationInfo } from "@/widgets/NavigationInfo";
 import { Toaster } from "../providers/toastProvider";
-import { AgeDialog } from "@/features/AgeDialog";
 
 export const Layout = () => {
   const [isVerified, setIsVerified] = useState(true);
@@ -22,6 +23,7 @@ export const Layout = () => {
           </main>
           <Toaster />
           <AgeDialog setIsVerified={setIsVerified} />
+          <Footer />
         </>
       )}
     </div>

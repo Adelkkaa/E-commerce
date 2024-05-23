@@ -55,6 +55,12 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        textXXS: [
+          "10px",
+          {
+            fontWeight: 400,
+          },
+        ],
         textXS: [
           "12px",
           {

@@ -6,6 +6,7 @@ export type Variant =
   | "h2"
   | "h3"
   | "textS"
+  | "textXXS"
   | "textXS"
   | "titleXS"
   | "titleS"
@@ -33,6 +34,7 @@ const tags: Record<Variant, ElementType> = {
   textL: "p",
   titleS: "p",
   titleXS: "p",
+  textXXS: "p",
   textXl: "p",
   textAlertTitle: "p",
   buttonM: "p",
@@ -42,6 +44,7 @@ const sizes: Record<Variant, string> = {
   h1: "text-h1",
   h2: "text-h2",
   h3: "text-h3",
+  textXXS: "text-textXXS",
   textXS: "text-textXS",
   textS: "text-textS",
   textM: "text-textM",
