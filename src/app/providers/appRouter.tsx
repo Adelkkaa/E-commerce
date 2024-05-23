@@ -10,8 +10,6 @@ const Product = lazy(() => import("@/pages/Product"));
 const Agreeement = lazy(() => import("@/pages/Agreement"));
 const Policy = lazy(() => import("@/pages/Policy"));
 
-
-
 const routes: RouteObject[] = [
   {
     path: "/",
