@@ -106,6 +106,18 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        modalTitle: [
+          "40px",
+          {
+            fontWeight: "700",
+          },
+        ],
+        modalDesc: [
+          "16px",
+          {
+            fontWeight: "400",
+          },
+        ],
       },
       colors: {
         border: "hsl(var(--border))",

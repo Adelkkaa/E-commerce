@@ -14,7 +14,9 @@ export type Variant =
   | "textL"
   | "textXl"
   | "textAlertTitle"
-  | "buttonM";
+  | "buttonM"
+  | "modalTitle"
+  | "modalDesc";
 
 interface Props {
   variant: Variant;
@@ -38,6 +40,8 @@ const tags: Record<Variant, ElementType> = {
   textXl: "p",
   textAlertTitle: "p",
   buttonM: "p",
+  modalTitle: "p",
+  modalDesc: "p",
 };
 
 const sizes: Record<Variant, string> = {
@@ -54,6 +58,8 @@ const sizes: Record<Variant, string> = {
   textXl: "text-textXl",
   textAlertTitle: "text-textAlertTitle",
   buttonM: "text-buttonM",
+  modalTitle: "text-modalTitle",
+  modalDesc: "text-modalDesc",
 };
 
 export const Typography = forwardRef<ReactElement, Props>(
