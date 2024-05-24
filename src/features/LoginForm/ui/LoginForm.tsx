@@ -19,8 +19,8 @@ import { dialogActions } from "@/entities/Dialog";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const LoginForm = () => {
-    const { selectCurrentDialog } = dialogActions;
-    const dispatch = useAppDispatch();
+  const { selectCurrentDialog } = dialogActions;
+  const dispatch = useAppDispatch();
   const methods = useForm<
     ILoginFormSchemaInitialType,
     unknown,
@@ -79,7 +79,6 @@ export const LoginForm = () => {
               variant="link"
               className="!text-modalDesc  items-start !p-0 !pl-1 h-auto"
               onClick={() => dispatch(selectCurrentDialog("contact"))}
-
             >
               <span className="text-blueCustom underline">
                 Оставьте контакты
@@ -92,6 +91,6 @@ export const LoginForm = () => {
           </Typography>
         </div>
       </DialogFooter>
-      </>
+    </>
   );
 };

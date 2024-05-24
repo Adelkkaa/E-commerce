@@ -18,8 +18,12 @@ import {
   IContactFormSchemaType,
 } from "../model/ContactForm.schema";
 import { Link } from "react-router-dom";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const ContactForm = () => {
+  const { selectCurrentDialog } = dialogActions;
+  const dispatch = useAppDispatch();
   const methods = useForm<
     IContactFormSchemaInitialType,
     unknown,
@@ -37,7 +41,7 @@ export const ContactForm = () => {
 
   const onSubmit: SubmitHandler<IContactFormSchemaType> = async (newData) => {
     console.log("Form Data", newData);
-    reset();
+    dispatch(selectCurrentDialog("contactSuccess"));
   };
   return (
     <>
