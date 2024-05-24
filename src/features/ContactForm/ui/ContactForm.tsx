@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  PhoneInput,
   Typography,
 } from "@/shared/ui";
 import {
@@ -58,7 +59,7 @@ export const ContactForm = () => {
         >
           <ControlledInput name="fio" labelText="Ваше ФИО" />
           <ControlledInput name="email" labelText="Email" />
-          <ControlledInput name="phone" labelText="Телефон" />
+          <PhoneInput name="phone" labelText="Телефон" />
           <ControlledTextarea name="message" labelText="Сообщение" />
         </form>
       </FormProvider>

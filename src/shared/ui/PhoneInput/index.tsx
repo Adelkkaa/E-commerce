@@ -1,30 +1,42 @@
 import React from "react";
 import { FieldPath, FieldValues, useController } from "react-hook-form";
+import { IMaskInput } from "react-imask";
 import { cn } from "@/shared/lib/utils";
 
-type TextareaDefaultProps =
-  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-    labelClassname?: string;
-    labelText?: string;
-  };
+type InputDefaultProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  labelClassname?: string;
+  labelText?: string;
+  wrapperClassname?: string;
+};
 
-type TTextField<
+type TInputField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = {
   name: TName;
-} & TextareaDefaultProps;
+} & InputDefaultProps;
 
-const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
-  ({ className, labelClassname, labelText, name, disabled, ...props }, ref) => {
+const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
+  (
+    {
+      className,
+      labelClassname,
+      wrapperClassname,
+      labelText,
+      name,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
     const {
-      field,
+      field: { onChange, ...field },
       fieldState: { error },
     } = useController({
       name,
     });
     return (
-      <div className="flex flex-col gap-2">
+      <div className={cn("flex flex-col gap-2", wrapperClassname)}>
         <label
           className={cn(
             "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer",
@@ -42,13 +54,21 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
           >
             {labelText}
           </span>
-          <textarea
+          <IMaskInput
+            overwrite
+            definitions={{
+              "#": /[0-9]/,
+            }}
             className={cn(
-              "resize-none min-h-[70px] py-1 !text-black text-textM placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "resize-none !text-black text-textL placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               className
             )}
+            inputRef={ref}
+            mask="+7 (###) ###-##-##"
+            onAccept={(value) => onChange({ target: { name, value } })}
             {...field}
             {...props}
+            disabled={disabled}
             ref={ref}
           />
         </label>
@@ -61,6 +81,6 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
     );
   }
 );
-ControlledTextarea.displayName = "ControlledTextarea";
+PhoneInput.displayName = "PhoneInput";
 
-export { ControlledTextarea };
+export { PhoneInput };
