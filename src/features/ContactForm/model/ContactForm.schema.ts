@@ -12,7 +12,7 @@ export const ContactFormSchema = z.object({
       required_error: "Поле обязательно для заполнения",
     })
     .transform((val) => val.replaceAll(" ", ""))
-    .refine((val) => val.length === 12, { message: "Неправильный номер" }),
+    .refine((val) => val.length === 16, { message: "Неправильный номер" }),
   message: z
     .string({ required_error: "Поле обязательно для заполнения" })
     .min(3, "Минимальное количество символов - 3"),
