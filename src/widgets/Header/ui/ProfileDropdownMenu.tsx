@@ -33,7 +33,10 @@ export const ProfileDropdownMenu = () => {
           <Typography variant="textXXS" className="text-center">
             Нет аккаунта?
           </Typography>
-          <DropdownMenuItem className="!text-textXXS text-center text-blueCustom p-0 pl-[2px] underline cursor-pointer focus:bg-transparent focus:text-blueCustom">
+          <DropdownMenuItem
+            onClick={() => dispatch(selectCurrentDialog("contact"))}
+            className="!text-textXXS text-center text-blueCustom p-0 pl-[2px] underline cursor-pointer focus:bg-transparent focus:text-blueCustom"
+          >
             Оставьте контакты
           </DropdownMenuItem>
           <Typography variant="textXXS" className="text-center">

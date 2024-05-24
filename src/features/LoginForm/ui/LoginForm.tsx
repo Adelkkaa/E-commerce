@@ -15,8 +15,12 @@ import {
   ILoginFormSchemaType,
   LoginFormSchema,
 } from "../model/LoginForm.schema";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const LoginForm = () => {
+    const { selectCurrentDialog } = dialogActions;
+    const dispatch = useAppDispatch();
   const methods = useForm<
     ILoginFormSchemaInitialType,
     unknown,
@@ -35,7 +39,7 @@ export const LoginForm = () => {
     reset();
   };
   return (
-    <DialogContent className="!max-w-500 px-[20px] gap-[30px]">
+    <>
       <DialogHeader className="gap-[10px] justify-center items-center">
         <DialogTitle className="text-modalTitle text-center ">
           Вход в аккаунт
@@ -74,6 +78,8 @@ export const LoginForm = () => {
             <Button
               variant="link"
               className="!text-modalDesc  items-start !p-0 !pl-1 h-auto"
+              onClick={() => dispatch(selectCurrentDialog("contact"))}
+
             >
               <span className="text-blueCustom underline">
                 Оставьте контакты
@@ -86,6 +92,6 @@ export const LoginForm = () => {
           </Typography>
         </div>
       </DialogFooter>
-    </DialogContent>
+      </>
   );
 };

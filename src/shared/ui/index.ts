@@ -92,3 +92,4 @@ export {
   ToastViewport,
 } from "./Toast";
 export { Typography } from "./Typography";
+export { ControlledTextarea } from "./ControlledTextarea";

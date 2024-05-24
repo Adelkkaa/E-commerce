@@ -102,6 +102,15 @@ body,
   scrollbar-gutter: stable;
 }
 
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Для Firefox */
+textarea {
+  scrollbar-width: none;
+}
+
 @layer base {
   * {
     @apply border-border;
