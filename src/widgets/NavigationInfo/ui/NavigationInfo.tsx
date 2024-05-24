@@ -19,7 +19,9 @@ export const NavigationInfo = () => {
     <div className="fullWidth py-[49px] bg-whiteCustom ">
       <div className="subContainer flex flex-col">
         <Breadcrumb />
-        <Typography variant="h1">{currentDesc}</Typography>
+        <Typography variant="h1" className="select-none">
+          {currentDesc}
+        </Typography>
       </div>
     </div>
   );

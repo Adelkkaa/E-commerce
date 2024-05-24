@@ -38,6 +38,18 @@ export {
 export { Checkbox } from "./Checkbox";
 export { Input as ControlledInput } from "./ControlledInput";
 export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from "./Dialog";
+export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -56,6 +68,18 @@ export {
 } from "./DropdownMenu";
 export { Input, type InputProps } from "./Input";
 export { MaskedInput } from "./MaskedInput";
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./Select";
 export {
   Toast,
   ToastAction,

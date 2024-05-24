@@ -1,4 +1,6 @@
+import { dialogActions } from "@/entities/Dialog";
 import ProfileIcon from "@/shared/assets/images/Profile.svg";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   DropdownMenu,
@@ -10,13 +12,17 @@ import {
 } from "@/shared/ui";
 
 export const ProfileDropdownMenu = () => {
+  const { selectCurrentDialog } = dialogActions;
+  const dispatch = useAppDispatch();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="bg-white hover:strokeBlue w-[36px] h-[36px] p-2 outline-none">
         <ProfileIcon className="cursor-pointer w-full h-full" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[260px]">
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => dispatch(selectCurrentDialog("login"))}
+        >
           <Button variant="ghost" className="text-textM w-full text-center">
             Войти
           </Button>
