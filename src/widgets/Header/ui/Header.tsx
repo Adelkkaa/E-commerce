@@ -2,10 +2,9 @@ import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 import { HeaderInput } from "@/features/HeaderInput";
 import mainLogo from "@/shared/assets/images/MainLogo.jpg";
-import ProfileIcon from "@/shared/assets/images/Profile.svg";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
 import { headerLinks } from "@/shared/constants/navigationLinks";
-import { Button } from "@/shared/ui";
+import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 
 export const Header = () => {
   const { pathname } = useLocation();
@@ -37,13 +36,7 @@ export const Header = () => {
           >
             <CartIcon className="cursor-pointer w-[20px] h-[20px]" />
           </Link>
-          <Button
-            variant="icon"
-            size="icon"
-            className="hover:strokeBlue w-[36px] h-[36px]"
-          >
-            <ProfileIcon className="cursor-pointer" />
-          </Button>
+          <ProfileDropdownMenu />
         </div>
       </div>
     </header>

@@ -37,6 +37,23 @@ export {
 } from "./Card";
 export { Checkbox } from "./Checkbox";
 export { Input as ControlledInput } from "./ControlledInput";
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./DropdownMenu";
 export { Input, type InputProps } from "./Input";
 export { MaskedInput } from "./MaskedInput";
 export {
