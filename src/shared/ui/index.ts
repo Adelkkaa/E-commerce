@@ -94,3 +94,4 @@ export {
 export { Typography } from "./Typography";
 export { ControlledTextarea } from "./ControlledTextarea";
 export { PhoneInput } from "./PhoneInput";
+export { ControlledSelect } from "./ControlledSelect";

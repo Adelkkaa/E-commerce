@@ -2,6 +2,7 @@ import { dialogActions } from "@/entities/Dialog";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
 import { LoginForm } from "@/features/LoginForm";
+import { StoreDialog } from "@/features/StoreDialog";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { cn } from "@/shared/lib/utils";
 import { Dialog, DialogContent } from "@/shared/ui";
@@ -30,6 +31,8 @@ export const SharedDialog = () => {
         {currentDialog === "login" && <LoginForm />}
         {currentDialog === "contact" && <ContactForm />}
         {currentDialog === "contactSuccess" && <ContactSuccess />}
+        {currentDialog === "trading" && <StoreDialog />}
+
       </DialogContent>
     </Dialog>
   );

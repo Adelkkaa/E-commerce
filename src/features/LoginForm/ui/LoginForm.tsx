@@ -36,6 +36,7 @@ export const LoginForm = () => {
 
   const onSubmit: SubmitHandler<ILoginFormSchemaType> = async (newData) => {
     console.log("Form Data", newData);
+    dispatch(selectCurrentDialog("trading"));
     reset();
   };
   return (
