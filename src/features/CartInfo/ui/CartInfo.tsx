@@ -56,18 +56,21 @@ export const CartInfo = () => {
             ]}
             placeholder="Выберите торговую точку"
           />
+          <DatePicker
+            name="date"
+            label="Дата доставки"
+            placeholderText="ДД.ММ.ГГГГ"
+            startDate={new Date()}
+          />
           <ControlledTextarea
             labelClassname="bg-whiteCustom"
             labelTextClassname="bg-whiteCustom"
             className="bg-whiteCustom min-h-[173px]"
             name="comment"
             labelText="Комментарий"
+            placeholder="Введите комментарий..."
           />
-          <DatePicker
-            name="date"
-            label="Дата доставки"
-            startDate={new Date()}
-          />
+
           <Button
             type="submit"
             className="flex-1 w-full min-h-[50px] !text-textL text-white !rounded-[8px]"
