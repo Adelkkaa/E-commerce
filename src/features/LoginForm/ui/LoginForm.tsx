@@ -1,5 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledInput,
@@ -15,8 +17,6 @@ import {
   ILoginFormSchemaType,
   LoginFormSchema,
 } from "../model/LoginForm.schema";
-import { dialogActions } from "@/entities/Dialog";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const LoginForm = () => {
   const { selectCurrentDialog } = dialogActions;

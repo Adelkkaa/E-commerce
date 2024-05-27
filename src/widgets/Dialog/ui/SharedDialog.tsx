@@ -3,6 +3,7 @@ import { CartSuccess } from "@/features/CartSuccess";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
 import { LoginForm } from "@/features/LoginForm";
+import { PreviewDialog } from "@/features/PreviewDialog";
 import { StoreDialog } from "@/features/StoreDialog";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { cn } from "@/shared/lib/utils";
@@ -27,6 +28,7 @@ export const SharedDialog = () => {
       <DialogContent
         className={cn("!max-w-500 px-[20px] gap-[30px]", {
           "!max-w-[550px]": currentDialog === "contactSuccess",
+          "!max-w-[80%]": currentDialog === "productPreview",
         })}
       >
         {currentDialog === "login" && <LoginForm />}
@@ -34,6 +36,7 @@ export const SharedDialog = () => {
         {currentDialog === "contactSuccess" && <ContactSuccess />}
         {currentDialog === "trading" && <StoreDialog />}
         {currentDialog === "cartSuccess" && <CartSuccess />}
+        {currentDialog === "productPreview" && <PreviewDialog />}
       </DialogContent>
     </Dialog>
   );

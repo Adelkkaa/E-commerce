@@ -1,12 +1,37 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import { dialogActions } from "@/entities/Dialog";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
 import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 
 export const ProductCard = () => {
   const { toast } = useToast();
+  const { selectCurrentDialog } = dialogActions;
+  const dispatch = useAppDispatch();
+
+  const onClickPreview = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    dispatch(selectCurrentDialog("productPreview"));
+  };
+
+  const onClickFavorites = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+  };
+
+  const onClickCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    toast({
+      title: "Товар успешно добавлен в корзину",
+    });
+  };
 
   return (
     <Link to="/product/123">
@@ -15,29 +40,16 @@ export const ProductCard = () => {
           <img src={cardImage2} alt="card" className="w-[158px] h-[198px] " />
           <div className="absolute bottom-0 p-2 opacity-0 group-hover:opacity-100 w-full flex justify-center gap-[8px]">
             <Button
-              onClick={(e) => {
-                e.preventDefault();
-              }}
+              onClick={onClickFavorites}
               variant="icon"
               size="icon"
               className="hover:fillBlue"
             >
               <HeartIcon />
             </Button>
+            <Button onClick={onClickCart}>Добавить в заказ</Button>
             <Button
-              onClick={(e) => {
-                e.preventDefault();
-                toast({
-                  title: "Товар успешно добавлен в корзину",
-                });
-              }}
-            >
-              Добавить в заказ
-            </Button>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-              }}
+              onClick={onClickPreview}
               variant="icon"
               size="icon"
               className="hover:strokeBlue"
