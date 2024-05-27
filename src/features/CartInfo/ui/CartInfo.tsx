@@ -1,5 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledSelect,
@@ -14,6 +16,8 @@ import {
 } from "../model/CartInfo.schema";
 
 export const CartInfo = () => {
+  const { selectCurrentDialog } = dialogActions;
+  const dispatch = useAppDispatch();
   const methods = useForm<
     ICartInfoSchemaInitialType,
     unknown,
@@ -30,6 +34,7 @@ export const CartInfo = () => {
 
   const onSubmit: SubmitHandler<ICartInfoSchemaType> = async (newData) => {
     console.log("Form Data", newData);
+    dispatch(selectCurrentDialog("cartSuccess"));
   };
   return (
     <div className="py-[30px] px-[26px] bg-whiteCustom rounded-[10px] w-[30%] flex flex-col gap-[32px]">

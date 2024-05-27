@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type ICurrentDialog = "login" | "trading" | "contact" | "contactSuccess" | "cartSuccess" | null;
+type ICurrentDialog =
+  | "login"
+  | "trading"
+  | "contact"
+  | "contactSuccess"
+  | "cartSuccess"
+  | null;
 
 interface IDialogSlice {
   isOpen: boolean;

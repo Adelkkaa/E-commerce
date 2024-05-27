@@ -6,16 +6,16 @@ import {
   Typography,
 } from "@/shared/ui";
 
-export const ContactSuccess = () => {
+export const CartSuccess = () => {
   return (
     <>
       <DialogHeader className="gap-[10px] justify-center items-center">
         <DialogTitle className="text-modalTitle text-center ">
-          Сообщение успешно отправлено
+          Заказ успешно создан{" "}
         </DialogTitle>
         <DialogDescription className="!text-modalDesc text-black text-center max-w-[68%]">
-          Мы уже работаем над Вашим обращением.
-          <br /> Вы получите ответ в будние дни в 9-18:00 мск
+          Для уточнения деталей с Вами свяжется менеджер. <br /> Время работы:
+          будние дни, 9-18:00 мск
         </DialogDescription>
       </DialogHeader>
 

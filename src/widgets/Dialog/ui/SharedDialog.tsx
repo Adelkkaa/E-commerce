@@ -1,4 +1,5 @@
 import { dialogActions } from "@/entities/Dialog";
+import { CartSuccess } from "@/features/CartSuccess";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
 import { LoginForm } from "@/features/LoginForm";
@@ -10,7 +11,7 @@ import { Dialog, DialogContent } from "@/shared/ui";
 export const SharedDialog = () => {
   const { selectIsOpen } = dialogActions;
   const { isOpen, currentDialog } = useAppSelector(
-    (state) => state.dialogReducer
+    (state) => state.dialogReducer,
   );
 
   const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ export const SharedDialog = () => {
         {currentDialog === "contact" && <ContactForm />}
         {currentDialog === "contactSuccess" && <ContactSuccess />}
         {currentDialog === "trading" && <StoreDialog />}
-
+        {currentDialog === "cartSuccess" && <CartSuccess />}
       </DialogContent>
     </Dialog>
   );
