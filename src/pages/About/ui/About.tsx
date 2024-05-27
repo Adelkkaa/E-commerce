@@ -26,7 +26,7 @@ export const About = () => {
   };
   return (
     <section className="mt-[72px] max-w-[500px]">
-      About
+      {/* About */}
       <FormProvider {...methods}>
         <form
           id="loginForm"
@@ -35,9 +35,9 @@ export const About = () => {
         >
           <ControlledSelect
             name="select"
-            labelText="Тп"
-            options={[{ label: "hello", value: "123" }]}
-            placeholder="Привет"
+            labelText="Торговая точка"
+            options={[{ label: "hello", value: "123" }, { label: "poka", value: "321" }, { label: "huy", value: "333" }, { label: "123", value: "4444" }]}
+            placeholder="Выберите торговую точку"
           />
         </form>
       </FormProvider>

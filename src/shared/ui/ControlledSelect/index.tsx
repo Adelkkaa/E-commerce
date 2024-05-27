@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { FieldPath, FieldValues, useController } from "react-hook-form";
 import { cn } from "@/shared/lib/utils";
 
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import {  ChevronDown, ChevronUp } from "lucide-react";
 
 const Select = SelectPrimitive.Root;
 
@@ -18,7 +18,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -85,7 +85,7 @@ const SelectContent = React.forwardRef<
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
+          "p-0",
           position === "popper" &&
             "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
         )}
@@ -122,11 +122,11 @@ const SelectItem = React.forwardRef<
     )}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    {/* <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />
       </SelectPrimitive.ItemIndicator>
-    </span>
+    </span> */}
 
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
@@ -145,20 +145,8 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-};
-
-type SelectDefaultProps = React.FC<SelectPrimitive.SelectProps> & {
+type SelectDefaultProps = {
+  name: FieldPath<FieldValues>;
   labelClassname?: string;
   labelText?: string;
   wrapperClassname?: string;
@@ -170,84 +158,76 @@ type SelectDefaultProps = React.FC<SelectPrimitive.SelectProps> & {
   }[];
 };
 
-type TSelectField<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
-  name: TName;
-} & SelectDefaultProps;
-
-const ControlledSelect = React.forwardRef<HTMLButtonElement, TSelectField>(
-  (
-    {
-      labelClassname,
-      labelText,
-      wrapperClassname,
-      name,
-      disabled,
-      placeholder,
-      options,
-      ...props
-    },
-    ref
-  ) => {
-    const {
-      field: { onChange, value },
-      fieldState: { error },
-    } = useController({
-      name,
-    });
-    return (
-      <div className={cn("flex flex-col gap-2", wrapperClassname)}>
-        <label
+const ControlledSelect: FC<SelectDefaultProps> = ({
+  labelClassname,
+  labelText,
+  wrapperClassname,
+  name,
+  disabled,
+  placeholder,
+  options,
+  ...props
+}) => {
+  const {
+    field: { onChange, value },
+    fieldState: { error },
+  } = useController({
+    name,
+  });
+  return (
+    <div className={cn("flex flex-col gap-2", wrapperClassname)}>
+      <label className={cn("relative", labelClassname)}>
+        <span
           className={cn(
-            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background pl-[33px] pr-[10px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer",
-            labelClassname,
+            "!text-textL absolute top-[-14px] left-[33px] bg-white text-grayCustom select-none",
             {
-              "border-red-600": error?.message,
-              "bg-grayCustom": disabled,
+              "text-red-600": error?.message,
             }
           )}
         >
-          <span
-            className={cn("!text-textL absolute top-[-14px] bg-white", {
-              "text-red-600": error?.message,
-            })}
+          {labelText}
+        </span>
+        <Select
+          {...props}
+          value={value}
+          onValueChange={(event) => {
+            onChange(event);
+          }}
+        >
+          <SelectTrigger
+            disabled={disabled}
+            className={cn(
+              "outline-none !p-0 gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background !pl-[33px] !pr-[10px] !py-[20px] !text-textM ring-offset-background data-[placeholder]:text-grayCustom text-black cursor-pointer",
+              {
+                "border-red-600": error?.message,
+                "bg-grayCustom": disabled,
+              }
+            )}
           >
-            {labelText}
-          </span>
-          <Select
-            {...props}
-            value={value}
-            onValueChange={(event) => {
-              onChange(event);
-            }}
-          >
-            <SelectTrigger
-              disabled={disabled}
-              ref={ref}
-              className="border-none !p-0 text-textM !w-full"
-            >
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-            <SelectContent>
-              {options.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </label>
-        {error?.message && (
-          <span className="text-textS text-red-600 border-red-600">
-            {error.message}
-          </span>
-        )}
-      </div>
-    );
-  }
-);
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((item) => (
+              <SelectItem
+                className="!text-center !text-textM justify-center !pl-0 data-[state=checked]:bg-blueCustom data-[state=checked]:text-white"
+                key={item.value}
+                value={item.value}
+              >
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </label>
+      {error?.message && (
+        <span className="text-textS text-red-600 border-red-600">
+          {error.message}
+        </span>
+      )}
+    </div>
+  );
+};
+
 ControlledSelect.displayName = "ControlledSelect";
 
 export { ControlledSelect };
