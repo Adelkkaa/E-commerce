@@ -95,3 +95,13 @@ export { Typography } from "./Typography";
 export { ControlledTextarea } from "./ControlledTextarea";
 export { PhoneInput } from "./PhoneInput";
 export { ControlledSelect } from "./ControlledSelect";
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./Table";

@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { HeaderInput } from "@/features/HeaderInput";
 import mainLogo from "@/shared/assets/images/MainLogo.jpg";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
+import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
+
 import { headerLinks } from "@/shared/constants/navigationLinks";
 import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 
@@ -31,11 +33,18 @@ export const Header = () => {
         <HeaderInput />
         <div className="flex gap-[20px] items-center">
           <Link
+            to="/favorites"
+            className="hover:strokeBlue w-[36px] h-[36px] flex justify-center items-center"
+          >
+            <FavoritesIcon className="cursor-pointer w-[20px] h-[20px]" />
+          </Link>
+          <Link
             to="/cart"
             className="hover:strokeBlue w-[36px] h-[36px] flex justify-center items-center"
           >
             <CartIcon className="cursor-pointer w-[20px] h-[20px]" />
           </Link>
+
           <ProfileDropdownMenu />
         </div>
       </div>

@@ -45,6 +45,12 @@ export const allLinks = [
     searchBreadcrumb: "/policy",
     description: "Политика конфиденциальности",
   },
+  {
+    title: "Избранное",
+    href: "/favorites",
+    searchBreadcrumb: "/favorites",
+    description: "Избранное",
+  },
 ];
 
 export const redirectLinks = ["/product"];

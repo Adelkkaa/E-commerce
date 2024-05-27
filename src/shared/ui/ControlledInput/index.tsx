@@ -38,17 +38,19 @@ const Input = React.forwardRef<HTMLInputElement, TInputField>(
       <div className={cn("flex flex-col gap-2", wrapperClassname)}>
         <label
           className={cn(
-            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer",
+            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px]  border-[2px] focus-within:!border-blueCustom focus-within:!text-blueCustom bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer",
             labelClassname,
             {
               "border-red-600": error?.message,
               "bg-grayCustom": disabled,
+              "border-blueCustom": field.value,
             },
           )}
         >
           <span
             className={cn("!text-textL absolute top-[-14px] bg-white", {
               "text-red-600": error?.message,
+              "text-blueCustom": field.value,
             })}
           >
             {labelText}
