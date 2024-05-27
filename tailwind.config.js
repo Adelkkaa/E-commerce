@@ -91,7 +91,7 @@ module.exports = {
           },
         ],
         textXl: [
-          "2rem",
+          "30px",
           {
             fontWeight: "600",
           },
