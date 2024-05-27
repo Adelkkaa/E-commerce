@@ -30,10 +30,10 @@ export const CartTable: FC<ICartTableProps> = ({ tableClassname }) => {
           <TableHead className="text-center !text-textL !text-black py-[28px]">
             Наименование товара
           </TableHead>
-          <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
+          <TableHead className="text-center !text-textL !text-black py-[28px]">
             Цена
           </TableHead>
-          <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
+          <TableHead className="text-center !text-textL !text-black py-[28px]">
             Количество
           </TableHead>
           <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
