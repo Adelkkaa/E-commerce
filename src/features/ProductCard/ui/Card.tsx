@@ -1,9 +1,8 @@
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
+import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { useToast } from "@/shared/hooks/use-toast";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
-import cardImage from "@/shared/assets/images/mockCard.png";
-import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 
 export const ProductCard = () => {
   const { toast } = useToast();

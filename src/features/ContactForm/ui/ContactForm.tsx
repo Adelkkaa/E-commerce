@@ -37,7 +37,7 @@ export const ContactForm = () => {
       phone: "",
     },
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<IContactFormSchemaType> = async (newData) => {
     console.log("Form Data", newData);

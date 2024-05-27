@@ -27,7 +27,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const {
       field: { onChange, ...field },
@@ -44,7 +44,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
             {
               "border-red-600": error?.message,
               "bg-grayCustom": disabled,
-            }
+            },
           )}
         >
           <span
@@ -61,7 +61,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
             }}
             className={cn(
               "resize-none !text-black text-textL placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-              className
+              className,
             )}
             inputRef={ref}
             mask="+7 (###) ###-##-##"
@@ -79,7 +79,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
         )}
       </div>
     );
-  }
+  },
 );
 PhoneInput.displayName = "PhoneInput";
 

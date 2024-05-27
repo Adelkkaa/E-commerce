@@ -30,7 +30,7 @@ export const CartInfo = () => {
       store: "",
     },
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<ICartInfoSchemaType> = async (newData) => {
     console.log("Form Data", newData);

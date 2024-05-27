@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 import { HeaderInput } from "@/features/HeaderInput";
+import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import mainLogo from "@/shared/assets/images/MainLogo.jpg";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
-import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
-
 import { headerLinks } from "@/shared/constants/navigationLinks";
 import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 

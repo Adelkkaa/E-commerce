@@ -1,5 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledSelect,
@@ -8,12 +10,10 @@ import {
   DialogTitle,
 } from "@/shared/ui";
 import {
-  StoreDialogSchema,
   IStoreDialogSchemaInitialType,
   IStoreDialogSchemaType,
+  StoreDialogSchema,
 } from "../model/StoreDialog.schema";
-import { dialogActions } from "@/entities/Dialog";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const StoreDialog = () => {
   const { selectIsOpen } = dialogActions;
@@ -28,11 +28,11 @@ export const StoreDialog = () => {
       store: "",
     },
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<IStoreDialogSchemaType> = async (newData) => {
     console.log("Form Data", newData);
-    dispatch(selectIsOpen(false))
+    dispatch(selectIsOpen(false));
   };
   return (
     <>

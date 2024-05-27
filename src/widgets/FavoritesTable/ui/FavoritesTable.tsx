@@ -30,7 +30,7 @@ export const FavoritesTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {favoritesCard.map((item, index) => (
+        {favoritesCard.map((_, index) => (
           <TableRow key={index} className="border-none">
             <TableCell
               className="w-[34px] h-[34px]"
