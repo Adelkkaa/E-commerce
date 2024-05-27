@@ -23,7 +23,7 @@ export const CartTable: FC<ICartTableProps> = ({ tableClassname }) => {
 
   const favoritesCard = Array.from({ length: 20 });
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex flex-1 min-w-[75%] flex-col">
       <Table className={cn("text-textM", tableClassname)}>
         <TableHeader>
           <TableRow className="border-none bg-whiteCustom rounded-[10px]">

@@ -80,7 +80,7 @@ export const CartInfo = () => {
             type="submit"
             className="flex-1 w-full min-h-[50px] !text-textL text-white !rounded-[8px]"
           >
-            Войти
+            Заказать
           </Button>
         </form>
       </FormProvider>

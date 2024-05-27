@@ -5,7 +5,6 @@ import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledInput,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
