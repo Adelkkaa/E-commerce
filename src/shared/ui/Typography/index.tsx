@@ -16,7 +16,8 @@ export type Variant =
   | "textAlertTitle"
   | "buttonM"
   | "modalTitle"
-  | "modalDesc";
+  | "modalDesc"
+  | "titleL";
 
 interface Props {
   variant: Variant;
@@ -42,6 +43,7 @@ const tags: Record<Variant, ElementType> = {
   buttonM: "p",
   modalTitle: "p",
   modalDesc: "p",
+  titleL: "p",
 };
 
 const sizes: Record<Variant, string> = {
@@ -55,6 +57,7 @@ const sizes: Record<Variant, string> = {
   textL: "text-textL",
   titleS: "text-titleS",
   titleXS: "text-titleXS",
+  titleL: "text-titleL",
   textXl: "text-textXl",
   textAlertTitle: "text-textAlertTitle",
   buttonM: "text-buttonM",

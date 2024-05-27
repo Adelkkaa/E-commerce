@@ -7,6 +7,7 @@ import { Typography } from "@/shared/ui";
 export const NavigationInfo = () => {
   const { pathname } = useLocation();
   const params = useParams();
+  console.log(params);
   const currentDesc =
     allLinks.find((link) =>
       Object.entries(params).length > 0

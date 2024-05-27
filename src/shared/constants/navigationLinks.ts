@@ -28,7 +28,7 @@ export const allLinks = [
     description: "Корзина",
   },
   {
-    title: "Информация о товаре",
+    title: "Каталог",
     href: "/product/:productId",
     searchBreadcrumb: "productId",
     description: "Информация о товаре",

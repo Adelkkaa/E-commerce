@@ -30,7 +30,9 @@ export const Breadcrumb = () => {
           </Typography>
         )}
 
-        {crumbs.length > 0 && (Object.keys(params)[0] !== '*')&& <BreadcrumbSeparator>|</BreadcrumbSeparator>}
+        {crumbs.length > 0 && Object.keys(params)[0] !== "*" && (
+          <BreadcrumbSeparator>|</BreadcrumbSeparator>
+        )}
         {crumbs.map((crumb, index) => {
           currentLink += `/${crumb}`;
           const isHidden = redirectLinks.includes(currentLink);
