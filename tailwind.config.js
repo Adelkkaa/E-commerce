@@ -184,7 +184,7 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    function ({ addComponents, addUtilities }) {
+    function ({ addComponents }) {
       addComponents({
         ".container": {
           margin: "0 auto",
