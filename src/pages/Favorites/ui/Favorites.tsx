@@ -1,9 +1,9 @@
-import { FavoritesTable } from "@/features/FavoritesTable";
+import { FavoritesTable } from "@/widgets/FavoritesTable";
 
 export const Favorites = () => {
   return (
-    <div className="my-[71px]">
+    <section className="my-[71px]">
       <FavoritesTable />
-    </div>
+    </section>
   );
 };

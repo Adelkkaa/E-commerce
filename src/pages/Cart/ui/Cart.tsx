@@ -1,3 +1,9 @@
+import { CartTable } from "@/widgets/CartTable";
+
 export const Cart = () => {
-  return <section>Cart</section>;
+  return (
+    <section className="my-[71px]">
+      <CartTable />
+    </section>
+  );
 };

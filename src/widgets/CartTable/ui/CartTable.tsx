@@ -1,7 +1,8 @@
-import { X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { useToast } from "@/shared/hooks/use-toast";
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -10,7 +11,7 @@ import {
   TableRow,
 } from "@/shared/ui";
 
-export const FavoritesTable = () => {
+export const CartTable = () => {
   const { toast } = useToast();
 
   const favoritesCard = Array.from({ length: 20 });
@@ -26,6 +27,12 @@ export const FavoritesTable = () => {
           <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
             Цена
           </TableHead>
+          <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
+            Количество
+          </TableHead>
+          <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
+            Сумма
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -40,7 +47,12 @@ export const FavoritesTable = () => {
                 })
               }
             >
-              <X className="w-[24px] h-[24px] bg-whiteCustom p-[2px] rounded-[50%] hover:text-blueCustom cursor-pointer" />
+              <Button
+                variant="icon"
+                className="w-[24px] h-[24px] bg-whiteCustom p-[2px] rounded-[50%] hover:text-blueCustom cursor-pointer"
+              >
+                <X />
+              </Button>
             </TableCell>
             <TableCell>
               <img src={cardImage2} alt="card" className="w-[90px] h-[90px]" />
@@ -51,6 +63,26 @@ export const FavoritesTable = () => {
             </TableCell>
             <TableCell className="text-center !font-semibold">
               122.56 ₽
+            </TableCell>
+            <TableCell className="!font-semibold text-center">
+              <div className=" flex justify-center items-center gap-[16px] !h-full">
+                <Button
+                  variant="icon"
+                  className="shadow-custom rounded-[50%] p-[2px] cursor-pointer hover:text-blueCustom"
+                >
+                  <Minus />
+                </Button>
+                10
+                <Button
+                  variant="icon"
+                  className="shadow-custom rounded-[50%] p-[2px] cursor-pointer hover:text-blueCustom"
+                >
+                  <Plus />
+                </Button>
+              </div>
+            </TableCell>
+            <TableCell className="text-center !font-semibold">
+              1225.56 ₽
             </TableCell>
           </TableRow>
         ))}
