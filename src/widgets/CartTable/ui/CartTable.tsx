@@ -1,6 +1,8 @@
 import { Minus, Plus, X } from "lucide-react";
+import { FC } from "react";
 import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { useToast } from "@/shared/hooks/use-toast";
+import { cn } from "@/shared/lib/utils";
 import {
   Button,
   Table,
@@ -11,12 +13,16 @@ import {
   TableRow,
 } from "@/shared/ui";
 
-export const CartTable = () => {
+export interface ICartTableProps {
+  tableClassname?: string;
+}
+
+export const CartTable: FC<ICartTableProps> = ({ tableClassname }) => {
   const { toast } = useToast();
 
   const favoritesCard = Array.from({ length: 20 });
   return (
-    <Table className="text-textM ">
+    <Table className={cn("text-textM", tableClassname)}>
       <TableHeader>
         <TableRow className="border-none bg-whiteCustom rounded-[10px]">
           <TableHead className="rounded-tl-[10px] rounded-bl-[10px]" />

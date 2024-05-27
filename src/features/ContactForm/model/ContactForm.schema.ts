@@ -6,7 +6,7 @@ export const ContactFormSchema = z.object({
     .min(3, "Минимальное количество символов - 3"),
   email: z
     .string({ required_error: "Поле обязательно для заполнения" })
-    .email('Введите корректный Email'),
+    .email("Введите корректный Email"),
   phone: z
     .string({
       required_error: "Поле обязательно для заполнения",

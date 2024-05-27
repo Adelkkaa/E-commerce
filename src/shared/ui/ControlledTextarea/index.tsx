@@ -5,6 +5,7 @@ import { cn } from "@/shared/lib/utils";
 type TextareaDefaultProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     labelClassname?: string;
+    labelTextClassname?: string;
     labelText?: string;
   };
 
@@ -16,7 +17,18 @@ type TTextField<
 } & TextareaDefaultProps;
 
 const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
-  ({ className, labelClassname, labelText, name, disabled, ...props }, ref) => {
+  (
+    {
+      className,
+      labelClassname,
+      labelTextClassname,
+      labelText,
+      name,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     const {
       field,
       fieldState: { error },
@@ -32,20 +44,24 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
             {
               "border-red-600": error?.message,
               "bg-grayCustom": disabled,
-            }
+            },
           )}
         >
           <span
-            className={cn("!text-textL absolute top-[-14px] bg-white", {
-              "text-red-600": error?.message,
-            })}
+            className={cn(
+              "!text-textL absolute top-[-14px] bg-white",
+              {
+                "text-red-600": error?.message,
+              },
+              labelTextClassname,
+            )}
           >
             {labelText}
           </span>
           <textarea
             className={cn(
               "resize-none min-h-[70px] py-1 !text-black text-textM placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-              className
+              className,
             )}
             {...field}
             {...props}
@@ -59,7 +75,7 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
         )}
       </div>
     );
-  }
+  },
 );
 ControlledTextarea.displayName = "ControlledTextarea";
 

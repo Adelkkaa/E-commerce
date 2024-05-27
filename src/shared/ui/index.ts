@@ -37,6 +37,9 @@ export {
 } from "./Card";
 export { Checkbox } from "./Checkbox";
 export { Input as ControlledInput } from "./ControlledInput";
+export { ControlledSelect } from "./ControlledSelect";
+export { ControlledTextarea } from "./ControlledTextarea";
+export { DatePicker } from "./DatePicker";
 export {
   Dialog,
   DialogClose,
@@ -68,6 +71,7 @@ export {
 } from "./DropdownMenu";
 export { Input, type InputProps } from "./Input";
 export { MaskedInput } from "./MaskedInput";
+export { PhoneInput } from "./PhoneInput";
 export {
   Select,
   SelectContent,
@@ -81,6 +85,16 @@ export {
   SelectValue,
 } from "./Select";
 export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./Table";
+export {
   Toast,
   ToastAction,
   type ToastActionElement,
@@ -92,16 +106,3 @@ export {
   ToastViewport,
 } from "./Toast";
 export { Typography } from "./Typography";
-export { ControlledTextarea } from "./ControlledTextarea";
-export { PhoneInput } from "./PhoneInput";
-export { ControlledSelect } from "./ControlledSelect";
-export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./Table";

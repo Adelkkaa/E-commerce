@@ -1,5 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { dialogActions } from "@/entities/Dialog";
+import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledInput,
@@ -17,9 +20,6 @@ import {
   IContactFormSchemaInitialType,
   IContactFormSchemaType,
 } from "../model/ContactForm.schema";
-import { Link } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
 
 export const ContactForm = () => {
   const { selectCurrentDialog } = dialogActions;
@@ -76,14 +76,14 @@ export const ContactForm = () => {
           Войти
         </Button>
         <Typography variant="modalDesc">
-          Нажимая кнопку “Отправить сообщение”, Вы даете согласие
+          Нажимая кнопку “Отправить сообщение”, Вы даете согласие
           <DialogTrigger asChild>
             <Link to="/agreement" className="underline text-blueCustom">
               {" "}
-              на обработку персональных данных
+              на обработку персональных данных
             </Link>
           </DialogTrigger>{" "}
-          и соглашаетесь{" "}
+          и соглашаетесь{" "}
           <DialogTrigger asChild>
             <Link to="/policy" className="underline text-blueCustom">
               c политикой конфиденциальности
