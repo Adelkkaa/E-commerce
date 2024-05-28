@@ -1,12 +1,12 @@
-import { Button } from "@/shared/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@/shared/ui";
+import { ControlledSelect } from "@/shared/ui/ControlledSelect";
 import {
   ILoginFormSchemaInitialType,
   ILoginFormSchemaType,
   LoginFormSchema,
 } from "./schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ControlledSelect } from "@/shared/ui/ControlledSelect";
 
 export const About = () => {
   const methods = useForm<
@@ -36,7 +36,12 @@ export const About = () => {
           <ControlledSelect
             name="select"
             labelText="Торговая точка"
-            options={[{ label: "hello", value: "123" }, { label: "poka", value: "321" }, { label: "huy", value: "333" }, { label: "123", value: "4444" }]}
+            options={[
+              { label: "hello", value: "123" },
+              { label: "poka", value: "321" },
+              { label: "huy", value: "333" },
+              { label: "123", value: "4444" },
+            ]}
             placeholder="Выберите торговую точку"
           />
         </form>

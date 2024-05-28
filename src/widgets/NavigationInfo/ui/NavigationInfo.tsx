@@ -1,5 +1,6 @@
 import { useLocation, useParams } from "react-router-dom";
-import { Breadcrumb } from "@/features/Breadcrumb";
+// import { CustomBreadcrumb } from "@/features/Breadcrumb";
+import { Breadcrumbs } from "@/features/Breadcrumb";
 import { allLinks } from "@/shared/constants/navigationLinks";
 import useDocumentTitle from "@/shared/hooks/use-documentTitle";
 import { Typography } from "@/shared/ui";
@@ -18,9 +19,10 @@ export const NavigationInfo = () => {
   return (
     <div className="fullWidth py-[49px] bg-whiteCustom ">
       <div className="subContainer flex flex-col">
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
+        <Breadcrumbs />
         <Typography variant="h1" className="select-none">
-          {currentDesc}
+          {(params.orderId && `Заказ #${params.orderId}`) || currentDesc}
         </Typography>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, Link, RouteObject } from "react-router-dom";
 import { Typography } from "@/shared/ui";
 import { Layout } from "../layouts/Layout";
 
@@ -17,42 +17,86 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <Home />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/cart",
-    element: <Cart />,
-  },
-  {
-    path: "/contacts",
-    element: <Cart />,
-  },
-  {
-    path: "/product/:productId",
-    element: <Product />,
-  },
-  {
-    path: "/agreement",
-    element: <Agreeement />,
-  },
-  {
-    path: "/policy",
-    element: <Policy />,
-  },
-  {
-    path: "/favorites",
-    element: <Favorites />,
-  },
-  {
-    path: "/orders",
-    element: <Orders />,
-  },
-  {
-    path: "/orders/:orderId",
-    element: <OrderInfo />,
+    children: [
+      {
+        path: "/about",
+        element: <About />,
+        handle: {
+          crumb: () => <Link to="/about">О Нас</Link>,
+        },
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+        handle: {
+          crumb: () => <Typography variant="buttonM">Корзина</Typography>,
+        },
+      },
+      {
+        path: "/contacts",
+        element: <Cart />,
+        handle: {
+          crumb: () => <Typography variant="buttonM">Контакты</Typography>,
+        },
+      },
+      {
+        path: "/product/:productId",
+        element: <Product />,
+        handle: {
+          crumb: () => (
+            <Typography variant="buttonM">Информация о товаре</Typography>
+          ),
+        },
+      },
+      {
+        path: "/agreement",
+        element: <Agreeement />,
+        handle: {
+          crumb: () => (
+            <Typography variant="buttonM">
+              Согласие на обработку персональных данных
+            </Typography>
+          ),
+        },
+      },
+      {
+        path: "/policy",
+        element: <Policy />,
+        handle: {
+          crumb: () => (
+            <Typography variant="buttonM">
+              Политика конфиденциальности
+            </Typography>
+          ),
+        },
+      },
+      {
+        path: "/favorites",
+        element: <Favorites />,
+        handle: {
+          crumb: () => <Typography variant="buttonM">Избранное</Typography>,
+        },
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
+        handle: {
+          crumb: () => <Link to="/orders">Мои заказы</Link>,
+        },
+        children: [
+          {
+            path: "/orders/:orderId",
+            element: <OrderInfo />,
+            handle: {
+              crumb: () => <Typography variant="buttonM">Заказ</Typography>,
+            },
+          },
+        ],
+      },
+    ],
+    handle: {
+      crumb: () => <Link to="/">Домой</Link>,
+    },
   },
   {
     path: "*",

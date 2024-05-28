@@ -1,1 +1,3 @@
-export { Breadcrumb } from "./ui/Breadcrumb";
+export { Breadcrumb as CustomBreadcrumb } from "./ui/Breadcrumb";
+export { Breadcrumbs } from "./ui/Breadcrumbs";
+
