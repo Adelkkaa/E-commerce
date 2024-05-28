@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import {
-  Button,
   Table,
   TableBody,
   TableCell,

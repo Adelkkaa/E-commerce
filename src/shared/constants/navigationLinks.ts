@@ -57,6 +57,12 @@ export const allLinks = [
     searchBreadcrumb: "/orders",
     description: "Мои заказы",
   },
+  {
+    title: "Заказ",
+    href: "/orders/:orderId",
+    searchBreadcrumb: "orderId",
+    description: "Заказ",
+  },
 ];
 
 export const redirectLinks = ["/product"];

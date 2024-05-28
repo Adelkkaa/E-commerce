@@ -11,6 +11,7 @@ const Agreeement = lazy(() => import("@/pages/Agreement"));
 const Policy = lazy(() => import("@/pages/Policy"));
 const Favorites = lazy(() => import("@/pages/Favorites"));
 const Orders = lazy(() => import("@/pages/Orders"));
+const OrderInfo = lazy(() => import("@/pages/OrderInfo"));
 
 const routes: RouteObject[] = [
   {
@@ -48,6 +49,10 @@ const routes: RouteObject[] = [
   {
     path: "/orders",
     element: <Orders />,
+  },
+  {
+    path: "/orders/:orderId",
+    element: <OrderInfo />,
   },
   {
     path: "*",
