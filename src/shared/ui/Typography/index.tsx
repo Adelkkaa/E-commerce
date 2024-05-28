@@ -17,7 +17,8 @@ export type Variant =
   | "buttonM"
   | "modalTitle"
   | "modalDesc"
-  | "titleL";
+  | "titleL"
+  | "tableText";
 
 interface Props {
   variant: Variant;
@@ -44,6 +45,7 @@ const tags: Record<Variant, ElementType> = {
   modalTitle: "p",
   modalDesc: "p",
   titleL: "p",
+  tableText: "p",
 };
 
 const sizes: Record<Variant, string> = {
@@ -63,6 +65,7 @@ const sizes: Record<Variant, string> = {
   buttonM: "text-buttonM",
   modalTitle: "text-modalTitle",
   modalDesc: "text-modalDesc",
+  tableText: "text-tableText",
 };
 
 export const Typography = forwardRef<ReactElement, Props>(
