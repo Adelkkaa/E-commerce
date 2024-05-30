@@ -102,6 +102,12 @@ module.exports = {
             fontWeight: "600",
           },
         ],
+        textXXl: [
+          "30px",
+          {
+            fontWeight: "700",
+          },
+        ],
         textAlertTitle: [
           "200px",
           {

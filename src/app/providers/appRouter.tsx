@@ -6,6 +6,7 @@ import { Layout } from "../layouts/Layout";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Cart = lazy(() => import("@/pages/Cart"));
+const Contacts = lazy(() => import("@/pages/Contacts"));
 const Product = lazy(() => import("@/pages/Product"));
 const Agreeement = lazy(() => import("@/pages/Agreement"));
 const Policy = lazy(() => import("@/pages/Policy"));
@@ -34,7 +35,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "/contacts",
-        element: <Cart />,
+        element: <Contacts />,
         handle: {
           crumb: () => <Typography variant="buttonM">Контакты</Typography>,
         },
