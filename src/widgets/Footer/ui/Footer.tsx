@@ -4,7 +4,7 @@ import { firstFooterLinks, secondFooterLinks } from "../constants/footerLinks";
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col">
+    <footer className="padding flex flex-col">
       <div className="py-[21px] border-grayCustom border-b-2 border-t-2 grid grid-cols-3">
         <div className="pl-[84px] flex flex-col gap-[16px]">
           <Typography variant="titleXS">Поддержка</Typography>

@@ -14,10 +14,11 @@ export function Breadcrumbs() {
       {crumbs.map((crumb, index) => (
         <li
           key={index}
-          className={cn("text-grayCustom  flex gap-[10px]", {
+          className={cn("text-white  flex gap-[10px]", {
             "select-none [&_a]:cursor-default":
               index === crumbs.length - 1 || crumbs.length === 1,
-            "[&_a]:hover:text-blueCustom ": index < crumbs.length - 1,
+            "[&_a]:hover:text-white [&_a]:hover:opacity-80 ":
+              index < crumbs.length - 1,
           })}
         >
           {crumb}

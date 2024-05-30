@@ -17,11 +17,11 @@ export const NavigationInfo = () => {
   useDocumentTitle(currentDesc || "e-commerce");
 
   return (
-    <div className="fullWidth py-[49px] bg-whiteCustom ">
+    <div className="fullWidth py-[49px] bg-blueCustom ">
       <div className="subContainer flex flex-col">
         {/* <Breadcrumb /> */}
         <Breadcrumbs />
-        <Typography variant="h1" className="select-none">
+        <Typography variant="h1" className="select-none text-white">
           {(params.orderId && `Заказ #${params.orderId}`) || currentDesc}
         </Typography>
       </div>

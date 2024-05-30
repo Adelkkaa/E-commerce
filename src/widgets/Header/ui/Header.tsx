@@ -11,7 +11,7 @@ export const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <header className="flex items-end gap-[81px] py-[20px]">
+    <header className="padding flex items-end gap-[81px] py-[20px]">
       <Link to="/" className="min-w-[160px] max-w-[160px]">
         <img src={mainLogo} alt="mainLogo" />
       </Link>

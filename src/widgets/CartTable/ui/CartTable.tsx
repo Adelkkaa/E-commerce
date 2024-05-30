@@ -66,7 +66,7 @@ export const CartTable: FC<ICartTableProps> = ({ tableClassname }) => {
                 <img
                   src={cardImage2}
                   alt="card"
-                  className="w-[90px] h-[90px]"
+                  className="min-w-[90px] min-h-[90px] max-w-[90px] max-h-[90px]"
                 />
               </TableCell>
               <TableCell className="text-center">

@@ -73,7 +73,7 @@ export const ContactForm = () => {
           form="contactForm"
           className="flex-1 w-full min-h-[50px] !text-textL text-white !rounded-[8px] "
         >
-          Войти
+          Отправить сообщение
         </Button>
         <Typography variant="modalDesc">
           Нажимая кнопку “Отправить сообщение”, Вы даете согласие

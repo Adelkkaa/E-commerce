@@ -11,11 +11,6 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-
-      screens: {
-        "2xl": "1400px",
-      },
     },
 
     extend: {
@@ -29,7 +24,7 @@ module.exports = {
         tb: "980px",
         lg: "1024px",
         dk: "1300px",
-        xl: "1680px",
+        xl: "1500px",
       },
       fontSize: {
         h1: [
@@ -210,34 +205,44 @@ module.exports = {
           display: "flex",
           flexDirection: "column",
           height: "100vh",
-          padding: "0px",
           "@screen mb": {
             maxWidth: "100%",
+            // padding: "0px 8px",
           },
           "@screen dk": {
-            maxWidth: "1500px",
+            maxWidth: "100%",
           },
           "@screen xl": {
-            maxWidth: "1500px",
+            maxWidth: "1510px",
+            padding: "0px 10px",
           },
         },
         ".subContainer": {
           margin: "0 auto",
           "@screen mb": {
             maxWidth: "100%",
-          },
-          "@screen dk": {
-            maxWidth: "1500px",
+            padding: "0px 10px",
           },
           "@screen xl": {
-            maxWidth: "1500px",
+            maxWidth: "1510px",
+            padding: "0px 10px",
           },
         },
         ".fullWidth": {
-          width: "calc(100vw - 16px)",
           position: "relative",
           left: "50%",
           transform: "translateX(-50%)",
+          "@screen mb": {
+            minWidth: "100%",
+          },
+          "@screen xl": {
+            minWidth: "calc(100vw - 16px)",
+          },
+        },
+        ".padding": {
+          "@screen mb": {
+            padding: "0px 8px",
+          },
         },
         ".fillBlue svg": {
           fill: "#3A71C3",
