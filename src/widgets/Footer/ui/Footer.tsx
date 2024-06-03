@@ -13,8 +13,8 @@ export const Footer = () => {
   const dispatch = useAppDispatch();
   return (
     <footer className="padding flex flex-col">
-      <div className="grid mb:max-md:hidden py-[21px] border-grayCustom border-b-2 border-t-2  grid-cols-3">
-        <div className="pl-[84px] flex flex-col gap-[16px]">
+      <div className="hidden pl-[84px] md:grid py-[21px] border-grayCustom border-b-2 border-t-2 grid-cols-3">
+        <div className="flex flex-col gap-[16px]">
           <Typography variant="titleXS">Поддержка</Typography>
           <div className="flex gap-[48px]">
             <div className="flex flex-col">
@@ -58,7 +58,7 @@ export const Footer = () => {
         </div>
       </div>
       {/* Mobile links */}
-      <div className="flex flex-col items-center py-[21px] border-grayCustom border-b border-t">
+      <div className="mb:max-md:flex hidden flex-col items-center py-[21px] border-grayCustom border-b border-t">
         <Typography variant="titleXS">Поддержка</Typography>
         <div className="grid grid-cols-3 gap-[15px] justify-center">
           <div className="flex flex-col text-center ">
