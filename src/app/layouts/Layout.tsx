@@ -35,7 +35,7 @@ export const Layout = () => {
         <Toaster />
         <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
         <SharedDialog />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Provider>
   );

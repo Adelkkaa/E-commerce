@@ -19,6 +19,22 @@ export const headerLinks = [
   },
 ];
 
+export const mobileHeaderLinks = [
+  ...headerLinks,
+  {
+    title: "Избранное",
+    href: "/favorites",
+    searchBreadcrumb: "/favorites",
+    description: "Избранное",
+  },
+  {
+    title: "Корзина",
+    href: "/cart",
+    searchBreadcrumb: "/cart",
+    description: "Корзина",
+  },
+];
+
 export const allLinks = [
   ...headerLinks,
   {
