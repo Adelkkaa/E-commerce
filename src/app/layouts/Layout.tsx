@@ -25,21 +25,17 @@ export const Layout = () => {
   return (
     <Provider store={store}>
       <div className="container">
-        {isVerified && (
-          <>
-            <Header />
-            <main className="flex-grow">
-              <NavigationInfo />
-              <Suspense fallback="Loading...">
-                <Outlet />
-              </Suspense>
-            </main>
-            <Toaster />
-            <AgeDialog setIsVerified={setIsVerified} />
-            <SharedDialog />
-            <Footer />
-          </>
-        )}
+        <Header />
+        <main className="flex-grow">
+          <NavigationInfo />
+          <Suspense fallback="Loading...">
+            <Outlet />
+          </Suspense>
+        </main>
+        <Toaster />
+        <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
+        <SharedDialog />
+        <Footer />
       </div>
     </Provider>
   );
