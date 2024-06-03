@@ -3,7 +3,7 @@ import { fillingPolicy } from "../constants/fillingPolicy";
 
 export const Policy = () => {
   return (
-    <section className="mt-[40px] flex flex-col gap-10">
+    <section className="my-[40px] max-xl:padding flex flex-col gap-10">
       <Typography variant="textM">
         Настоящая Политика конфиденциальности персональной информации (далее —
         Политика конфиденциальности) действует в отношении всей информации,

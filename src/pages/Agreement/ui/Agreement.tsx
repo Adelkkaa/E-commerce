@@ -2,7 +2,7 @@ import { Typography } from "@/shared/ui";
 
 export const Agreement = () => {
   return (
-    <section className="flex flex-col gap-10 max-w-[794px] mt-[40px]">
+    <section className="max-xl:padding flex flex-col gap-10 max-w-[794px] my-[40px]">
       <Typography variant="textM">
         Своей волей и в своем интересе Я даю согласие на обработку, в т.ч. на
         сбор, систематизацию, накопление, хранение, уточнение, обновление,

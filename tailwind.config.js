@@ -173,6 +173,7 @@ module.exports = {
         grayCustom: "#A4B1BB",
         whiteCustom: "#F8F8F8",
         blackCustom: "#000000",
+        whiteBg: "#EFEFEF",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -207,7 +208,6 @@ module.exports = {
           height: "100vh",
           "@screen mb": {
             maxWidth: "100%",
-            // padding: "0px 8px",
           },
           "@screen dk": {
             maxWidth: "100%",
@@ -236,12 +236,12 @@ module.exports = {
             minWidth: "100%",
           },
           "@screen xl": {
-            minWidth: "calc(100vw - 16px)",
+            width: "calc(100vw - 16px)",
           },
         },
         ".padding": {
           "@screen mb": {
-            padding: "0px 8px",
+            padding: "0px 10px",
           },
         },
         ".fillBlue svg": {
