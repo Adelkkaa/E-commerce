@@ -1,11 +1,13 @@
 import { CartInfo } from "@/features/CartInfo";
-import { CartTable } from "@/widgets/CartTable";
+import { CartContent } from "@/widgets/CartContent";
 
 export const Cart = () => {
   return (
-    <section className="my-[71px] flex gap-[20px] items-start">
-      <CartTable />
-      <CartInfo />
+    <section className="fullWidth  bg-whiteCustom">
+      <div className=" subContainer py-[71px] flex gap-[20px] items-start">
+        <CartContent />
+        <CartInfo />
+      </div>
     </section>
   );
 };

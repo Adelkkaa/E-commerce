@@ -42,7 +42,7 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
       <div className="flex flex-col gap-2">
         <label
           className={cn(
-            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer bg-whiteCustom",
+            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer bg-white",
             labelClassname,
             {
               "border-red-600": error?.message,
@@ -52,7 +52,7 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
         >
           <span
             className={cn(
-              "!text-textL absolute top-[-14px] bg-whiteCustom",
+              "!text-textL absolute top-[-14px] bg-white",
               {
                 "text-red-600": error?.message,
               },
@@ -70,7 +70,7 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
             selected={value}
             onChange={(date) => onChange(date)}
             dateFormat={dateFormat}
-            className="w-full h-full text-textM text-black bg-whiteCustom outline-none"
+            className="w-full h-full text-textM text-black bg-white outline-none"
             customInput={
               <IMaskInput
                 definitions={{

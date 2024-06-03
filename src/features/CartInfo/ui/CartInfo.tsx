@@ -37,7 +37,7 @@ export const CartInfo = () => {
     dispatch(selectCurrentDialog("cartSuccess"));
   };
   return (
-    <div className="py-[30px] px-[26px] bg-whiteCustom rounded-[10px] w-[30%] flex flex-col gap-[32px]">
+    <div className="py-[30px] px-[26px] bg-white rounded-[10px] w-[30%] flex flex-col gap-[32px]">
       <div className="flex justify-between">
         <Typography variant="textL">Сумма заказа</Typography>
         <Typography variant="textL">19 804.8 ₽</Typography>
@@ -49,8 +49,6 @@ export const CartInfo = () => {
           className="flex flex-col gap-8"
         >
           <ControlledSelect
-            labelClassname="bg-whiteCustom"
-            selectClassname="bg-whiteCustom"
             name="store"
             labelText="Торговая точка"
             options={[
@@ -68,9 +66,7 @@ export const CartInfo = () => {
             startDate={new Date()}
           />
           <ControlledTextarea
-            labelClassname="bg-whiteCustom"
-            labelTextClassname="bg-whiteCustom"
-            className="bg-whiteCustom min-h-[173px]"
+            className="min-h-[173px]"
             name="comment"
             labelText="Комментарий"
             placeholder="Введите комментарий..."
