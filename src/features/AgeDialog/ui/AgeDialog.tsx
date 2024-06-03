@@ -49,13 +49,13 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified, isVerified }) => {
           <AlertDialogFooter className="flex items-center !justify-center gap-7">
             <AlertDialogAction
               onClick={() => handleClickButton(true)}
-              className="flex-1 bg-blueCustom text-white font-bold text-[20px]"
+              className="flex-1 bg-blueCustom text-white font-bold text-[20px] hover:bg-blueCustom hover:scale-[1.05]"
             >
               Мне больше 18 лет
             </AlertDialogAction>
             <AlertDialogCancel
               onClick={() => handleClickButton(false)}
-              className="flex-1 bg-grayCustom text-white font-bold text-[20px]"
+              className="flex-1 bg-grayCustom !text-white font-bold text-[20px] hover:bg-grayCustom hover:scale-[1.05] outline-none"
             >
               Мне нет 18 лет
             </AlertDialogCancel>
