@@ -3,7 +3,7 @@ import { Typography } from "@/shared/ui";
 
 export const HomeCatalogSort = () => {
   return (
-    <div className="flex gap-[20px]">
+    <div className="md:flex hidden gap-[20px]">
       <Typography variant="titleXS">Сортировка</Typography>
       <Link to="/" className="text-textS hover:text-blueCustom hover:underline">
         по популярности

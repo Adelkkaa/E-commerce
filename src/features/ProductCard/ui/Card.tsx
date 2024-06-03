@@ -38,7 +38,7 @@ export const ProductCard = () => {
       <Card className="group max-w-[230px] w-[230px] min-h-[288px] max-h-[288px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
           <img src={cardImage2} alt="card" className="w-[158px] h-[198px] " />
-          <div className="absolute bottom-0 p-2 opacity-0 group-hover:opacity-100 w-full flex justify-center gap-[8px]">
+          <div className="md:flex absolute bottom-0 p-2 opacity-0 group-hover:opacity-100 w-full hidden justify-center gap-[8px]">
             <Button
               onClick={onClickFavorites}
               variant="icon"
