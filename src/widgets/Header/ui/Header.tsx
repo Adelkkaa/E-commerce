@@ -13,18 +13,11 @@ export const Header = () => {
 
   return (
     <header className="padding flex flex-col py-[8px] md:py-[20px]">
-      <div className="flex mb:max-md:justify-between md:items-end tb:gap-[81px] md:gap-[20px] border-b border-grayCustom pb-[8px]">
+      <div className="flex mb:max-md:justify-between md:items-end tb:gap-[81px] md:gap-[20px] mb:max-md:border-b border-grayCustom pb-[8px]">
         <MenuSheet />
-        <Link to="/">
-          <img
-            src={mainLogo}
-            alt="mainLogo"
-            className="mb:max-md:min-w-[160px] mb:max-md:max-w-[160px] md:hidden mb:max-md:h-[40px]"
-          />
-        </Link>
         <Link
           to="/"
-          className="md:min-w-[160px] md:max-w-[160px] mb:max-md:hidden"
+          className="mb:min-w-[160px] mb:max-w-[160px] mb:max-md:h-[40px]"
         >
           <img src={mainLogo} alt="mainLogo" className="w-full h-full" />
         </Link>
