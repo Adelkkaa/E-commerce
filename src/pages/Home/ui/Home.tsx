@@ -14,7 +14,7 @@ export const Home = () => {
     );
   }
   return (
-    <section className="padding md:my-[76px] flex mb:max-md:flex-col gap-[30px]">
+    <section className="padding my-[26px] md:my-[76px] flex mb:max-md:flex-col gap-[30px]">
       <HomeFilters />
       <HomeCatalog />
     </section>

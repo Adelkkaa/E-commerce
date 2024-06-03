@@ -27,3 +27,5 @@ export const secondFooterLinks = [
     href: "/contacts",
   },
 ];
+
+export const footerLinks = [...firstFooterLinks, ...secondFooterLinks];
