@@ -17,7 +17,7 @@ export const NavigationInfo = () => {
   useDocumentTitle(currentDesc || "e-commerce");
 
   return (
-    <div className="fullWidth py-[49px] bg-blueCustom ">
+    <div className="fullWidth md:py-[49px] py-[26px] bg-blueCustom ">
       <div className="subContainer flex flex-col">
         {/* <Breadcrumb /> */}
         <Breadcrumbs />
