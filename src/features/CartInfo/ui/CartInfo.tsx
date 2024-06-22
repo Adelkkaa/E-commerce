@@ -1,4 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import { FC } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { dialogActions } from "@/entities/Dialog";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
@@ -15,7 +17,15 @@ import {
   ICartInfoSchemaType,
 } from "../model/CartInfo.schema";
 
-export const CartInfo = () => {
+interface ICartInfoProps {
+  containerClassName?: string;
+  onCloseSheet?: () => void;
+}
+
+export const CartInfo: FC<ICartInfoProps> = ({
+  containerClassName,
+  onCloseSheet,
+}) => {
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
   const methods = useForm<
@@ -35,9 +45,17 @@ export const CartInfo = () => {
   const onSubmit: SubmitHandler<ICartInfoSchemaType> = async (newData) => {
     console.log("Form Data", newData);
     dispatch(selectCurrentDialog("cartSuccess"));
+    if (onCloseSheet) {
+      onCloseSheet();
+    }
   };
   return (
-    <div className="py-[30px] px-[26px] bg-white rounded-[10px] w-[30%] flex flex-col gap-[32px]">
+    <div
+      className={clsx(
+        "py-[30px] px-[26px] bg-white rounded-[10px] flex md:flex flex-col gap-[32px]",
+        containerClassName,
+      )}
+    >
       <div className="flex justify-between">
         <Typography variant="textL">Сумма заказа</Typography>
         <Typography variant="textL">19 804.8 ₽</Typography>

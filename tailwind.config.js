@@ -255,6 +255,9 @@ module.exports = {
             stroke: "#3A71C3",
           },
         },
+        ".boxShadow": {
+          boxShadow: "0px 4px 4px 0px #0000001A",
+        },
       });
     },
   ],

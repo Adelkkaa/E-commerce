@@ -2,7 +2,7 @@ import { Typography } from "@/shared/ui";
 
 export const Contacts = () => {
   return (
-    <section className="my-[40px] flex flex-col gap-[30px]">
+    <section className="px-[10px] my-[40px] flex flex-col gap-[30px]">
       <Typography variant="textM">
         Если у Вас возникли вопросы, то можете позвонить по телефону{" "}
         <span className="text-textL">+7 (999) 123-45-67</span> (будние дни, с 8
