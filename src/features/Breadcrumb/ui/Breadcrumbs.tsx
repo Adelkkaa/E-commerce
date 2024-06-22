@@ -10,11 +10,11 @@ export function Breadcrumbs() {
     .map((match) => match.handle.crumb(match.data));
 
   return (
-    <ol className="flex gap-[10px] text-buttonM">
+    <ol className="flex gap-[10px] text-buttonM max-md:text-[12px]">
       {crumbs.map((crumb, index) => (
         <li
           key={index}
-          className={cn("text-white  flex gap-[10px]", {
+          className={cn("text-white flex gap-[10px]", {
             "select-none [&_a]:cursor-default":
               index === crumbs.length - 1 || crumbs.length === 1,
             "[&_a]:hover:text-white [&_a]:hover:opacity-80 ":

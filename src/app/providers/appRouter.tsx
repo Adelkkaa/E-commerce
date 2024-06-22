@@ -30,14 +30,14 @@ const routes: RouteObject[] = [
         path: "/cart",
         element: <Cart />,
         handle: {
-          crumb: () => <Typography variant="buttonM">Корзина</Typography>,
+          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Корзина</Typography>,
         },
       },
       {
         path: "/contacts",
         element: <Contacts />,
         handle: {
-          crumb: () => <Typography variant="buttonM">Контакты</Typography>,
+          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Контакты</Typography>,
         },
       },
       {
@@ -45,7 +45,7 @@ const routes: RouteObject[] = [
         element: <Product />,
         handle: {
           crumb: () => (
-            <Typography variant="buttonM">Информация о товаре</Typography>
+            <Typography variant="buttonM" className="max-md:text-[12px]">Информация о товаре</Typography>
           ),
         },
       },
@@ -54,7 +54,7 @@ const routes: RouteObject[] = [
         element: <Agreeement />,
         handle: {
           crumb: () => (
-            <Typography variant="buttonM">
+            <Typography variant="buttonM" className="max-md:text-[12px]">
               Согласие на обработку персональных данных
             </Typography>
           ),
@@ -65,7 +65,7 @@ const routes: RouteObject[] = [
         element: <Policy />,
         handle: {
           crumb: () => (
-            <Typography variant="buttonM">
+            <Typography variant="buttonM" className="max-md:text-[12px]">
               Политика конфиденциальности
             </Typography>
           ),
@@ -75,7 +75,7 @@ const routes: RouteObject[] = [
         path: "/favorites",
         element: <Favorites />,
         handle: {
-          crumb: () => <Typography variant="buttonM">Избранное</Typography>,
+          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Избранное</Typography>,
         },
       },
       {
@@ -89,7 +89,7 @@ const routes: RouteObject[] = [
             path: "/orders/:orderId",
             element: <OrderInfo />,
             handle: {
-              crumb: () => <Typography variant="buttonM">Заказ</Typography>,
+              crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Заказ</Typography>,
             },
           },
         ],

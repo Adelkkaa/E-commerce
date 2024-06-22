@@ -2,7 +2,7 @@ import { FavoritesTable } from "@/widgets/FavoritesTable";
 
 export const Favorites = () => {
   return (
-    <section className="my-[71px]">
+    <section className="max-md:my-[20px] my-[71px]">
       <FavoritesTable />
     </section>
   );

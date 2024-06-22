@@ -21,7 +21,10 @@ export const NavigationInfo = () => {
       <div className="subContainer flex flex-col">
         {/* <Breadcrumb /> */}
         <Breadcrumbs />
-        <Typography variant="h1" className="select-none text-white">
+        <Typography
+          variant="h1"
+          className="select-none text-white max-md:text-[20px]"
+        >
           {(params.orderId && `Заказ #${params.orderId}`) || currentDesc}
         </Typography>
       </div>
