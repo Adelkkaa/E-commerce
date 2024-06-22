@@ -37,8 +37,8 @@ export const StoreDialog = () => {
   return (
     <>
       <DialogHeader className="gap-[10px] justify-center items-center">
-        <DialogTitle className="text-modalTitle text-center ">
-          Выберите торговую точку{" "}
+        <DialogTitle className="text-modalTitle max-md:text-[30px] text-center ">
+          Выберите торговую точку
         </DialogTitle>
       </DialogHeader>
       <FormProvider {...methods}>

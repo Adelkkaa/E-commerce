@@ -13,7 +13,7 @@ export const ContactSuccess = () => {
         <DialogTitle className="text-modalTitle text-center ">
           Сообщение успешно отправлено
         </DialogTitle>
-        <DialogDescription className="!text-modalDesc text-black text-center max-w-[68%]">
+        <DialogDescription className="!text-modalDesc text-black text-center max-w-[68%] max-md:max-w-full">
           Мы уже работаем над Вашим обращением.
           <br /> Вы получите ответ в будние дни в 9-18:00 мск
         </DialogDescription>

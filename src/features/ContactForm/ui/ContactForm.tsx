@@ -49,7 +49,7 @@ export const ContactForm = () => {
         <DialogTitle className="text-modalTitle text-center ">
           Свяжитесь с нами
         </DialogTitle>
-        <DialogDescription className="text-modalDesc text-center max-w-[68%]">
+        <DialogDescription className="text-modalDesc text-center max-w-[68%] max-md:max-w-full">
           Если Вы хотите создать аккаунт, забыли пароль от существующего или у
           Вас есть вопросы, оставьте Ваши контакты в форме ниже — мы свяжемся с
           Вами
@@ -75,7 +75,7 @@ export const ContactForm = () => {
         >
           Отправить сообщение
         </Button>
-        <Typography variant="modalDesc">
+        <Typography variant="modalDesc" className="max-md:text-center">
           Нажимая кнопку “Отправить сообщение”, Вы даете согласие
           <DialogTrigger asChild>
             <Link to="/agreement" className="underline text-blueCustom">

@@ -13,7 +13,7 @@ export const CartSuccess = () => {
         <DialogTitle className="text-modalTitle text-center ">
           Заказ успешно создан{" "}
         </DialogTitle>
-        <DialogDescription className="!text-modalDesc text-black text-center max-w-[68%]">
+        <DialogDescription className="!text-modalDesc text-black text-center max-w-[68%] max-md:max-w-full">
           Для уточнения деталей с Вами свяжется менеджер. <br /> Время работы:
           будние дни, 9-18:00 мск
         </DialogDescription>

@@ -44,8 +44,9 @@ export const LoginForm = () => {
         <DialogTitle className="text-modalTitle text-center ">
           Вход в аккаунт
         </DialogTitle>
-        <DialogDescription className="text-modalDesc text-center max-w-[68%]">
-          Для оформления заказа, а также просмотра индивидуальных предложений
+        <DialogDescription className="text-modalDesc text-center max-w-[68%] max-md:max-w-full">
+          Для оформления заказа, а также просмотра{" "}
+          <br className="hidden max-md:block" /> индивидуальных предложений
           необходимо авторизоваться
         </DialogDescription>
       </DialogHeader>
@@ -59,7 +60,7 @@ export const LoginForm = () => {
           <ControlledInput type="password" name="password" labelText="Пароль" />
         </form>
       </FormProvider>
-      <DialogFooter className="!justify-between">
+      <DialogFooter className="!justify-between max-md:flex-row">
         <Button
           type="submit"
           form="loginForm"
@@ -68,16 +69,16 @@ export const LoginForm = () => {
           Войти
         </Button>
         <div className="flex flex-col">
-          <div className="flex">
+          <div className="flex max-md:gap-[10px]">
             <Typography
               variant="modalDesc"
-              className="max-w-[50%] text-end leading-[20px]"
+              className="max-w-[50%] max-ml:text-[12px] text-end leading-[20px]"
             >
               Нет аккаунта?
             </Typography>
             <Button
               variant="link"
-              className="!text-modalDesc  items-start !p-0 !pl-1 h-auto"
+              className="!text-modalDesc max-ml:!text-[12px] items-start !p-0 !pl-1 h-auto"
               onClick={() => dispatch(selectCurrentDialog("contact"))}
             >
               <span className="text-blueCustom underline">
@@ -86,7 +87,10 @@ export const LoginForm = () => {
               ,
             </Button>
           </div>
-          <Typography variant="modalDesc" className="text-end leading-[20px]">
+          <Typography
+            variant="modalDesc"
+            className="max-ml:text-[12px] text-end leading-[20px]"
+          >
             чтобы мы связались с Вами
           </Typography>
         </div>

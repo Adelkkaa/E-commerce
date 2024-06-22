@@ -62,7 +62,7 @@ export const CartInfo: FC<ICartInfoProps> = ({
       </div>
       <FormProvider {...methods}>
         <form
-          id="contactForm"
+          id="cartInfo"
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-8"
         >

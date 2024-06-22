@@ -26,10 +26,13 @@ export const SharedDialog = () => {
       }}
     >
       <DialogContent
-        className={cn("!max-w-500 px-[20px] gap-[30px]", {
-          "!max-w-[550px]": currentDialog === "contactSuccess",
-          "!max-w-[80%]": currentDialog === "productPreview",
-        })}
+        className={cn(
+          "!max-w-500 px-[20px] gap-[30px] max-md:max-w-[96%] max-md:py-[30px] max-md:px-[10px] max-md:rounded-[10px]",
+          {
+            "!max-w-[550px]": currentDialog === "contactSuccess",
+            "!max-w-[80%]": currentDialog === "productPreview",
+          },
+        )}
       >
         {currentDialog === "login" && <LoginForm />}
         {currentDialog === "contact" && <ContactForm />}
