@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import {
   Table,
@@ -11,51 +11,61 @@ import {
 } from "@/shared/ui";
 
 export const OrdersTable = () => {
+  const navigate = useNavigate();
+
   const ordersCard = Array.from({ length: 20 });
+
   return (
     <>
       <Table className="text-textM ">
         <TableHeader>
-          <TableRow className="border-none bg-whiteCustom rounded-[10px]">
-            <TableHead className="rounded-tl-[10px] rounded-bl-[10px] text-center !text-textL !text-black py-[28px]">
+          <TableRow className="border-none bg-whiteBg rounded-[10px]">
+            <TableHead className="rounded-tl-[10px] rounded-bl-[10px] text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
               Заказ
             </TableHead>
-            <TableHead className="text-center !text-textL !text-black py-[28px]">
+            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
               Дата заказа
             </TableHead>
-            <TableHead className="text-center !text-textL !text-black py-[28px]">
+            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
               Дата доставки
             </TableHead>
-            <TableHead className="text-center !text-textL !text-black py-[28px]">
+            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
               Статус
             </TableHead>
-            <TableHead className="text-center !text-textL !text-black py-[28px]">
+            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px] rounded-tr-[10px] rounded-br-[10px] whitespace-nowrap">
               Сумма
             </TableHead>
-            <TableHead className="text-center !text-textL !text-black py-[28px] rounded-tr-[10px] rounded-br-[10px]">
+            {/* <TableHead className="max-md:hidden text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px] rounded-tr-[10px] rounded-br-[10px]">
               Детали
-            </TableHead>
+            </TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
           {ordersCard.map((_, index) => (
             <TableRow
               key={index}
-              className="border-none text-tableText text-center"
+              onClick={() => navigate("/orders/123")}
+              className="border-none text-tableText text-center cursor-pointer hover:bg-whiteBg hover:rounded-[10px]"
             >
-              <TableCell>#123435</TableCell>
-              <TableCell>25.05.2024</TableCell>
-              <TableCell>27.05.2024</TableCell>
-              <TableCell>Ожидает доставки</TableCell>
-              <TableCell>50 240.40 ₽</TableCell>
-              <TableCell className="flex justify-center">
+              <TableCell className="max-md:text-[12px] rounded-tl-[10px] rounded-bl-[10px]">
+                #123435
+              </TableCell>
+              <TableCell className="max-md:text-[12px]">25.05.2024</TableCell>
+              <TableCell className="max-md:text-[12px]">27.05.2024</TableCell>
+              <TableCell className="max-md:text-[12px]">
+                Ожидает доставки
+              </TableCell>
+              <TableCell className="max-md:text-[12px] whitespace-nowrap rounded-tr-[10px] rounded-br-[10px]">
+                50 240.40 <span className="font-medium"> ₽</span>
+              </TableCell>
+              {/* <TableCell className="flex justify-center max-md:hidden">
                 <Link
                   to="/orders/123"
                   className="hover:strokeBlue hover:border-blueCustom flex justify-center w-[70px] h-[30px] border-2 rounded-[10px]"
                 >
                   <EyeIcon className="w-[24px] h-[24px] [&_path]:stroke-grayCustom" />
                 </Link>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
