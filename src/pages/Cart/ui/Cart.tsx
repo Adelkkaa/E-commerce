@@ -7,7 +7,7 @@ export const Cart = () => {
     <section className="padding bg-whiteCustom max-md:relative">
       <div className="max-md:py-[20px] md:py-[71px] flex gap-[20px] items-start">
         <CartContent />
-        <CartInfo containerClassName="max-md:hidden flex" />
+        <CartInfo containerClassName="max-md:hidden flex basis-[25%]" />
       </div>
       <BottomCartSheet />
     </section>
