@@ -1,15 +1,26 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { dialogActions } from "@/entities/Dialog";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
-import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { useBreakpoint } from "@/shared/hooks/use-breakpoint";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 
-export const ProductCard = () => {
+interface ICardProps {
+  guid: string;
+  name: string;
+  type: string;
+  image_key: string;
+}
+
+export const ProductCard: FC<ICardProps> = ({
+  guid,
+  name,
+  type,
+  image_key,
+}) => {
   const { toast } = useToast();
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
@@ -20,6 +31,8 @@ export const ProductCard = () => {
   ) => {
     e.preventDefault();
     dispatch(selectCurrentDialog("productPreview"));
+    console.log(guid);
+    // Сюда скорее всего как query параметр будем передавать guid, чтоб в запросе выцеплять на превью
   };
 
   const onClickFavorites = (
@@ -36,10 +49,19 @@ export const ProductCard = () => {
   };
 
   return (
-    <Link to="/product/123">
+    <Link to={`/product/${guid}`}>
       <Card className="group md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
-          <img src={cardImage2} alt="card" className="w-[158px] h-[198px] " />
+          {image_key ? (
+            <img
+              src={image_key}
+              alt="card"
+              className="w-[158px] h-[198px]"
+              loading="lazy"
+            />
+          ) : (
+            <div className="bg-whiteBg w-full h-[198px] " />
+          )}
           <div className="md:flex absolute bottom-0 p-2 opacity-0 group-hover:opacity-100 w-full hidden justify-center gap-[8px]">
             <Button
               onClick={onClickFavorites}
@@ -61,10 +83,7 @@ export const ProductCard = () => {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col items-start px-[10px] py-[8px]">
-          <Typography variant="textXS">
-            Элект. антитаб. устр. LUXLITE SALTERY Compact WILD BERRIES (лесный
-            ягоды)
-          </Typography>
+          <Typography variant="textXS">{name}</Typography>
           <Typography variant="titleS"> 122.56 ₽/шт</Typography>
           {isMobile && (
             <div className="flex">

@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { dialogReducer } from "@/entities/Dialog";
+import { baseApi } from "@/shared/api/baseApi";
 
 export const store = configureStore({
   reducer: {
     dialogReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat([baseApi.middleware]),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

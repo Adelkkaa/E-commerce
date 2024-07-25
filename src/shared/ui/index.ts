@@ -71,6 +71,15 @@ export {
 } from "./DropdownMenu";
 export { Input, type InputProps } from "./Input";
 export { MaskedInput } from "./MaskedInput";
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "./Pagination";
 export { PhoneInput } from "./PhoneInput";
 export {
   Select,

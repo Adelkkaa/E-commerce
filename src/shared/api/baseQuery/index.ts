@@ -1,0 +1,1 @@
+export { baseQuery } from "./baseQuery";
