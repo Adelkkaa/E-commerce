@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { dialogActions } from "@/entities/Dialog";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
@@ -25,13 +25,15 @@ export const ProductCard: FC<ICardProps> = ({
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
   const { isMobile } = useBreakpoint();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onClickPreview = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
+    searchParams.set("guid", guid);
+    setSearchParams(searchParams);
     dispatch(selectCurrentDialog("productPreview"));
-    console.log(guid);
     // Сюда скорее всего как query параметр будем передавать guid, чтоб в запросе выцеплять на превью
   };
 
@@ -50,7 +52,7 @@ export const ProductCard: FC<ICardProps> = ({
 
   return (
     <Link to={`/product/${guid}`}>
-      <Card className="group md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
+      <Card className="group max-md:flex max-md:flex-col md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
           {image_key ? (
             <img
@@ -82,11 +84,11 @@ export const ProductCard: FC<ICardProps> = ({
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col items-start px-[10px] py-[8px]">
+        <CardFooter className="flex flex-col max-md:flex-grow max-md:grid items-start px-[10px] py-[8px]">
           <Typography variant="textXS">{name}</Typography>
           <Typography variant="titleS"> 122.56 ₽/шт</Typography>
           {isMobile && (
-            <div className="flex">
+            <div className="flex self-end">
               <Button
                 onClick={onClickFavorites}
                 variant="icon"
