@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import * as React from "react";
 import ArrowRight from "@/shared/assets/images/ArrowRight.svg";
 import { cn } from "@/shared/lib/utils";

@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
-import EyeIcon from "@/shared/assets/images/Eye.svg";
+import { useNavigate } from "react-router-dom";
 import {
   Table,
   TableBody,

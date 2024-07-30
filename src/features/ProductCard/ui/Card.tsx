@@ -15,12 +15,7 @@ interface ICardProps {
   image_key: string;
 }
 
-export const ProductCard: FC<ICardProps> = ({
-  guid,
-  name,
-  type,
-  image_key,
-}) => {
+export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
   const { toast } = useToast();
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
