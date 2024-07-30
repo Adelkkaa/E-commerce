@@ -27,7 +27,7 @@ export const HomeCatalog = () => {
           ? mockProductCards.map((_, index) => (
               <ProductCardSkeleton key={index} />
             ))
-          : productCardList?.map((productCard) => (
+          : productCardList?.items.map((productCard) => (
               <ProductCard key={productCard.guid} {...productCard} />
             ))}
       </div>
