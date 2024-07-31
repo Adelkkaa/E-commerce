@@ -1,0 +1,8 @@
+version: '3'
+services:
+ frontend:
+    build: .
+    image: e-commerce:v1
+    ports:
+      - "90:80"
+    restart: unless-stopped
