@@ -1,4 +1,8 @@
 {
+  "ssl": {
+    "certificate": null,
+    "key": null
+  },
     "rewrites": [
       {
         "source": "/api/v1/(.*)",
