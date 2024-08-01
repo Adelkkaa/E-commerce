@@ -4,5 +4,5 @@ services:
     build: .
     image: e-commerce:v1
     ports:
-      - "90:80"
+      - "80:80"
     restart: unless-stopped
