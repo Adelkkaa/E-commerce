@@ -70,6 +70,7 @@ export {
   DropdownMenuTrigger,
 } from "./DropdownMenu";
 export { Input, type InputProps } from "./Input";
+export { Loader } from "./Loader";
 export { MaskedInput } from "./MaskedInput";
 export {
   Pagination,

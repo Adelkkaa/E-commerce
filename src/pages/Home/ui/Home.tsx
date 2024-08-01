@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { Loader } from "@/shared/ui";
 import { HomeCatalog } from "@/widgets/HomeCatalog";
 import { HomeFilters } from "@/widgets/HomeFilters";
 
@@ -8,7 +9,7 @@ export const Home = () => {
 
   if (pathname !== "/") {
     return (
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     );

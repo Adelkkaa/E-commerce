@@ -6,6 +6,7 @@ import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { AgeDialog } from "@/features/AgeDialog";
+import { Loader } from "@/shared/ui";
 import { SharedDialog } from "@/widgets/Dialog";
 import { Footer } from "@/widgets/Footer";
 import { Header } from "@/widgets/Header";
@@ -28,7 +29,7 @@ export const Layout = () => {
         <Header />
         <main className="flex-grow">
           <NavigationInfo />
-          <Suspense fallback="Loading...">
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </main>

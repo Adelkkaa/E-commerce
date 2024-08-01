@@ -7,7 +7,6 @@ import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { scrollToTop } from "@/shared/lib/scrollToTop";
 import { cn } from "@/shared/lib/utils";
 import { Button, Typography } from "@/shared/ui";
-import { moreInfo } from "./constants";
 
 export const Product = () => {
   const { productId } = useParams();
@@ -19,8 +18,6 @@ export const Product = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
-
-  console.log("productCard", productCard);
 
   return (
     <section className="relative mb-[71px] mt-[26px] max-md:px-[20px]">
@@ -130,30 +127,38 @@ export const Product = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col mt-[50px] gap-[30px]">
-            <Typography variant="titleL" className="max-md:text-textL">
-              Дополнительная информация
-            </Typography>
-            <div>
-              {moreInfo.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={cn("flex justify-between rounded-[10px] p-1", {
-                      "bg-whiteBg": index % 2 === 0,
-                    })}
-                  >
-                    <Typography variant="textL" className="w-[50%] text-center">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="textL" className="w-[50%] text-center">
-                      {item.info}
-                    </Typography>
-                  </div>
-                );
-              })}
+          {productCard?.properties && productCard.properties.length > 0 && (
+            <div className="flex flex-col mt-[50px] gap-[30px]">
+              <Typography variant="titleL" className="max-md:text-textL">
+                Дополнительная информация
+              </Typography>
+              <div>
+                {productCard.properties.map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={cn("flex justify-between rounded-[10px] p-1", {
+                        "bg-whiteBg": index % 2 === 0,
+                      })}
+                    >
+                      <Typography
+                        variant="textL"
+                        className="w-[50%] text-center"
+                      >
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        variant="textL"
+                        className="w-[50%] text-center"
+                      >
+                        {item.value}
+                      </Typography>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
           <div className="sticky md:hidden bottom-[50px] gap-[123px] mt-[30px] w-full flex justify-between">
             <Button
               variant="icon"

@@ -47,13 +47,13 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
 
   return (
     <Link to={`/product/${guid}`}>
-      <Card className="group max-md:flex max-md:flex-col md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
+      <Card className="group flex flex-col md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
           {image_key ? (
             <img
               src={image_key}
               alt="card"
-              className="w-[158px] h-[198px]"
+              className="w-full h-[198px]"
               loading="lazy"
             />
           ) : (
@@ -79,7 +79,7 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col max-md:flex-grow max-md:grid items-start px-[10px] py-[8px]">
+        <CardFooter className="flex flex-col flex-grow max-md:grid md:justify-between items-start px-[10px] py-[8px]">
           <Typography variant="textXS">{name}</Typography>
           <Typography variant="titleS"> 122.56 ₽/шт</Typography>
           {isMobile && (

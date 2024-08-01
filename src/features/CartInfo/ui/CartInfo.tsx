@@ -70,10 +70,10 @@ export const CartInfo: FC<ICartInfoProps> = ({
             name="store"
             labelText="Торговая точка"
             options={[
-              { label: "hello", value: "123" },
-              { label: "poka", value: "321" },
-              { label: "huy", value: "333" },
-              { label: "123", value: "4444" },
+              { label: "ИП Шайхутдинова О.В.", value: "123" },
+              { label: "Торговая точка 2", value: "321" },
+              { label: "Торговая точка 3", value: "333" },
+              { label: "Торговая точка 4", value: "4444" },
             ]}
             placeholder="Выберите торговую точку"
           />

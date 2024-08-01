@@ -28,19 +28,9 @@ export const HomeFilters = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-[10px] text-titleXS items-center bg-transparent hover:strokeBlue p-2 outline-none">
               <HomeSort />
-              По популярности
+              По названию
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[260px]">
-              <DropdownMenuItem
-              // onClick={() => dispatch(selectCurrentDialog("login"))}
-              >
-                <Button
-                  variant="ghost"
-                  className="text-titleXS w-full text-center"
-                >
-                  По популярности
-                </Button>
-              </DropdownMenuItem>
               <DropdownMenuItem
               // onClick={() => dispatch(selectCurrentDialog("login"))}
               >

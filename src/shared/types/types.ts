@@ -1,17 +1,23 @@
+interface IProductCardProperty {
+  name: string;
+  value: string;
+}
+
 export interface IProductCard {
   guid: string;
   name: string;
   description: string;
   good_group_guid: string;
   type: string;
-  filling: string;
-  aroma: string;
-  strength: string;
-  format: string;
-  manufacturing_method: string;
-  package: string;
-  block: string;
-  box: string;
+  // filling: string;
+  // aroma: string;
+  // strength: string;
+  // format: string;
+  // manufacturing_method: string;
+  // package: string;
+  // block: string;
+  // box: string;
+  properties: IProductCardProperty[];
   producing_country: string;
   image_key: string;
   specifications: [

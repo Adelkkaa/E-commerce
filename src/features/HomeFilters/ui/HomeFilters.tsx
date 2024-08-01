@@ -25,33 +25,33 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
         <AccordionItem value="item-1">
           <AccordionTrigger>Категории</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam" label="Салам" />
-            <FilterCheckbox id="salam_1" label="Ну привет" />
-            <FilterCheckbox id="anti-salam" label="Покеда" />
+            <FilterCheckbox id="salam" label="Категория 1" />
+            <FilterCheckbox id="salam_1" label="Категория 2" />
+            <FilterCheckbox id="anti-salam" label="Категория 3" />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>Фильтр 1</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-1" label="Салам" />
-            <FilterCheckbox id="salam_1-1" label="Ну привет" />
-            <FilterCheckbox id="anti-salam-1" label="Покеда" />
+            <FilterCheckbox id="salam-1" label="Категория 2" />
+            <FilterCheckbox id="salam_1-1" label="Категория 2" />
+            <FilterCheckbox id="anti-salam-1" label="Категория 3" />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>Фильтр 2</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-2" label="Салам" />
-            <FilterCheckbox id="salam_1-2" label="Ну привет" />
-            <FilterCheckbox id="anti-salam-2" label="Покеда" />
+            <FilterCheckbox id="salam-2" label="Категория 2" />
+            <FilterCheckbox id="salam_1-2" label="Категория 2" />
+            <FilterCheckbox id="anti-salam-2" label="Категория 3" />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>Фильтр 3</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-3" label="Салам" />
-            <FilterCheckbox id="salam_1-3" label="Ну привет" />
-            <FilterCheckbox id="anti-salam-3" label="Покеда" />
+            <FilterCheckbox id="salam-3" label="Категория 2" />
+            <FilterCheckbox id="salam_1-3" label="Категория 2" />
+            <FilterCheckbox id="anti-salam-3" label="Категория 3" />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">

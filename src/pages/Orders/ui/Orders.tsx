@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { Loader } from "@/shared/ui";
 import { OrdersTable } from "@/widgets/OrdersTable";
 
 export const Orders = () => {
   const { pathname } = useLocation();
   if (pathname !== "/orders") {
     return (
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     );
