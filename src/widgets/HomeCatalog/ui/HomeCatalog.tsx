@@ -16,7 +16,7 @@ export const HomeCatalog = () => {
     isSuccess,
   } = useGetProductCardListQuery({
     page: Number(page) || 1,
-    size: 50,
+    size: 25,
   });
 
   return (
