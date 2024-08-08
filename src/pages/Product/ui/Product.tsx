@@ -1,5 +1,5 @@
 import { Minus, Plus } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductCardSingleQuery } from "@/entities/ProductCard";
 import { ProductSkeleton } from "@/entities/ProductSkeleton";
@@ -10,10 +10,26 @@ import { Button, Typography } from "@/shared/ui";
 
 export const Product = () => {
   const { productId } = useParams();
+  const [count, setCount] = useState(1);
+  const [selectedStorageIndx] = useState(0);
 
   const { data: productCard, isLoading } = useGetProductCardSingleQuery({
     guid: productId as string,
   });
+
+  const handleIncrementProduct = () => {
+    if (
+      productCard?.storages &&
+      count < productCard.storages[selectedStorageIndx].in_stock
+    ) {
+      setCount((prev) => prev + 1);
+    }
+  };
+  const handleDecrementProduct = () => {
+    if (count > 1) {
+      setCount((prev) => prev - 1);
+    }
+  };
 
   useEffect(() => {
     scrollToTop();
@@ -35,7 +51,7 @@ export const Product = () => {
             ) : (
               <div className="border border-grayCustom rounded-[10px] md:max-dk:min-w-[400px] dk:min-w-[500px] h-[500px] bg-white " />
             )}
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col flex-1 justify-between">
               <div className="flex flex-col gap-[20px]">
                 <Typography variant="titleL" className="max-md:text-textL">
                   {productCard?.name}
@@ -49,21 +65,19 @@ export const Product = () => {
                   className="font-semibold max-md:text-titleXS"
                 >
                   В наличии на складе:{" "}
-                  <span className="text-blueCustom">140 шт</span>
+                  <span className="text-blueCustom">
+                    {productCard?.storages[0].in_stock} шт
+                  </span>
                 </Typography>
                 <Typography variant="textM" className="text-textS">
-                  Luxlite Saltery Compact WILD BERRIES – одноразовая электронная
-                  сигарета с солевым никотином. Содержание никотина в
-                  заправочной жидкости – 5%. Микс из лесных ягод с лёгким
-                  холодком. Этот вкус разработан LUXLITE совместно с HQD
-                  эксклюзивно для линейки Saltery Compact. В перерывах между
-                  затяжками рекомендуется держать корпус в вертикальном
-                  положении.
+                  {productCard?.description}
                 </Typography>
               </div>
               <div className="hidden tb:flex gap-[50px]">
-                <div className="flex justify-center items-center gap-[30px] !h-full">
+                <div className="flex  justify-center items-center gap-[30px] !h-full">
                   <Button
+                    disabled={count === 1}
+                    onClick={handleDecrementProduct}
                     variant="icon"
                     className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
                   >
@@ -71,11 +85,18 @@ export const Product = () => {
                   </Button>
                   <Typography
                     variant="textM"
-                    className="text-[25px] font-semibold"
+                    className="text-[25px] font-semibold min-w-10 text-center"
                   >
-                    10
+                    {productCard?.storages[selectedStorageIndx].in_stock !== 0
+                      ? count
+                      : 0}
                   </Typography>
                   <Button
+                    disabled={
+                      count ===
+                      productCard?.storages[selectedStorageIndx].in_stock
+                    }
+                    onClick={handleIncrementProduct}
                     variant="icon"
                     className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
                   >

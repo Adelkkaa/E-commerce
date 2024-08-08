@@ -29,7 +29,6 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
     searchParams.set("guid", guid);
     setSearchParams(searchParams);
     dispatch(selectCurrentDialog("productPreview"));
-    // Сюда скорее всего как query параметр будем передавать guid, чтоб в запросе выцеплять на превью
   };
 
   const onClickFavorites = (
@@ -47,13 +46,13 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
 
   return (
     <Link to={`/product/${guid}`}>
-      <Card className="group flex flex-col md:max-w-[230px] md:w-[230px] md:min-h-[288px] md:max-h-[288px] max-w-[190px] w-[190px] min-h-[330px] max-h-[330px] cursor-pointer ">
+      <Card className="group flex flex-col md:max-w-[230px] md:w-[230px] md:min-h-[380px] md:max-h-[380px] max-w-[190px] w-[190px] min-h-[360px] max-h-[360px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
           {image_key ? (
             <img
               src={image_key}
               alt="card"
-              className="w-full h-[198px]"
+              className="w-full h-[235px] md:h-[285px]"
               loading="lazy"
             />
           ) : (

@@ -1,5 +1,5 @@
 import { Minus, Plus } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetProductCardSingleQuery } from "@/entities/ProductCard";
 import { ProductPreviewSkeleton } from "@/entities/ProductPreviewSkeleton";
@@ -10,9 +10,26 @@ export const PreviewDialog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const guid = searchParams.get("guid");
 
+  const [count, setCount] = useState(1);
+  const [selectedStorageIndx] = useState(0);
+
   const { data: productCard, isLoading } = useGetProductCardSingleQuery({
     guid: guid as string,
   });
+
+  const handleIncrementProduct = () => {
+    if (
+      productCard?.storages &&
+      count < productCard.storages[selectedStorageIndx].in_stock
+    ) {
+      setCount((prev) => prev + 1);
+    }
+  };
+  const handleDecrementProduct = () => {
+    if (count > 1) {
+      setCount((prev) => prev - 1);
+    }
+  };
 
   useEffect(() => {
     return () => {
@@ -50,20 +67,21 @@ export const PreviewDialog = () => {
                 className="font-semibold max-lg:text-titleXS"
               >
                 В наличии на складе:{" "}
-                <span className="text-blueCustom">140 шт</span>
+                <span className="text-blueCustom">
+                  <span className="text-blueCustom">
+                    {productCard?.storages[0].in_stock} шт
+                  </span>
+                </span>
               </Typography>
               <Typography variant="textM" className="max-lg:text-textS">
-                Luxlite Saltery Compact WILD BERRIES – одноразовая электронная
-                сигарета с солевым никотином. Содержание никотина в заправочной
-                жидкости – 5%. Микс из лесных ягод с лёгким холодком. Этот вкус
-                разработан LUXLITE совместно с HQD эксклюзивно для линейки
-                Saltery Compact. В перерывах между затяжками рекомендуется
-                держать корпус в вертикальном положении.
+                {productCard?.description}
               </Typography>
             </div>
             <div className="hidden lg:flex gap-[20px]">
               <div className=" flex justify-center items-center gap-[30px] !h-full">
                 <Button
+                  disabled={count === 1}
+                  onClick={handleDecrementProduct}
                   variant="icon"
                   className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
                 >
@@ -71,11 +89,18 @@ export const PreviewDialog = () => {
                 </Button>
                 <Typography
                   variant="textM"
-                  className="text-[25px] font-semibold"
+                  className="text-[25px] font-semibold "
                 >
-                  10
+                  {productCard?.storages[selectedStorageIndx].in_stock !== 0
+                    ? count
+                    : 0}
                 </Typography>
                 <Button
+                  disabled={
+                    count ===
+                    productCard?.storages[selectedStorageIndx].in_stock
+                  }
+                  onClick={handleIncrementProduct}
                   variant="icon"
                   className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
                 >

@@ -21,7 +21,6 @@ export const SharedDialog = () => {
     <Dialog
       open={isOpen}
       onOpenChange={(e) => {
-        console.log(e);
         dispatch(selectIsOpen(e));
       }}
     >

@@ -3,29 +3,22 @@ interface IProductCardProperty {
   value: string;
 }
 
+export interface IProductCardStorage {
+  good_guid: string;
+  in_stock: number;
+  specification_guid: string;
+  specification_name: string;
+}
 export interface IProductCard {
   guid: string;
   name: string;
   description: string;
   good_group_guid: string;
   type: string;
-  // filling: string;
-  // aroma: string;
-  // strength: string;
-  // format: string;
-  // manufacturing_method: string;
-  // package: string;
-  // block: string;
-  // box: string;
   properties: IProductCardProperty[];
   producing_country: string;
   image_key: string;
-  specifications: [
-    {
-      guid: string;
-      name: string;
-    },
-  ];
+  storages: IProductCardStorage[];
 }
 
 export type IProductCardList = Pick<
