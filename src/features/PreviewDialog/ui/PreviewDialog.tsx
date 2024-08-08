@@ -53,7 +53,7 @@ export const PreviewDialog = () => {
           ) : (
             <div className="border border-grayCustom rounded-[10px] mb:min-w-[300px] xl:min-w-[500px] lg:h-[500px] max-lg:h-[300px] bg-white" />
           )}
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col flex-1 justify-between">
             <div className="flex flex-col gap-[20px]">
               <Typography variant="titleL" className="max-lg:text-textL">
                 {productCard?.name}
@@ -69,7 +69,10 @@ export const PreviewDialog = () => {
                 В наличии на складе:{" "}
                 <span className="text-blueCustom">
                   <span className="text-blueCustom">
-                    {productCard?.storages[0].in_stock} шт
+                    {productCard?.storages && productCard.storages.length > 0
+                      ? productCard.storages[0]?.in_stock
+                      : 0}{" "}
+                    шт
                   </span>
                 </span>
               </Typography>
@@ -77,46 +80,48 @@ export const PreviewDialog = () => {
                 {productCard?.description}
               </Typography>
             </div>
-            <div className="hidden lg:flex gap-[20px]">
-              <div className=" flex justify-center items-center gap-[30px] !h-full">
-                <Button
-                  disabled={count === 1}
-                  onClick={handleDecrementProduct}
-                  variant="icon"
-                  className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
-                >
-                  <Minus />
+            {productCard?.storages && productCard.storages.length > 0 && (
+              <div className="hidden lg:flex gap-[20px]">
+                <div className=" flex justify-center items-center gap-[30px] !h-full">
+                  <Button
+                    disabled={count === 1}
+                    onClick={handleDecrementProduct}
+                    variant="icon"
+                    className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+                  >
+                    <Minus />
+                  </Button>
+                  <Typography
+                    variant="textM"
+                    className="text-[25px] font-semibold "
+                  >
+                    {productCard.storages[selectedStorageIndx].in_stock !== 0
+                      ? count
+                      : 0}
+                  </Typography>
+                  <Button
+                    disabled={
+                      count ===
+                      productCard.storages[selectedStorageIndx].in_stock
+                    }
+                    onClick={handleIncrementProduct}
+                    variant="icon"
+                    className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+                  >
+                    <Plus />
+                  </Button>
+                </div>
+                <Button className="bg-blueCustom text-[25px] font-bold flex-1">
+                  Добавить в заказ
                 </Button>
-                <Typography
-                  variant="textM"
-                  className="text-[25px] font-semibold "
-                >
-                  {productCard?.storages[selectedStorageIndx].in_stock !== 0
-                    ? count
-                    : 0}
-                </Typography>
                 <Button
-                  disabled={
-                    count ===
-                    productCard?.storages[selectedStorageIndx].in_stock
-                  }
-                  onClick={handleIncrementProduct}
                   variant="icon"
-                  className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+                  className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
                 >
-                  <Plus />
+                  <FavoritesIcon />
                 </Button>
               </div>
-              <Button className="bg-blueCustom text-[25px] font-bold flex-1">
-                Добавить в заказ
-              </Button>
-              <Button
-                variant="icon"
-                className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
-              >
-                <FavoritesIcon />
-              </Button>
-            </div>
+            )}
           </div>
           <div className="lg:hidden gap-[30px] w-full flex justify-between">
             <Button
