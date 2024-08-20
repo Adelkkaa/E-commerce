@@ -19,7 +19,11 @@ export const Header = () => {
           to="/"
           className="mb:min-w-[160px] mb:max-w-[160px] mb:max-md:h-[40px]"
         >
-          <img src={mainLogo} alt="mainLogo" className="w-full h-full" />
+          <img
+            src={mainLogo}
+            alt="mainLogo"
+            className="w-full h-full object-contain"
+          />
         </Link>
         <div className="flex md:w-full tb:gap-[81px] md:gap-[20px]">
           <nav className="hidden md:flex tb:gap-[44px] md:gap-[10px]">

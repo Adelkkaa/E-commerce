@@ -10,7 +10,7 @@ export const CartCard = () => {
         <img
           src={cardImage2}
           alt="card"
-          className="min-w-[75px] min-h-[75px] max-w-[75px] max-h-[75px] border border-grayCustom rounded-[4px]"
+          className="min-w-[75px] min-h-[75px] max-w-[75px] max-h-[75px] object-contain border border-grayCustom rounded-[4px]"
         />
         <div className="flex flex-col">
           <Typography variant="textL" className="max-md:text-[16px]">

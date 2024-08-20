@@ -54,7 +54,7 @@ export const FavoritesTable = () => {
                 <img
                   src={cardImage2}
                   alt="card"
-                  className="w-[90px] h-[90px] md:min-w-[90px] md:min-h-[90px] max-md:min-w-[50px] max-md:min-h-[50px]"
+                  className="w-[90px] h-[90px] md:min-w-[90px] object-contain md:min-h-[90px] max-md:min-w-[50px] max-md:min-h-[50px]"
                 />
               </TableCell>
               <TableCell className="text-center max-md:text-[12px]">

@@ -52,7 +52,7 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
             <img
               src={image_key}
               alt="card"
-              className="w-full h-[235px] md:h-[285px]"
+              className="w-full h-[235px] md:h-[285px] object-contain"
               loading="lazy"
             />
           ) : (
@@ -78,8 +78,10 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col flex-grow max-md:grid md:justify-between items-start px-[10px] py-[8px]">
-          <Typography variant="textXS">{name}</Typography>
+        <CardFooter className="flex flex-col flex-grow max-md:grid max-md:grid-rows-3 md:justify-between items-start px-[10px] py-[8px]">
+          <Typography variant="textXS" className="line-clamp-2">
+            {name}
+          </Typography>
           <Typography variant="titleS"> 122.56 ₽/шт</Typography>
           {isMobile && (
             <div className="flex self-end">
