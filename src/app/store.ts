@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { dialogReducer } from "@/entities/Dialog";
+import { productListReducer } from "@/entities/ProductList";
 import { baseApi } from "@/shared/api/baseApi";
 
 export const store = configureStore({
   reducer: {
     dialogReducer,
+    productListReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

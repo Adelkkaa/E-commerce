@@ -1,6 +1,10 @@
 import clsx from "clsx";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FilterCheckbox } from "@/entities/FilterCheckbox";
+import { FilterRadioGroup } from "@/entities/FilterRadioGroup";
+import { productListActions } from "@/entities/ProductList";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import {
   Accordion,
   AccordionContent,
@@ -15,19 +19,75 @@ interface IHomeFilters {
 }
 
 export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const in_stock = searchParams.get("in_stock");
+
+  const [accordionValue, setAccordionValue] = useState<string[]>([]);
+
+  const dispatch = useAppDispatch();
+
   const [downPrice, setDownPrice] = useState("");
+  const { selectInStock } = productListActions;
+  const { inStock } = useAppSelector((state) => state.productListReducer);
+
+  const handleInStockFilterChange = (value: string) => {
+    dispatch(selectInStock(value));
+  };
+
+  const handleApplyFilters = () => {
+    if (inStock) {
+      searchParams.set("in_stock", inStock);
+    } else {
+      searchParams.delete("in_stock");
+    }
+
+    searchParams.set("page", "1");
+    setSearchParams(searchParams);
+  };
+
+  const handleClearFilters = () => {
+    dispatch(selectInStock(null));
+    searchParams.delete("in_stock");
+    searchParams.set("page", "1");
+    setSearchParams(searchParams);
+  };
+
+  useEffect(() => {
+    if (in_stock) {
+      dispatch(selectInStock(in_stock));
+      setAccordionValue((prev) => [...prev, "in_stock"]);
+    }
+  }, [in_stock]);
 
   return (
     <div
       className={clsx("w-[240px] flex flex-col gap-[30px]", wrapperClassname)}
     >
-      <Accordion type="multiple" className="flex flex-col gap-[30px]">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Категории</AccordionTrigger>
+      <Accordion
+        value={accordionValue}
+        onValueChange={setAccordionValue}
+        type="multiple"
+        className="flex flex-col gap-[30px]"
+      >
+        <AccordionItem value="in_stock">
+          <AccordionTrigger>Наличие</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam" label="Категория 1" />
-            <FilterCheckbox id="salam_1" label="Категория 2" />
-            <FilterCheckbox id="anti-salam" label="Категория 3" />
+            <FilterRadioGroup
+              value={inStock || in_stock || ""}
+              onValueChange={handleInStockFilterChange}
+              items={[
+                {
+                  id: "in_stock",
+                  value: "true",
+                  label: "В наличии",
+                },
+                {
+                  id: "out_of_stock",
+                  value: "false",
+                  label: "Нет в наличии",
+                },
+              ]}
+            />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
@@ -67,10 +127,16 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
         </AccordionItem>
       </Accordion>
       <div className="flex justify-between items-center gap-[20px]">
-        <Button className="flex-1 py-[10px] !text-buttonM text-white">
+        <Button
+          onClick={handleClearFilters}
+          className="flex-1 py-[10px] !text-buttonM text-white"
+        >
           Отменить
         </Button>
-        <Button className="flex-1 py-[10px] !text-buttonM text-white">
+        <Button
+          onClick={handleApplyFilters}
+          className="flex-1 py-[10px] !text-buttonM text-white"
+        >
           Применить
         </Button>
       </div>

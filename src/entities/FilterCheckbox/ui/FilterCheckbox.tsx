@@ -1,5 +1,5 @@
-import { Checkbox } from "@/shared/ui";
 import { FC } from "react";
+import { Checkbox } from "@/shared/ui";
 
 interface IFilterCheckboxProps {
   id: string;

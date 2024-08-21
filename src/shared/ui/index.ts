@@ -82,6 +82,7 @@ export {
   PaginationPrevious,
 } from "./Pagination";
 export { PhoneInput } from "./PhoneInput";
+export { RadioGroup, RadioGroupItem } from "./RadioGroup";
 export {
   Select,
   SelectContent,

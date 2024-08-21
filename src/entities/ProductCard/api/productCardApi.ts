@@ -4,6 +4,7 @@ import { IProductCard, IProductCardApiResponse } from "@/shared/types/types";
 interface IProductCardListQueryParams {
   page?: number;
   size?: number;
+  in_stock?: string;
 }
 
 export const productCardApi = baseApi.injectEndpoints({
