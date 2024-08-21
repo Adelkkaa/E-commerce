@@ -1,11 +1,9 @@
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetProductCardListQuery } from "@/entities/ProductCard";
 import { ProductCardSkeleton } from "@/entities/ProductCardSkeleton";
 import { HomeCatalogSort } from "@/features/HomeCatalogSort";
 import { ProductCard } from "@/features/ProductCard";
 import { ProductsPagination } from "@/features/ProductsPagination";
-import { useAppSelector } from "@/shared/hooks/use-redux";
 
 export const HomeCatalog = () => {
   const [searchParams] = useSearchParams();
