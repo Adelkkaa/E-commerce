@@ -11,6 +11,10 @@ import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 export const Header = () => {
   const { pathname } = useLocation();
 
+  const handleReturnToHome = () => {
+    sessionStorage.clear();
+  };
+
   return (
     <header className="padding flex flex-col py-[8px] md:py-[20px]">
       <div className="flex mb:max-md:justify-between md:items-end tb:gap-[81px] md:gap-[20px] mb:max-md:border-b border-grayCustom pb-[8px]">
@@ -18,6 +22,7 @@ export const Header = () => {
         <Link
           to="/"
           className="mb:min-w-[160px] mb:max-w-[160px] mb:max-md:h-[40px]"
+          onClick={handleReturnToHome}
         >
           <img
             src={mainLogo}
@@ -34,6 +39,7 @@ export const Header = () => {
                   "text-blueCustom": item.href === pathname,
                 })}
                 to={item.href}
+                onClick={item.href === "/" ? handleReturnToHome : undefined}
               >
                 {item.title}
               </Link>

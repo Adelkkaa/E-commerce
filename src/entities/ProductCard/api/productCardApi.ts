@@ -5,6 +5,7 @@ interface IProductCardListQueryParams {
   page?: number;
   size?: number;
   in_stock?: string;
+  name?: string;
 }
 
 export const productCardApi = baseApi.injectEndpoints({

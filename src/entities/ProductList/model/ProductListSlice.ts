@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IProductListSlice {
   inStock: string | null;
+  name: string;
 }
 
 const initialState: IProductListSlice = {
   inStock: null,
+  name: "",
 };
 
 export const ProductListSlice = createSlice({
@@ -16,6 +18,12 @@ export const ProductListSlice = createSlice({
       return {
         ...state,
         inStock: payload,
+      };
+    },
+    selectName(state, { payload }: PayloadAction<string>) {
+      return {
+        ...state,
+        name: payload,
       };
     },
   },

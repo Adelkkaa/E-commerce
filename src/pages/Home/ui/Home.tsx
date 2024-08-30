@@ -9,42 +9,37 @@ export const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   const in_stock = searchParams.get("in_stock");
+  const name = searchParams.get("name");
 
   // Заполняем sessionStorage при открытии вкладки с заполненными query параметрами
   useEffect(() => {
     if (pathname === "/") {
       if (page) {
-        sessionStorage.setItem(
-          "homeSearchParams",
-          JSON.stringify({
-            ...JSON.parse(sessionStorage.getItem("homeSearchParams") || "{}"),
-            page,
-          }),
-        );
+        sessionStorage.setItem("page", page);
       }
       if (in_stock) {
-        sessionStorage.setItem(
-          "homeSearchParams",
-          JSON.stringify({
-            ...JSON.parse(sessionStorage.getItem("homeSearchParams") || "{}"),
-            in_stock,
-          }),
-        );
+        sessionStorage.setItem("in_stock", in_stock);
+      }
+      if (name) {
+        sessionStorage.setItem("name", name);
       }
     }
-  }, [pathname, page, in_stock]);
+  }, [pathname, page, in_stock, name]);
 
   // Заполняем query параметры при переходе с других страниц сайта
   useEffect(() => {
     if (pathname === "/") {
-      const homeSearch = JSON.parse(
-        sessionStorage.getItem("homeSearchParams") || "{}",
-      );
-      if (homeSearch?.page) {
-        searchParams.set("page", homeSearch?.page);
+      const page = sessionStorage.getItem("page");
+      const in_stock = sessionStorage.getItem("in_stock");
+      const searchName = sessionStorage.getItem("name");
+      if (page) {
+        searchParams.set("page", page);
       }
-      if (homeSearch?.in_stock) {
-        searchParams.set("in_stock", homeSearch?.in_stock);
+      if (in_stock) {
+        searchParams.set("in_stock", in_stock);
+      }
+      if (searchName) {
+        searchParams.set("name", searchName);
       }
       setSearchParams(searchParams);
     }

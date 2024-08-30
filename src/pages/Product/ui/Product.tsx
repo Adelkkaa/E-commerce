@@ -46,7 +46,7 @@ export const Product = () => {
               <img
                 src={productCard.image_key}
                 alt="card"
-                className="border border-grayCustom rounded-[10px] md:max-dk:min-w-[400px] dk:min-w-[500px] h-[500px] bg-white "
+                className="border border-grayCustom rounded-[10px] md:max-dk:min-w-[400px] md:max-dk:max-w-[400px] dk:min-w-[500px] dk:max-w-[500px] h-[500px] bg-white object-contain"
               />
             ) : (
               <div className="border border-grayCustom rounded-[10px] md:max-dk:min-w-[400px] dk:min-w-[500px] h-[500px] bg-white " />
