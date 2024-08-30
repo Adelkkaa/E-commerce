@@ -1,12 +1,12 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetProductCardListQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { cn } from "@/shared/lib/utils";
-import { Input } from "@/shared/ui";
+import { Command } from "@/shared/ui";
+import { CommandInput, CommandItem, CommandList } from "@/shared/ui/Command";
 
 export const HeaderInput = () => {
   const searchName = sessionStorage.getItem("name");
@@ -25,19 +25,25 @@ export const HeaderInput = () => {
     { skip: !debouncedSearchValue },
   );
 
-  const handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(selectName(e.target.value));
+  const handleChangeSearchValue = (search: string) => {
+    dispatch(selectName(search));
     setHintVisibility(true);
   };
 
-  const handleSelectHint = (hintName: string) => {
+  const handleSelectHint = ({
+    guid,
+    hintName,
+  }: {
+    guid: string;
+    hintName: string;
+  }) => {
     dispatch(selectName(hintName));
     sessionStorage.setItem("name", hintName);
+    navigate(`/product/${guid}`);
     setHintVisibility(false);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSearch = () => {
     if (name) {
       setHintVisibility(false);
       navigate(`/?name=${name}`);
@@ -50,40 +56,56 @@ export const HeaderInput = () => {
 
   useEffect(() => {
     dispatch(selectName(searchName || ""));
-    console.log("searchName", searchName);
   }, [searchName]);
+
+  const hintVisible =
+    productCardList?.items &&
+    productCardList.items.length > 0 &&
+    debouncedSearchValue &&
+    hintVisibility;
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex-1 relative flex flex-col gap-4"
+    <Command
+      onFocus={() => setHintVisibility(true)}
+      className={cn("relative flex-1 flex w-full items-center")}
     >
-      <label htmlFor="search" className={cn("relative flex items-center")}>
-        <Search className=" absolute h-[16px] w-[16px] ml-[7px] cursor-pointer" />
-        <Input
-          value={name}
-          onChange={handleChangeSearchValue}
-          id="search"
-          className="border-[2px] text-[20px] px-[32px]"
-          placeholder="Введите ваш запрос..."
-        />
-      </label>
-      {productCardList?.items &&
-        productCardList.items.length > 0 &&
-        debouncedSearchValue &&
-        hintVisibility && (
-          <div className="absolute flex flex-col gap-2 border-[2px] py-2 text-[20px] px-[32px] rounded-sm top-[50px] w-full z-10 bg-white">
-            {productCardList.items.map((product) => (
-              <Link
-                key={product.guid}
-                to={`/product/${product.guid}`}
-                className="line-clamp-1"
-                onClick={() => handleSelectHint(product.name)}
-              >
-                {product.name}
-              </Link>
-            ))}
-          </div>
+      <CommandInput
+        value={name}
+        onValueChange={handleChangeSearchValue}
+        id="search"
+        className="border-[2px] text-[20px] px-[32px]"
+        placeholder="Введите ваш запрос..."
+      />
+      <CommandList
+        className={cn(
+          "absolute flex flex-col gap-2 border-[2px] text-[20px] rounded-sm top-[50px] w-full z-10 bg-white",
+          hintVisible ? "block" : "hidden",
         )}
-    </form>
+      >
+        <CommandItem
+          key="unique"
+          className="line-clamp-1 px-[26px]"
+          onSelect={handleSearch}
+          value={name}
+        >
+          Поиск в каталоге: {name}
+        </CommandItem>
+        {hintVisible &&
+          productCardList.items.map((product) => (
+            <CommandItem
+              key={product.guid}
+              className="line-clamp-1 px-[26px]"
+              onSelect={() =>
+                handleSelectHint({
+                  guid: product.guid,
+                  hintName: product.name,
+                })
+              }
+              value={product.name}
+            >
+              {product.name}
+            </CommandItem>
+          ))}
+      </CommandList>
+    </Command>
   );
 };

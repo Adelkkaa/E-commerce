@@ -36,6 +36,7 @@ export {
   CardTitle,
 } from "./Card";
 export { Checkbox } from "./Checkbox";
+export { Command } from "./Command";
 export { Input as ControlledInput } from "./ControlledInput";
 export { ControlledSelect } from "./ControlledSelect";
 export { ControlledTextarea } from "./ControlledTextarea";
