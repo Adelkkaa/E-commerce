@@ -9,6 +9,17 @@ export interface IProductCardStorage {
   specification_guid: string;
   specification_name: string;
 }
+
+export interface IProductCardPriceType {
+  name: string;
+  guid: string;
+}
+export interface IProductCardPrice {
+  good_guid: string;
+  price_type: IProductCardPriceType;
+  specification_guid: string;
+  value: number;
+}
 export interface IProductCard {
   guid: string;
   name: string;
@@ -19,11 +30,12 @@ export interface IProductCard {
   producing_country: string;
   image_key: string;
   storages: IProductCardStorage[];
+  prices: IProductCardPrice[] | [];
 }
 
 export type IProductCardList = Pick<
   IProductCard,
-  "guid" | "name" | "type" | "image_key"
+  "guid" | "name" | "type" | "image_key" | "prices"
 >;
 
 export interface IProductCardApiResponse {

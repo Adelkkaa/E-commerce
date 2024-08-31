@@ -1,7 +1,10 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetProductCardSingleQuery } from "@/entities/ProductCard";
+import {
+  getPreviewPrice,
+  useGetProductCardSingleQuery,
+} from "@/entities/ProductCard";
 import { ProductPreviewSkeleton } from "@/entities/ProductPreviewSkeleton";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { Button, Typography } from "@/shared/ui";
@@ -59,7 +62,7 @@ export const PreviewDialog = () => {
                 {productCard?.name}
               </Typography>
               <Typography variant="titleL" className="max-lg:text-textL">
-                122.56 ₽/шт
+                {productCard && getPreviewPrice(productCard.prices)}
               </Typography>
               <div className="border border-grayCustom" />
               <Typography

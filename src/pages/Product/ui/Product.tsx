@@ -1,7 +1,10 @@
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetProductCardSingleQuery } from "@/entities/ProductCard";
+import {
+  getPreviewPrice,
+  useGetProductCardSingleQuery,
+} from "@/entities/ProductCard";
 import { ProductSkeleton } from "@/entities/ProductSkeleton";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { scrollToTop } from "@/shared/lib/scrollToTop";
@@ -57,7 +60,8 @@ export const Product = () => {
                   {productCard?.name}
                 </Typography>
                 <Typography variant="titleL" className="max-md:text-textL">
-                  122.56 <span className="font-normal">₽</span>/шт
+                  {/* 122.56 <span className="font-normal">₽</span>/шт */}
+                  {productCard && getPreviewPrice(productCard.prices)}
                 </Typography>
                 <div className="border border-grayCustom" />
                 <Typography

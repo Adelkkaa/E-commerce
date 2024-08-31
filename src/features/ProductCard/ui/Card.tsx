@@ -1,21 +1,21 @@
 import React, { FC } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { dialogActions } from "@/entities/Dialog";
+import { getPreviewPrice } from "@/entities/ProductCard";
 import EyeIcon from "@/shared/assets/images/Eye.svg";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
 import { useBreakpoint } from "@/shared/hooks/use-breakpoint";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
+import { IProductCardList, IProductCardPrice } from "@/shared/types/types";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 
-interface ICardProps {
-  guid: string;
-  name: string;
-  type: string;
-  image_key: string;
-}
-
-export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
+export const ProductCard: FC<IProductCardList> = ({
+  guid,
+  name,
+  image_key,
+  prices,
+}) => {
   const { toast } = useToast();
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
@@ -82,7 +82,7 @@ export const ProductCard: FC<ICardProps> = ({ guid, name, image_key }) => {
           <Typography variant="textXS" className="line-clamp-2">
             {name}
           </Typography>
-          <Typography variant="titleS"> 122.56 ₽/шт</Typography>
+          <Typography variant="titleS">{getPreviewPrice(prices)}</Typography>
           {isMobile && (
             <div className="flex self-end">
               <Button
