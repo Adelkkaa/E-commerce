@@ -85,7 +85,7 @@ export const HeaderInput = () => {
           key="unique"
           className="line-clamp-1 px-[26px]"
           onSelect={handleSearch}
-          value={name}
+          value={`uniq-${name}`}
         >
           Поиск в каталоге: {name}
         </CommandItem>
@@ -100,7 +100,7 @@ export const HeaderInput = () => {
                   hintName: product.name,
                 })
               }
-              value={product.name}
+              value={`z-${product.name}`}
             >
               {product.name}
             </CommandItem>
