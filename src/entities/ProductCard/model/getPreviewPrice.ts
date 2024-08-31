@@ -7,5 +7,7 @@ export const getPreviewPrice = (prices: IProductCardPrice[]) => {
     (p) => p.price_type && p.price_type.name === "Розничная",
   );
 
-  return retailPrice ? `${retailPrice.value} ₽/шт` : "Цена не указана";
+  return retailPrice && retailPrice.value > 0
+    ? `${retailPrice.value} ₽/шт`
+    : "Цена не указана";
 };
