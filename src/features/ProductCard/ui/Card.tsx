@@ -7,7 +7,7 @@ import HeartIcon from "@/shared/assets/images/Heart.svg";
 import { useBreakpoint } from "@/shared/hooks/use-breakpoint";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
-import { IProductCardList, IProductCardPrice } from "@/shared/types/types";
+import { IProductCardList } from "@/shared/types/types";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 
 export const ProductCard: FC<IProductCardList> = ({
