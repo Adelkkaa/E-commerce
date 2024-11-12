@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const ContactFormSchema = z.object({
-  fio: z
+  full_name: z
     .string({ required_error: "Поле обязательно для заполнения" })
-    .min(3, "Минимальное количество символов - 3"),
+    .min(8, "Минимальное количество символов - 8"),
   email: z
     .string({ required_error: "Поле обязательно для заполнения" })
     .email("Введите корректный Email"),
@@ -13,9 +13,7 @@ export const ContactFormSchema = z.object({
     })
     .transform((val) => val.replaceAll(" ", ""))
     .refine((val) => val.length === 16, { message: "Неправильный номер" }),
-  message: z
-    .string({ required_error: "Поле обязательно для заполнения" })
-    .min(3, "Минимальное количество символов - 3"),
+  is_company: z.boolean(),
 });
 
 export type IContactFormSchemaInitialType = z.input<typeof ContactFormSchema>;

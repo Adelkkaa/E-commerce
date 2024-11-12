@@ -39,18 +39,22 @@ const PhoneInput = React.forwardRef<HTMLInputElement, TInputField>(
       <div className={cn("flex flex-col gap-2", wrapperClassname)}>
         <label
           className={cn(
-            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer",
+            "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer disabled:opacity-50",
             labelClassname,
             {
+              "border-blueCustom": field.value && !disabled && !error?.message,
               "border-red-600": error?.message,
-              "bg-grayCustom": disabled,
             },
           )}
         >
           <span
-            className={cn("!text-textL absolute top-[-14px] bg-white", {
-              "text-red-600": error?.message,
-            })}
+            className={cn(
+              "!text-textL absolute top-[-14px] bg-white disabled:opacity-50",
+              {
+                "text-red-600": error?.message,
+                "text-blueCustom": field.value && !disabled,
+              },
+            )}
           >
             {labelText}
           </span>
