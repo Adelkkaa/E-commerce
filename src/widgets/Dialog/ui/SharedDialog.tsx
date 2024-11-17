@@ -15,8 +15,6 @@ export const SharedDialog = () => {
     (state) => state.dialogReducer,
   );
 
-  console.log(isOpen, currentDialog, disableClose);
-
   const dispatch = useAppDispatch();
 
   return (

@@ -4,17 +4,10 @@ import { IOutletsResponse } from "../model/types";
 
 export const outletsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getOutlets: build.query<ISelectOptions[], void>({
+    getOutlets: build.query<IOutletsResponse, void>({
       query: () => ({
         url: `outlets`,
       }),
-      transformResponse: (response: IOutletsResponse) => {
-        const transformedResults = response.map((item) => ({
-          label: item.name,
-          value: item.price_type_guid,
-        }));
-        return transformedResults;
-      },
     }),
   }),
   overrideExisting: true,

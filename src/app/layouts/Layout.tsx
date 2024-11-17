@@ -13,6 +13,7 @@ import { Header } from "@/widgets/Header";
 import { NavigationInfo } from "@/widgets/NavigationInfo";
 import { Toaster } from "../providers/toastProvider";
 import { store } from "../store";
+import { AuthLayout } from "./AuthLayout";
 
 // Регистрация русской локализации
 registerLocale("ru", ru);
@@ -25,19 +26,21 @@ export const Layout = () => {
 
   return (
     <Provider store={store}>
-      <div className="container">
-        <Header />
-        <main className="flex-grow">
-          <NavigationInfo />
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </main>
-        <Toaster />
-        <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
-        <SharedDialog />
-        <Footer />
-      </div>
+      <AuthLayout>
+        <div className="container">
+          <Header />
+          <main className="flex-grow">
+            <NavigationInfo />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
+          </main>
+          <Toaster />
+          <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
+          <SharedDialog />
+          <Footer />
+        </div>
+      </AuthLayout>
     </Provider>
   );
 };

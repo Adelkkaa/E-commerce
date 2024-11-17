@@ -4,10 +4,12 @@ import { dialogActions } from "@/entities/Dialog";
 import {
   IOutletsDialogSchemaInitialType,
   IOutletsDialogSchemaType,
+  IOutletsItem,
+  outletsActions,
   OutletsDialogSchema,
   useGetOutletsQuery,
 } from "@/entities/Outlets";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledSelect,
@@ -18,6 +20,10 @@ import {
 
 export const OutletsDialog = () => {
   const { selectIsOpen } = dialogActions;
+  const { setOutlet } = outletsActions;
+
+  const { guid } = useAppSelector((state) => state.outletsReducer);
+
   const dispatch = useAppDispatch();
   const { data: outlets, isLoading } = useGetOutletsQuery();
   const methods = useForm<
@@ -27,15 +33,26 @@ export const OutletsDialog = () => {
   >({
     resolver: zodResolver(OutletsDialogSchema),
     values: {
-      outlet: "",
+      outlet: guid || "",
     },
   });
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<IOutletsDialogSchemaType> = async (newData) => {
-    console.log("Form Data", newData);
+  const onSubmit: SubmitHandler<IOutletsDialogSchemaType> = async (
+    formData,
+  ) => {
+    const currentOutlet = outlets?.find(
+      (outlet) => outlet.guid === formData.outlet,
+    );
+    dispatch(setOutlet(currentOutlet as IOutletsItem));
     dispatch(selectIsOpen(false));
   };
+
+  const selectData =
+    outlets?.map((outlet) => ({
+      value: outlet.guid,
+      label: outlet.name,
+    })) || [];
   return (
     <>
       <DialogHeader className="gap-[10px] justify-center items-center">
@@ -53,7 +70,7 @@ export const OutletsDialog = () => {
             name="outlet"
             labelText="Торговая точка"
             disabled={isLoading}
-            options={outlets || []}
+            options={selectData}
             placeholder="Выберите торговую точку"
           />
         </form>

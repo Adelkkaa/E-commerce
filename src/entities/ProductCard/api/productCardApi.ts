@@ -6,6 +6,7 @@ interface IProductCardListQueryParams {
   size?: number;
   in_stock?: string;
   name?: string;
+  price_type_guid?: string;
 }
 
 export const productCardApi = baseApi.injectEndpoints({
@@ -14,10 +15,12 @@ export const productCardApi = baseApi.injectEndpoints({
       IProductCardApiResponse,
       IProductCardListQueryParams
     >({
-      query: (params) => ({
-        url: `goods/`,
-        params: params || undefined,
-      }),
+      query: (params) => {
+        return {
+          url: `goods/`,
+          params: params || undefined,
+        };
+      },
     }),
     getProductCardSingle: build.query<IProductCard, { guid: string }>({
       query: ({ guid }) => ({

@@ -13,6 +13,7 @@ import {
 
 export const ProfileDropdownMenu = () => {
   const { selectCurrentDialog } = dialogActions;
+
   const dispatch = useAppDispatch();
   return (
     <DropdownMenu>

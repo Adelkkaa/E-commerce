@@ -5,6 +5,7 @@ import { HomeCatalogSort } from "@/features/HomeCatalogSort";
 import { ProductCard } from "@/features/ProductCard";
 import { ProductsPagination } from "@/features/ProductsPagination";
 import { Button, Typography } from "@/shared/ui";
+import { useAppSelector } from "@/shared/hooks/use-redux";
 
 export const HomeCatalog = () => {
   // Если будут баги, то вынести в отдельный редьюсер
@@ -12,6 +13,8 @@ export const HomeCatalog = () => {
   const page = searchParams.get("page");
   const in_stock = searchParams.get("in_stock");
   const name = searchParams.get("name");
+
+  const { price_type_guid } = useAppSelector((state) => state.outletsReducer);
 
   const mockProductCards = Array.from({ length: 10 });
   const {
@@ -24,6 +27,7 @@ export const HomeCatalog = () => {
     size: 25,
     in_stock: in_stock || undefined,
     name: name || undefined,
+    price_type_guid: price_type_guid || undefined,
   });
 
   const handleClearSearchName = () => {
@@ -50,7 +54,7 @@ export const HomeCatalog = () => {
           mockProductCards.map((_, index) => (
             <ProductCardSkeleton key={index} />
           ))
-        ) : (productCardList?.items && productCardList.items.length > 0 ? (
+        ) : productCardList?.items && productCardList.items.length > 0 ? (
           productCardList.items.map((productCard) => (
             <ProductCard key={productCard.guid} {...productCard} />
           ))
@@ -58,7 +62,7 @@ export const HomeCatalog = () => {
           <Typography variant="titleL" className="font-normal">
             Список товаров пуст...
           </Typography>
-        ))}
+        )}
       </div>
       {isSuccess && !isFetching && productCardList.items.length > 0 && (
         <ProductsPagination
