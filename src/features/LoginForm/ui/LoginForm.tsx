@@ -9,7 +9,6 @@ import {
 } from "@/entities/LoginForm";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
-import { IResponseErrorPrimary } from "@/shared/types/types";
 import {
   Button,
   ControlledInput,
@@ -46,7 +45,7 @@ export const LoginForm = () => {
       await login(newData).unwrap();
       dispatch(selectCurrentDialog("outlets-auth"));
       reset();
-    } catch (error: any | IResponseErrorPrimary) {
+    } catch (error: any) {
       const errorMessage =
         error?.data?.detail === "Not Found"
           ? "Неверный логин или пароль"

@@ -36,6 +36,13 @@ export const OutletsSlice = createSlice({
         _init: true,
       };
     },
+    resetOutlets(state) {
+      localStorage.removeItem("outlet");
+      return {
+        ...state,
+        ...initialState,
+      };
+    },
   },
 });
 
