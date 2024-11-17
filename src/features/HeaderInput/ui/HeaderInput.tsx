@@ -1,6 +1,6 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useGetProductCardListQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
@@ -15,6 +15,9 @@ export const HeaderInput = () => {
   const { selectInStock, selectName } = productListActions;
   const { name } = useAppSelector((state) => state.productListReducer);
   const debouncedSearchValue = useDebounce(name, 300);
+  const [searchParams] = useSearchParams();
+  const nameSP = searchParams.get("name");
+
 
   const { data: productCardList } = useGetProductCardListQuery(
     {
@@ -49,6 +52,12 @@ export const HeaderInput = () => {
       dispatch(selectInStock(null));
     }
   };
+
+  useEffect(() => {
+    if (nameSP && name !== nameSP) {
+      dispatch(selectName(nameSP));
+    }
+  }, [nameSP]);
 
   const hintVisible =
     productCardList?.items &&
