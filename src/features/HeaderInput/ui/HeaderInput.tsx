@@ -1,5 +1,5 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetProductCardListQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
@@ -9,7 +9,6 @@ import { Command } from "@/shared/ui";
 import { CommandInput, CommandItem, CommandList } from "@/shared/ui/Command";
 
 export const HeaderInput = () => {
-  const searchName = sessionStorage.getItem("name");
   const [hintVisibility, setHintVisibility] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -38,8 +37,8 @@ export const HeaderInput = () => {
     hintName: string;
   }) => {
     dispatch(selectName(hintName));
-    sessionStorage.setItem("name", hintName);
-    navigate(`/product/${guid}`);
+    // navigate(`/product/${guid}`);
+    window.open(`/product/${guid}`, "_blank"); // Открывает в новой вкладке
     setHintVisibility(false);
   };
 
@@ -47,16 +46,9 @@ export const HeaderInput = () => {
     if (name) {
       setHintVisibility(false);
       navigate(`/?name=${name}`);
-      sessionStorage.setItem("name", name);
-      sessionStorage.removeItem("in_stock");
-      sessionStorage.removeItem("page");
       dispatch(selectInStock(null));
     }
   };
-
-  useEffect(() => {
-    dispatch(selectName(searchName || ""));
-  }, [searchName]);
 
   const hintVisible =
     productCardList?.items &&

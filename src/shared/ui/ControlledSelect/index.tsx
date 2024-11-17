@@ -144,6 +144,11 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
+export interface ISelectOptions {
+  value: string;
+  label: string;
+}
+
 interface SelectDefaultProps {
   name: FieldPath<FieldValues>;
   labelClassname?: string;
@@ -152,10 +157,7 @@ interface SelectDefaultProps {
   selectClassname?: string;
   disabled?: boolean;
   placeholder: string;
-  options: {
-    value: string;
-    label: string;
-  }[];
+  options: ISelectOptions[];
 }
 
 const ControlledSelect: FC<SelectDefaultProps> = ({

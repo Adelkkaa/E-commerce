@@ -45,3 +45,12 @@ export interface IProductCardApiResponse {
   size: number;
   pages: number;
 }
+
+export interface IResponseError<T> {
+  status: number;
+  data: T;
+}
+
+export type IResponseErrorPrimary = IResponseError<{
+  detail: string;
+}>;

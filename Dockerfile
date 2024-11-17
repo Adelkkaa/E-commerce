@@ -7,7 +7,7 @@ COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
 # Same as yarn install
-RUN yarn
+RUN yarn --ignore-engines
 COPY . /app
 FROM development AS build
 RUN yarn build

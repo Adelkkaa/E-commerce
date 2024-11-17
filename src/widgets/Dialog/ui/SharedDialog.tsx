@@ -3,17 +3,19 @@ import { CartSuccess } from "@/features/CartSuccess";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
 import { LoginForm } from "@/features/LoginForm";
+import { OutletsDialog } from "@/features/OutletsDialog";
 import { PreviewDialog } from "@/features/PreviewDialog";
-import { StoreDialog } from "@/features/StoreDialog";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { cn } from "@/shared/lib/utils";
 import { Dialog, DialogContent } from "@/shared/ui";
 
 export const SharedDialog = () => {
   const { selectIsOpen } = dialogActions;
-  const { isOpen, currentDialog } = useAppSelector(
+  const { isOpen, currentDialog, disableClose } = useAppSelector(
     (state) => state.dialogReducer,
   );
+
+  console.log(isOpen, currentDialog, disableClose);
 
   const dispatch = useAppDispatch();
 
@@ -21,7 +23,9 @@ export const SharedDialog = () => {
     <Dialog
       open={isOpen}
       onOpenChange={(e) => {
-        dispatch(selectIsOpen(e));
+        if (!disableClose) {
+          dispatch(selectIsOpen(e));
+        }
       }}
     >
       <DialogContent
@@ -36,7 +40,9 @@ export const SharedDialog = () => {
         {currentDialog === "login" && <LoginForm />}
         {currentDialog === "contact" && <ContactForm />}
         {currentDialog === "contactSuccess" && <ContactSuccess />}
-        {currentDialog === "trading" && <StoreDialog />}
+        {(currentDialog === "outlets" || currentDialog === "outlets-auth") && (
+          <OutletsDialog />
+        )}
         {currentDialog === "cartSuccess" && <CartSuccess />}
         {currentDialog === "productPreview" && <PreviewDialog />}
       </DialogContent>

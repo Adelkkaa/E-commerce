@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ICurrentDialog =
   | "login"
-  | "trading"
+  | "outlets-auth"
+  | "outlets"
   | "contact"
   | "contactSuccess"
   | "cartSuccess"
@@ -11,11 +12,13 @@ type ICurrentDialog =
 
 interface IDialogSlice {
   isOpen: boolean;
+  disableClose: boolean;
   currentDialog: ICurrentDialog;
 }
 
 const initialState: IDialogSlice = {
   isOpen: false,
+  disableClose: false,
   currentDialog: null,
 };
 
@@ -28,6 +31,7 @@ export const DialogSlice = createSlice({
         ...state,
         isOpen: true,
         currentDialog: payload,
+        disableClose: payload === "outlets-auth",
       };
     },
     selectIsOpen(state, { payload }: PayloadAction<boolean>) {
@@ -35,6 +39,7 @@ export const DialogSlice = createSlice({
         ...state,
         isOpen: payload,
         currentDialog: null,
+        disableClose: false,
       };
     },
   },

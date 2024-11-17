@@ -7,6 +7,7 @@ import { ProductsPagination } from "@/features/ProductsPagination";
 import { Button, Typography } from "@/shared/ui";
 
 export const HomeCatalog = () => {
+  // Если будут баги, то вынести в отдельный редьюсер
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   const in_stock = searchParams.get("in_stock");
@@ -29,7 +30,6 @@ export const HomeCatalog = () => {
     searchParams.delete("name");
     searchParams.set("page", "1");
     setSearchParams(searchParams);
-    sessionStorage.removeItem("name");
   };
 
   return (

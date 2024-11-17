@@ -1,6 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { dialogActions } from "@/entities/Dialog";
+import {
+  IOutletsDialogSchemaInitialType,
+  IOutletsDialogSchemaType,
+  OutletsDialogSchema,
+  useGetOutletsQuery,
+} from "@/entities/Outlets";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
@@ -9,28 +15,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/ui";
-import {
-  IStoreDialogSchemaInitialType,
-  IStoreDialogSchemaType,
-  StoreDialogSchema,
-} from "../model/StoreDialog.schema";
 
-export const StoreDialog = () => {
+export const OutletsDialog = () => {
   const { selectIsOpen } = dialogActions;
   const dispatch = useAppDispatch();
+  const { data: outlets, isLoading } = useGetOutletsQuery();
   const methods = useForm<
-    IStoreDialogSchemaInitialType,
+    IOutletsDialogSchemaInitialType,
     unknown,
-    IStoreDialogSchemaType
+    IOutletsDialogSchemaType
   >({
-    resolver: zodResolver(StoreDialogSchema),
+    resolver: zodResolver(OutletsDialogSchema),
     values: {
-      store: "",
+      outlet: "",
     },
   });
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<IStoreDialogSchemaType> = async (newData) => {
+  const onSubmit: SubmitHandler<IOutletsDialogSchemaType> = async (newData) => {
     console.log("Form Data", newData);
     dispatch(selectIsOpen(false));
   };
@@ -43,19 +45,15 @@ export const StoreDialog = () => {
       </DialogHeader>
       <FormProvider {...methods}>
         <form
-          id="storeFoem"
+          id="outletsForm"
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-8"
         >
           <ControlledSelect
-            name="store"
+            name="outlet"
             labelText="Торговая точка"
-            options={[
-              { label: "ИП Шайхутдинова О.В.", value: "123" },
-              { label: "Торговая точка 2", value: "321" },
-              { label: "Торговая точка 3", value: "333" },
-              { label: "Торговая точка 4", value: "4444" },
-            ]}
+            disabled={isLoading}
+            options={outlets || []}
             placeholder="Выберите торговую точку"
           />
         </form>
@@ -63,7 +61,7 @@ export const StoreDialog = () => {
       <DialogFooter className="!flex-col gap-[30px]">
         <Button
           type="submit"
-          form="storeFoem"
+          form="outletsForm"
           className="flex-1 w-full min-h-[50px] !text-textL text-white !rounded-[8px] "
         >
           Выбрать

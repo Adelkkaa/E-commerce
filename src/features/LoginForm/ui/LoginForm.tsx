@@ -1,7 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { dialogActions } from "@/entities/Dialog";
+import {
+  ILoginFormSchemaInitialType,
+  ILoginFormSchemaType,
+  LoginFormSchema,
+  useLoginMutation,
+} from "@/entities/LoginForm";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
+import { useToast } from "@/shared/hooks/use-toast";
+import { IResponseErrorPrimary } from "@/shared/types/types";
 import {
   Button,
   ControlledInput,
@@ -11,14 +19,11 @@ import {
   DialogTitle,
   Typography,
 } from "@/shared/ui";
-import {
-  ILoginFormSchemaInitialType,
-  ILoginFormSchemaType,
-  LoginFormSchema,
-} from "../model/LoginForm.schema";
 
 export const LoginForm = () => {
   const { selectCurrentDialog } = dialogActions;
+  const { toast } = useToast();
+
   const dispatch = useAppDispatch();
   const methods = useForm<
     ILoginFormSchemaInitialType,
@@ -33,10 +38,24 @@ export const LoginForm = () => {
   });
   const { handleSubmit, reset } = methods;
 
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+
   const onSubmit: SubmitHandler<ILoginFormSchemaType> = async (newData) => {
     console.log("Form Data", newData);
-    dispatch(selectCurrentDialog("trading"));
-    reset();
+    try {
+      await login(newData).unwrap();
+      dispatch(selectCurrentDialog("outlets-auth"));
+      reset();
+    } catch (error: any | IResponseErrorPrimary) {
+      const errorMessage =
+        error?.data?.detail === "Not Found"
+          ? "Неверный логин или пароль"
+          : "Что-то пошло не так, попробуйте позже";
+      toast({
+        title: errorMessage,
+        variant: "destructive",
+      });
+    }
   };
   return (
     <>
@@ -56,8 +75,17 @@ export const LoginForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-8"
         >
-          <ControlledInput name="login" labelText="Логин" />
-          <ControlledInput type="password" name="password" labelText="Пароль" />
+          <ControlledInput
+            disabled={isLoginLoading}
+            name="login"
+            labelText="Логин"
+          />
+          <ControlledInput
+            disabled={isLoginLoading}
+            type="password"
+            name="password"
+            labelText="Пароль"
+          />
         </form>
       </FormProvider>
       <DialogFooter className="!justify-between max-md:flex-row">
@@ -65,6 +93,7 @@ export const LoginForm = () => {
           type="submit"
           form="loginForm"
           className="flex-1 max-w-[160px] max-h-[40px] !text-textL text-white !rounded-[8px] "
+          disabled={isLoginLoading}
         >
           Войти
         </Button>

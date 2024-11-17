@@ -45,7 +45,7 @@ export const ProductCard: FC<IProductCardList> = ({
   };
 
   return (
-    <Link to={`/product/${guid}`}>
+    <Link target="_blank" to={`/product/${guid}`}>
       <Card className="group flex flex-col md:max-w-[230px] md:w-[230px] md:min-h-[380px] md:max-h-[380px] max-w-[190px] w-[190px] min-h-[360px] max-h-[360px] cursor-pointer ">
         <CardContent className="flex items-center justify-center w-full relative bg-transparent !p-0  border-grayCustom border-b ">
           {image_key ? (

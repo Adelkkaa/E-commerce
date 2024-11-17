@@ -39,7 +39,7 @@ export { Checkbox } from "./Checkbox";
 export { Command } from "./Command";
 export { Checkbox as ControlledCheckbox } from "./ControlledCheckbox";
 export { Input as ControlledInput } from "./ControlledInput";
-export { ControlledSelect } from "./ControlledSelect";
+export { ControlledSelect, type ISelectOptions } from "./ControlledSelect";
 export { ControlledTextarea } from "./ControlledTextarea";
 export { DatePicker } from "./DatePicker";
 export {

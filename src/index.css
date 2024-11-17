@@ -90,6 +90,10 @@
   font-weight: 900;
 }
 
+body {
+  pointer-events: auto !important;
+}
+
 html,
 body,
 #root,
