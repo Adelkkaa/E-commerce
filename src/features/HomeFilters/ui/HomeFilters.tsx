@@ -21,33 +21,57 @@ interface IHomeFilters {
 export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const in_stock = searchParams.get("in_stock");
+  const price_from = searchParams.get("price_from");
+  const price_to = searchParams.get("price_to");
 
-  const [accordionValue, setAccordionValue] = useState<string[]>([]);
+  const [accordionValue, setAccordionValue] = useState<string[]>(["in_stock"]);
 
   const dispatch = useAppDispatch();
 
-  const [downPrice, setDownPrice] = useState("");
-  const { selectInStock } = productListActions;
-  const { inStock } = useAppSelector((state) => state.productListReducer);
+  const { selectInStock, selectPriceFrom, selectPriceTo, clearFilters } =
+    productListActions;
+  const { inStock, priceFrom, priceTo } = useAppSelector(
+    (state) => state.productListReducer,
+  );
 
   const handleInStockFilterChange = (value: string) => {
     dispatch(selectInStock(value));
   };
 
-  const handleApplyFilters = () => {
-    if (inStock) {
-      searchParams.set("in_stock", inStock);
-    } else {
-      searchParams.delete("in_stock");
-    }
+  const handlePriceFromFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    dispatch(selectPriceFrom(e.target.value));
+  };
 
+  const handlePriceToFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    dispatch(selectPriceTo(e.target.value));
+  };
+  const handleApplyFilters = () => {
+    const vocabulary: Record<string, string | null | undefined> = {
+      in_stock: inStock,
+      price_from: priceFrom,
+      price_to: priceTo,
+    };
+
+    Object.entries(vocabulary).forEach(([key, value]) => {
+      if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+    });
     searchParams.set("page", "1");
     setSearchParams(searchParams);
   };
 
   const handleClearFilters = () => {
-    dispatch(selectInStock(null));
-    searchParams.delete("in_stock");
+    dispatch(clearFilters());
+    ["in_stock", "price_from", "price_to"].forEach((key) => {
+      searchParams.delete(key);
+    });
     searchParams.set("page", "1");
     setSearchParams(searchParams);
   };
@@ -57,7 +81,15 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
       dispatch(selectInStock(in_stock));
       setAccordionValue((prev) => [...prev, "in_stock"]);
     }
-  }, [in_stock]);
+    if (price_from) {
+      dispatch(selectPriceFrom(price_from));
+      setAccordionValue((prev) => [...prev, "price"]);
+    }
+    if (price_to) {
+      dispatch(selectPriceTo(price_to));
+      setAccordionValue((prev) => [...prev, "price"]);
+    }
+  }, [in_stock, price_from, price_to]);
 
   return (
     <div
@@ -90,39 +122,19 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger>Фильтр 1</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-1" label="Категория 2" />
-            <FilterCheckbox id="salam_1-1" label="Категория 2" />
-            <FilterCheckbox id="anti-salam-1" label="Категория 3" />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger>Фильтр 2</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-2" label="Категория 2" />
-            <FilterCheckbox id="salam_1-2" label="Категория 2" />
-            <FilterCheckbox id="anti-salam-2" label="Категория 3" />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-4">
-          <AccordionTrigger>Фильтр 3</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterCheckbox id="salam-3" label="Категория 2" />
-            <FilterCheckbox id="salam_1-3" label="Категория 2" />
-            <FilterCheckbox id="anti-salam-3" label="Категория 3" />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-5">
+        <AccordionItem value="price">
           <AccordionTrigger>Цена</AccordionTrigger>
           <AccordionContent className="flex gap-[20px]">
             <MaskedInput
-              value={downPrice}
-              onChange={(e) => setDownPrice(e.target.value)}
+              value={priceFrom || ""}
+              onChange={handlePriceFromFilterChange}
               placeholder="От"
             />
-            <MaskedInput placeholder="До" />
+            <MaskedInput
+              value={priceTo || ""}
+              onChange={handlePriceToFilterChange}
+              placeholder="До"
+            />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

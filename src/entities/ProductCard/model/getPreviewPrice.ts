@@ -1,13 +1,20 @@
-import { IProductCardPrice } from "@/shared/types/types";
+import { IProductCardPrice, IProductCardPriceV2 } from "@/shared/types/types";
 
 export const getPreviewPrice = (prices: IProductCardPrice[]) => {
-  if (!prices || prices.length === 0) return "Цена не указана";
+  if (!prices || prices.length === 0) return "Цена не установлена";
 
-  const retailPrice = prices.find(
-    (p) => p.price_type && p.price_type.name === "Розничная",
-  );
+  return prices[0] && prices[0].value > 0
+    ? `${prices[0].value} ₽/шт`
+    : "Цена не установлена";
+};
 
-  return retailPrice && retailPrice.value > 0
-    ? `${retailPrice.value} ₽/шт`
-    : "Цена не указана";
+export const getPreviewPriceForSinglePage = (
+  prices: IProductCardPriceV2[],
+  currentIdx: number,
+) => {
+  if (!prices || prices.length === 0) return "Цена не установлена";
+
+  return prices[currentIdx] && prices[currentIdx].price > 0
+    ? `${prices[currentIdx].price} ₽/шт`
+    : "Цена не установлена";
 };

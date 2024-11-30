@@ -4,14 +4,16 @@ import { ProductCardSkeleton } from "@/entities/ProductCardSkeleton";
 import { HomeCatalogSort } from "@/features/HomeCatalogSort";
 import { ProductCard } from "@/features/ProductCard";
 import { ProductsPagination } from "@/features/ProductsPagination";
-import { Button, Typography } from "@/shared/ui";
 import { useAppSelector } from "@/shared/hooks/use-redux";
+import { Button, Typography } from "@/shared/ui";
 
 export const HomeCatalog = () => {
-  // Если будут баги, то вынести в отдельный редьюсер
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   const in_stock = searchParams.get("in_stock");
+  const price_from = searchParams.get("price_from");
+  const price_to = searchParams.get("price_to");
+
   const name = searchParams.get("name");
 
   const { price_type_guid } = useAppSelector((state) => state.outletsReducer);
@@ -25,9 +27,11 @@ export const HomeCatalog = () => {
   } = useGetProductCardListQuery({
     page: Number(page) || 1,
     size: 25,
-    in_stock: in_stock || undefined,
+    in_stock: in_stock || "true",
     name: name || undefined,
     price_type_guid: price_type_guid || undefined,
+    price_from: price_from || undefined,
+    price_to: price_to || undefined,
   });
 
   const handleClearSearchName = () => {

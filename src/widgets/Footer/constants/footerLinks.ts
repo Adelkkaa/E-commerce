@@ -4,10 +4,6 @@ export const firstFooterLinks = [
     href: "/",
   },
   {
-    title: "Личный кабинет",
-    href: "/",
-  },
-  {
     title: "Политика конфиденциальности",
     href: "/policy",
   },

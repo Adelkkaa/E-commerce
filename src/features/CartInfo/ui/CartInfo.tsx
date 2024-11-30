@@ -20,11 +20,15 @@ import {
 interface ICartInfoProps {
   containerClassName?: string;
   onCloseSheet?: () => void;
+  totalCost: number;
+  outletName: string;
 }
 
 export const CartInfo: FC<ICartInfoProps> = ({
   containerClassName,
   onCloseSheet,
+  outletName,
+  totalCost,
 }) => {
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
@@ -37,7 +41,6 @@ export const CartInfo: FC<ICartInfoProps> = ({
     values: {
       comment: "",
       date: null,
-      store: "",
     },
   });
   const { handleSubmit } = methods;
@@ -56,9 +59,13 @@ export const CartInfo: FC<ICartInfoProps> = ({
         containerClassName,
       )}
     >
+      <div>
+        <Typography variant="textL">Торговая точка</Typography>
+        <Typography variant="textM">{outletName}</Typography>
+      </div>
       <div className="flex justify-between">
         <Typography variant="textL">Сумма заказа</Typography>
-        <Typography variant="textL">19 804.8 ₽</Typography>
+        <Typography variant="textL">{totalCost} ₽</Typography>
       </div>
       <FormProvider {...methods}>
         <form
@@ -66,17 +73,6 @@ export const CartInfo: FC<ICartInfoProps> = ({
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-8"
         >
-          <ControlledSelect
-            name="store"
-            labelText="Торговая точка"
-            options={[
-              { label: "ИП Шайхутдинова О.В.", value: "123" },
-              { label: "Торговая точка 2", value: "321" },
-              { label: "Торговая точка 3", value: "333" },
-              { label: "Торговая точка 4", value: "4444" },
-            ]}
-            placeholder="Выберите торговую точку"
-          />
           <DatePicker
             name="date"
             label="Дата доставки"

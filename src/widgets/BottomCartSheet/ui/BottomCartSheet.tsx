@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { CartInfo } from "@/features/CartInfo";
+import { ICartList } from "@/shared/types/types";
 import { Sheet, SheetContent, SheetTrigger, Typography } from "@/shared/ui";
 
-export const BottomCartSheet = () => {
+interface IBottomCartSheetProps {
+  cartData: ICartList;
+  name: string;
+}
+
+export const BottomCartSheet: FC<IBottomCartSheetProps> = ({ cartData }) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleCloseSheet = () => {
@@ -20,6 +26,8 @@ export const BottomCartSheet = () => {
           className="w-full rounded-t-[10px] flex flex-col px-0 py-0"
         >
           <CartInfo
+            outletName={name}
+            totalCost={cartData.total_cost}
             onCloseSheet={handleCloseSheet}
             containerClassName="px-[26px] py-[20px]"
           />

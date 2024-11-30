@@ -3,11 +3,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IProductListSlice {
   inStock: string | null;
   name: string;
+  priceFrom: string;
+  priceTo: string;
 }
 
 const initialState: IProductListSlice = {
-  inStock: null,
+  inStock: "true",
   name: "",
+  priceFrom: "",
+  priceTo: "",
 };
 
 export const ProductListSlice = createSlice({
@@ -24,6 +28,26 @@ export const ProductListSlice = createSlice({
       return {
         ...state,
         name: payload,
+      };
+    },
+    selectPriceFrom(state, { payload }: PayloadAction<string>) {
+      return {
+        ...state,
+        priceFrom: payload,
+      };
+    },
+    selectPriceTo(state, { payload }: PayloadAction<string>) {
+      return {
+        ...state,
+        priceTo: payload,
+      };
+    },
+    clearFilters(state) {
+      return {
+        ...state,
+        inStock: null,
+        priceFrom: "",
+        priceTo: "",
       };
     },
   },

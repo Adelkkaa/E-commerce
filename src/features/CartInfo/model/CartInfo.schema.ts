@@ -3,9 +3,6 @@ import { formatInTimeZone } from "date-fns-tz";
 import { z } from "zod";
 
 export const CartInfoSchema = z.object({
-  store: z
-    .string({ required_error: "Поле обязательно для заполнения" })
-    .min(3, "Поле обязательно для заполнения"),
   date: z
     .date({
       required_error: "Введите дату рождения",

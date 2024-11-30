@@ -2,11 +2,12 @@ import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getPreviewPrice,
+  getPreviewPriceForSinglePage,
   useGetProductCardSingleQuery,
 } from "@/entities/ProductCard";
 import { ProductSkeleton } from "@/entities/ProductSkeleton";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
+import { useAppSelector } from "@/shared/hooks/use-redux";
 import { scrollToTop } from "@/shared/lib/scrollToTop";
 import { cn } from "@/shared/lib/utils";
 import { Button, Typography } from "@/shared/ui";
@@ -15,15 +16,17 @@ export const Product = () => {
   const { productId } = useParams();
   const [count, setCount] = useState(1);
   const [selectedStorageIndx] = useState(0);
+  const { price_type_guid } = useAppSelector((state) => state.outletsReducer);
 
   const { data: productCard, isLoading } = useGetProductCardSingleQuery({
     guid: productId as string,
+    price_type_guid,
   });
 
   const handleIncrementProduct = () => {
     if (
-      productCard?.storages &&
-      count < productCard.storages[selectedStorageIndx].in_stock
+      productCard?.specification[0].in_stock &&
+      count < productCard.specification[0].in_stock
     ) {
       setCount((prev) => prev + 1);
     }
@@ -60,8 +63,11 @@ export const Product = () => {
                   {productCard?.name}
                 </Typography>
                 <Typography variant="titleL" className="max-md:text-textL">
-                  {/* 122.56 <span className="font-normal">₽</span>/шт */}
-                  {productCard && getPreviewPrice(productCard.prices)}
+                  {productCard &&
+                    getPreviewPriceForSinglePage(
+                      productCard.specification,
+                      selectedStorageIndx,
+                    )}
                 </Typography>
                 <div className="border border-grayCustom" />
                 <Typography
@@ -70,8 +76,9 @@ export const Product = () => {
                 >
                   В наличии на складе:{" "}
                   <span className="text-blueCustom">
-                    {productCard?.storages && productCard.storages.length > 0
-                      ? productCard.storages[0]?.in_stock
+                    {productCard?.specification &&
+                    productCard.specification.length > 0
+                      ? productCard.specification[selectedStorageIndx]?.in_stock
                       : 0}{" "}
                     шт
                   </span>
@@ -80,51 +87,9 @@ export const Product = () => {
                   {productCard?.description}
                 </Typography>
               </div>
-              {productCard?.storages && productCard.storages.length > 0 && (
-                <div className="hidden tb:flex gap-[50px]">
-                  <div className="flex  justify-center items-center gap-[30px] !h-full">
-                    <Button
-                      disabled={count === 1}
-                      onClick={handleDecrementProduct}
-                      variant="icon"
-                      className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
-                    >
-                      <Minus />
-                    </Button>
-                    <Typography
-                      variant="textM"
-                      className="text-[25px] font-semibold min-w-10 text-center"
-                    >
-                      {productCard.storages[selectedStorageIndx].in_stock !== 0
-                        ? count
-                        : 0}
-                    </Typography>
-                    <Button
-                      disabled={
-                        count ===
-                        productCard.storages[selectedStorageIndx].in_stock
-                      }
-                      onClick={handleIncrementProduct}
-                      variant="icon"
-                      className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
-                    >
-                      <Plus />
-                    </Button>
-                  </div>
-                  <Button className="bg-blueCustom text-[25px] font-bold flex-1">
-                    Добавить в заказ
-                  </Button>
-                  <Button
-                    variant="icon"
-                    className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
-                  >
-                    <FavoritesIcon />
-                  </Button>
-                </div>
-              )}
-              {productCard?.storages && productCard.storages.length > 0 && (
-                <div className="hidden md:max-tb:flex flex-col gap-[20px]">
-                  <div className="flex w-full justify-between">
+              {productCard?.specification &&
+                productCard.specification.length > 0 && (
+                  <div className="hidden tb:flex gap-[50px]">
                     <div className="flex  justify-center items-center gap-[30px] !h-full">
                       <Button
                         disabled={count === 1}
@@ -136,17 +101,18 @@ export const Product = () => {
                       </Button>
                       <Typography
                         variant="textM"
-                        className="text-[25px] font-semibold"
+                        className="text-[25px] font-semibold min-w-10 text-center"
                       >
-                        {productCard.storages[selectedStorageIndx].in_stock !==
-                        0
+                        {productCard.specification[selectedStorageIndx]
+                          .in_stock !== 0
                           ? count
                           : 0}
                       </Typography>
                       <Button
                         disabled={
                           count ===
-                          productCard.storages[selectedStorageIndx].in_stock
+                          productCard.specification[selectedStorageIndx]
+                            .in_stock
                         }
                         onClick={handleIncrementProduct}
                         variant="icon"
@@ -155,6 +121,9 @@ export const Product = () => {
                         <Plus />
                       </Button>
                     </div>
+                    <Button className="bg-blueCustom text-[25px] font-bold flex-1">
+                      Добавить в заказ
+                    </Button>
                     <Button
                       variant="icon"
                       className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
@@ -162,11 +131,54 @@ export const Product = () => {
                       <FavoritesIcon />
                     </Button>
                   </div>
-                  <Button className="bg-blueCustom text-[25px] font-bold">
-                    Добавить в заказ
-                  </Button>
-                </div>
-              )}
+                )}
+              {productCard?.specification &&
+                productCard.specification.length > 0 && (
+                  <div className="hidden md:max-tb:flex flex-col gap-[20px]">
+                    <div className="flex w-full justify-between">
+                      <div className="flex  justify-center items-center gap-[30px] !h-full">
+                        <Button
+                          disabled={count === 1}
+                          onClick={handleDecrementProduct}
+                          variant="icon"
+                          className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+                        >
+                          <Minus />
+                        </Button>
+                        <Typography
+                          variant="textM"
+                          className="text-[25px] font-semibold"
+                        >
+                          {productCard.specification[selectedStorageIndx]
+                            .in_stock !== 0
+                            ? count
+                            : 0}
+                        </Typography>
+                        <Button
+                          disabled={
+                            count ===
+                            productCard.specification[selectedStorageIndx]
+                              .in_stock
+                          }
+                          onClick={handleIncrementProduct}
+                          variant="icon"
+                          className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+                        >
+                          <Plus />
+                        </Button>
+                      </div>
+                      <Button
+                        variant="icon"
+                        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
+                      >
+                        <FavoritesIcon />
+                      </Button>
+                    </div>
+                    <Button className="bg-blueCustom text-[25px] font-bold">
+                      Добавить в заказ
+                    </Button>
+                  </div>
+                )}
             </div>
           </div>
           {productCard?.properties && productCard.properties.length > 0 && (

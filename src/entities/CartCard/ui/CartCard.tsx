@@ -1,27 +1,39 @@
 import { Minus, Plus, X } from "lucide-react";
+import { FC } from "react";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { Button, Typography } from "@/shared/ui";
 
-export const CartCard = () => {
+interface ICartCardProps {
+  image_key: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+export const CartCard: FC<ICartCardProps> = ({
+  image_key,
+  name,
+  price,
+  quantity,
+}) => {
   return (
     <div className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]">
       <div className="flex gap-[15px]">
         <img
-          src={cardImage2}
+          src={image_key}
           alt="card"
           className="min-w-[75px] min-h-[75px] max-w-[75px] max-h-[75px] object-contain border border-grayCustom rounded-[4px]"
         />
         <div className="flex flex-col">
           <Typography variant="textL" className="max-md:text-[16px]">
-            12 240.40 <span className="text-textM max-md:text-[16px]">₽</span>
+            {price} <span className="text-textM max-md:text-[16px]">₽</span>
           </Typography>
           <Typography
             variant="tableText"
             className="max-md:text-modalDesc max-md:font-medium"
           >
-            Элект. антитаб. устр. LUXLITE SALTERY Compact WILD BERRIES (лесный
-            ягоды)
+            {name}
           </Typography>
         </div>
       </div>
@@ -47,7 +59,7 @@ export const CartCard = () => {
           >
             <Minus className="max-w-[14px] max-h-[14px]" />
           </Button>
-          10
+          {quantity}
           <Button
             variant="icon"
             className="shadow-custom w-[19px] h-[19px] rounded-[50%] p-[2px] cursor-pointer hover:text-blueCustom"

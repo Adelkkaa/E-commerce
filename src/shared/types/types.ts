@@ -17,7 +17,7 @@ export interface IProductCardPriceType {
 export interface IProductCardPrice {
   good_guid: string;
   price_type: IProductCardPriceType;
-  specification_guid: string;
+  specification: IProductCardPriceType;
   value: number;
 }
 export interface IProductCard {
@@ -54,3 +54,27 @@ export interface IResponseError<T> {
 export type IResponseErrorPrimary = IResponseError<{
   detail: string;
 }>;
+
+export type IProductCardPriceV2 = IProductCardStorage & { price: number };
+
+export interface IProductCardV2
+  extends Omit<IProductCard, "prices" | "storages" | "producing_country"> {
+  specification: IProductCardPriceV2[];
+}
+
+export interface ICartGood {
+  guid: string;
+  specification_guid: string;
+  price_type_guid: string;
+  name: string;
+  image_key: string;
+  is_favorite: boolean;
+  quantity: number;
+  price: number;
+}
+
+export interface ICartList {
+  cart_outlet_guid: string;
+  goods: ICartGood[];
+  total_cost: number;
+}
