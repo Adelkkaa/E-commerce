@@ -8,7 +8,10 @@ interface IBottomCartSheetProps {
   name: string;
 }
 
-export const BottomCartSheet: FC<IBottomCartSheetProps> = ({ cartData }) => {
+export const BottomCartSheet: FC<IBottomCartSheetProps> = ({
+  cartData,
+  name,
+}) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleCloseSheet = () => {
@@ -35,7 +38,8 @@ export const BottomCartSheet: FC<IBottomCartSheetProps> = ({ cartData }) => {
       </Sheet>
       <div className="flex flex-1 justify-center items-center bg-white boxShadow rounded-[10px]">
         <Typography variant="tableText">
-          19 804.8<span className="text-tableText font-medium"> ₽</span>
+          {cartData.total_cost}
+          <span className="text-tableText font-medium"> ₽</span>
         </Typography>
       </div>
     </div>
