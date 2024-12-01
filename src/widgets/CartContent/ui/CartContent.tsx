@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CartCard } from "@/entities/CartCard";
+import { CartCard } from "@/features/CartCard";
 import { ICartGood } from "@/shared/types/types";
 import { Typography } from "@/shared/ui";
 
@@ -8,6 +8,7 @@ interface ICartContentProps {
 }
 
 export const CartContent: FC<ICartContentProps> = ({ cartGoods }) => {
+  console.log(cartGoods);
   return (
     <div className="flex flex-1 flex-col">
       <div className="flex flex-col gap-[10px]">
@@ -15,6 +16,8 @@ export const CartContent: FC<ICartContentProps> = ({ cartGoods }) => {
           cartGoods.map((item) => (
             <CartCard
               key={item.guid}
+              guid={item.guid}
+              specification_guid={item.specification_guid}
               image_key={item.image_key}
               name={item.name}
               price={item.price}
