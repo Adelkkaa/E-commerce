@@ -6,7 +6,6 @@ import { dialogActions } from "@/entities/Dialog";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
-  ControlledSelect,
   ControlledTextarea,
   DatePicker,
   Typography,

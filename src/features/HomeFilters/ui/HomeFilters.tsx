@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FilterCheckbox } from "@/entities/FilterCheckbox";
 import { FilterRadioGroup } from "@/entities/FilterRadioGroup";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";

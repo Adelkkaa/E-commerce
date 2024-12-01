@@ -1,7 +1,6 @@
 import { Minus, Plus, X } from "lucide-react";
 import { FC } from "react";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
-import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
 import { Button, Typography } from "@/shared/ui";
 
 interface ICartCardProps {
