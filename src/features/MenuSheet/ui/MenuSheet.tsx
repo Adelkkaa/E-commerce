@@ -3,8 +3,10 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { dialogActions } from "@/entities/Dialog";
+import { useLogoutMutation } from "@/entities/LoginForm";
 import { mobileHeaderLinks } from "@/shared/constants/navigationLinks";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
+import { useToast } from "@/shared/hooks/use-toast";
 import {
   Accordion,
   AccordionContent,
@@ -16,17 +18,40 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  Typography,
 } from "@/shared/ui";
 
 export const MenuSheet = () => {
+  const { toast } = useToast();
   const { pathname } = useLocation();
+  const { name } = useAppSelector((state) => state.outletsReducer);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { selectCurrentDialog } = dialogActions;
   const dispatch = useAppDispatch();
 
+  const [logout] = useLogoutMutation();
+
   const handleLogin = () => {
     setIsSheetOpen(false);
     dispatch(selectCurrentDialog("login"));
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      setIsSheetOpen(false);
+    } catch (error) {
+      toast({
+        title: "Произошла ошибка",
+        description: "Попробуйте еще раз",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleSelectOutlet = () => {
+    setIsSheetOpen(false);
+    dispatch(selectCurrentDialog("outlets"));
   };
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -63,13 +88,53 @@ export const MenuSheet = () => {
                 Аккаунт
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-[9px]">
-                <Button
-                  variant="ghost"
-                  className="text-textM w-full text-center"
-                  onClick={handleLogin}
-                >
-                  Войти
-                </Button>
+                {name ? (
+                  <>
+                    <Typography
+                      className="font-semibold text-grayCustom"
+                      variant="textS"
+                    >
+                      Торговая точка
+                    </Typography>
+                    <Typography
+                      className="text-center text-blueCustom pb-[14px] border-b border-whiteCustom"
+                      variant="tableText"
+                    >
+                      {name}
+                    </Typography>
+                    <Button
+                      variant="ghost"
+                      className="text-textM w-full text-center pb-[14px] border-b border-whiteCustom"
+                      onClick={handleSelectOutlet}
+                    >
+                      Торговые точки
+                    </Button>
+                    <Link
+                      onClick={() => setIsSheetOpen(false)}
+                      className={clsx(
+                        "text-textM hover:text-blueCustom pb-[14px] border-b border-whiteCustom",
+                      )}
+                      to="/orders"
+                    >
+                      Заказы
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      className="text-textM w-full text-center"
+                      onClick={handleLogout}
+                    >
+                      Выйти
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    className="text-textM w-full text-center"
+                    onClick={handleLogin}
+                  >
+                    Войти
+                  </Button>
+                )}
               </AccordionContent>
             </AccordionItem>
           </Accordion>

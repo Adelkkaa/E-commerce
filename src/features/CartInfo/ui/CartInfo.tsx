@@ -64,7 +64,7 @@ export const CartInfo: FC<ICartInfoProps> = ({
       </div>
       <div className="flex justify-between">
         <Typography variant="textL">Сумма заказа</Typography>
-        <Typography variant="textL">{totalCost} ₽</Typography>
+        <Typography variant="textL">{totalCost.toFixed(2)} ₽</Typography>
       </div>
       <FormProvider {...methods}>
         <form

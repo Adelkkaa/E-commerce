@@ -36,9 +36,9 @@ export const ProductCard: FC<IProductCardList> = ({
               onClick={onClickFavorites}
               variant="icon"
               size="icon"
-              className="md:hover:fillBlue"
+              className="md:hover:fillBlue w-[36px] h-[36px]"
             >
-              <HeartIcon width={24} height={24} />
+              <HeartIcon width="100%" height="100%" />
             </Button>
           </div>
         </CardContent>

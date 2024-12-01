@@ -222,7 +222,18 @@ export const ProductContent: FC<IProductContentProps> = ({
         <ProductContentProperties productCard={productCard} />
       )}
 
-      <ProductContentMobileCart />
+      <ProductContentMobileCart
+        quantity={quantity}
+        handleAddProductToCart={handleAddProductToCart}
+        handleDecrementCount={handleDecrementCount}
+        handleIncrementCount={handleIncrementCount}
+        isDisabled={
+          isChangeProductCountLoading ||
+          isDeleteProductLoading ||
+          isAddProductToCartLoading
+        }
+        inStockValue={inStockValue}
+      />
     </>
   );
 };

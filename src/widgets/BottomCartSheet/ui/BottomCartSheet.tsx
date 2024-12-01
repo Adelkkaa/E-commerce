@@ -38,7 +38,7 @@ export const BottomCartSheet: FC<IBottomCartSheetProps> = ({
       </Sheet>
       <div className="flex flex-1 justify-center items-center bg-white boxShadow rounded-[10px]">
         <Typography variant="tableText">
-          {cartData.total_cost}
+          {cartData.total_cost.toFixed(2)}
           <span className="text-tableText font-medium"> ₽</span>
         </Typography>
       </div>
