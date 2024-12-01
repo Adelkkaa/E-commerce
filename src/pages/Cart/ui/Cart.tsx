@@ -50,7 +50,7 @@ export const Cart = () => {
         ) : (
           <>
             <CartContent cartGoods={cartData?.goods || []} />
-            {cartData && (
+            {cartData && cartData.goods.length > 0 && (
               <CartInfo
                 outletName={name}
                 totalCost={cartData.total_cost}
@@ -60,7 +60,9 @@ export const Cart = () => {
           </>
         )}
       </div>
-      {cartData && <BottomCartSheet name={name} cartData={cartData} />}
+      {cartData && cartData.goods.length > 0 && (
+        <BottomCartSheet name={name} cartData={cartData} />
+      )}
     </section>
   );
 };
