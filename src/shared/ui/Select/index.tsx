@@ -1,11 +1,11 @@
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
-import * as React from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import React from "react";
 import { cn } from "@/shared/lib/utils";
 
 const Select = SelectPrimitive.Root;
 
-const SelectGroup = SelectPrimitive.Group;
+// const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
@@ -16,7 +16,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className,
     )}
     {...props}
@@ -83,7 +83,7 @@ const SelectContent = React.forwardRef<
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
+          "p-0",
           position === "popper" &&
             "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
         )}
@@ -120,11 +120,11 @@ const SelectItem = React.forwardRef<
     )}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    {/* <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />
       </SelectPrimitive.ItemIndicator>
-    </span>
+    </span> */}
 
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
@@ -143,15 +143,86 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
+interface SelectDefaultProps<T> {
+  labelClassname?: string;
+  labelText?: string;
+  wrapperClassname?: string;
+  selectClassname?: string;
+  disabled?: boolean;
+  placeholder: string;
+  options: T[];
+  labelExtractor: keyof T;
+  valueExtractor: keyof T;
+  onChange: (value: keyof T) => void;
+  value: string | number;
+}
+
+const CustomSelect = <T extends Record<string, any>>({
+  labelClassname,
+  labelText,
+  wrapperClassname,
+  disabled,
+  placeholder,
+  selectClassname,
+  options,
+  labelExtractor,
+  valueExtractor,
+  onChange,
+  value,
+  ...props
+}: SelectDefaultProps<T>) => {
+  return (
+    <div className={cn("flex flex-col gap-2", wrapperClassname)}>
+      <label className={cn("relative")}>
+        <span
+          className={cn(
+            "!text-textL absolute top-[-14px] left-[33px] bg-white text-grayCustom select-none",
+            labelClassname,
+          )}
+        >
+          {labelText}
+        </span>
+        <Select
+          {...props}
+          value={String(value)}
+          onValueChange={(event) => {
+            onChange(event);
+          }}
+        >
+          <SelectTrigger
+            disabled={disabled}
+            className={cn(
+              "outline-none !p-0 gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background !pl-[33px] !pr-[10px] !py-[20px] !text-textM ring-offset-background data-[placeholder]:text-grayCustom text-black cursor-pointer",
+              {
+                "bg-grayCustom": disabled,
+              },
+              selectClassname,
+            )}
+          >
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((item) => (
+              <SelectItem
+                key={item[valueExtractor]}
+                className="!text-center !text-textM justify-center !pl-0 data-[state=checked]:bg-blueCustom data-[state=checked]:text-white"
+                value={item[valueExtractor]}
+              >
+                {item[labelExtractor]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </label>
+    </div>
+  );
+};
+
 export {
+  CustomSelect,
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 };

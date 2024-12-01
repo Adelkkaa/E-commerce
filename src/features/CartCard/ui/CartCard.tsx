@@ -1,5 +1,6 @@
 import { Minus, Plus, X } from "lucide-react";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import {
   useChangeProductCountMutation,
   useDeleteProductMutation,
@@ -47,7 +48,8 @@ export const CartCard: FC<ICartCardProps> = ({
       variant: "destructive",
     });
   };
-  const handleIncrementCount = async () => {
+  const handleIncrementCount = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!price_type_guid || !outletGuid) {
       dispatch(selectCurrentDialog("login"));
       return;
@@ -67,7 +69,8 @@ export const CartCard: FC<ICartCardProps> = ({
     }
   };
 
-  const handleDecrementCount = async () => {
+  const handleDecrementCount = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!price_type_guid || !outletGuid) {
       dispatch(selectCurrentDialog("login"));
       return;
@@ -91,7 +94,8 @@ export const CartCard: FC<ICartCardProps> = ({
     }
   };
 
-  const handleDeleteProduct = async () => {
+  const handleDeleteProduct = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!price_type_guid || !outletGuid) {
       dispatch(selectCurrentDialog("login"));
       return;
@@ -107,7 +111,11 @@ export const CartCard: FC<ICartCardProps> = ({
     }
   };
   return (
-    <div className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]">
+    <Link
+      to={`/product/${guid}`}
+      target="_blank"
+      className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]"
+    >
       <div className="flex gap-[15px]">
         <img
           src={image_key}
@@ -168,6 +176,6 @@ export const CartCard: FC<ICartCardProps> = ({
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

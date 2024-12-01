@@ -14,7 +14,7 @@ export const CartContent: FC<ICartContentProps> = ({ cartGoods }) => {
         {cartGoods.length > 0 ? (
           cartGoods.map((item) => (
             <CartCard
-              key={item.guid}
+              key={item.guid + item.specification_guid}
               guid={item.guid}
               specification_guid={item.specification_guid}
               image_key={item.image_key}

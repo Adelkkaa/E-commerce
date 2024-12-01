@@ -6,3 +6,5 @@ export {
   getPreviewPrice,
   getPreviewPriceForSinglePage,
 } from "./model/getPreviewPrice";
+export { getInStockValue } from "./model/getSingleProductInfo";
+export { SpecificationSelect } from "./ui/SpecificationSelect";

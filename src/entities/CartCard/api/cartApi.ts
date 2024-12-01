@@ -17,11 +17,22 @@ interface IChangeProductCountArgs {
   body: IChangeProductCountResponse;
 }
 
+interface IGetProductInCartArgs {
+  cart_outlet_guid: string;
+  good_guid: string;
+  specification_guid: string;
+}
+
+interface IGetProductInCartResponse extends IGetProductInCartArgs {
+  quantity: number;
+}
+
 export interface IDeleteProductCart {
   cart_outlet_guid: string;
   good_guid: string;
   specification_guid: string;
 }
+
 export const cartApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCartList: build.query<ICartList, ICartListQueryArgs>({
@@ -41,6 +52,46 @@ export const cartApi = baseApi.injectEndpoints({
             ]
           : [{ type: "CartCard", id: "LIST" }],
     }),
+    getProductInCart: build.query<
+      IGetProductInCartResponse,
+      IGetProductInCartArgs
+    >({
+      query: ({ cart_outlet_guid, good_guid, specification_guid }) => {
+        const params = new URLSearchParams({
+          good_guid,
+          specification_guid,
+        });
+        return {
+          url: `outlets/${cart_outlet_guid}/cart/good?${params}`,
+        };
+      },
+      providesTags: (result) =>
+        result?.good_guid
+          ? [
+              {
+                type: "ProductInCart",
+                id: result.good_guid,
+              },
+              { type: "ProductInCart", id: "ITEM" },
+            ]
+          : [{ type: "ProductInCart", id: "ITEM" }],
+    }),
+    addProductToCart: build.mutation<
+      IChangeProductCountResponse,
+      IChangeProductCountArgs
+    >({
+      query: ({ cart_outlet_guid, body }) => {
+        return {
+          url: `outlets/${cart_outlet_guid}/cart`,
+          method: "post",
+          body,
+        };
+      },
+      invalidatesTags: [
+        { type: "CartCard", id: "LIST" },
+        { type: "ProductInCart", id: "ITEM" },
+      ],
+    }),
     changeProductCount: build.mutation<
       IChangeProductCountResponse,
       IChangeProductCountArgs
@@ -52,11 +103,16 @@ export const cartApi = baseApi.injectEndpoints({
           body,
         };
       },
-      invalidatesTags: (result) => [
+      invalidatesTags: (result) =>
         result?.good_guid
-          ? { type: "CartCard", id: result.good_guid }
-          : { type: "CartCard", id: "LIST" },
-      ],
+          ? [
+              { type: "CartCard", id: result.good_guid },
+              { type: "ProductInCart", id: result.good_guid },
+            ]
+          : [
+              { type: "CartCard", id: "LIST" },
+              { type: "ProductInCart", id: "ITEM" },
+            ],
     }),
     deleteProduct: build.mutation<IDeleteProductCart, IDeleteProductCart>({
       query: ({ cart_outlet_guid, good_guid, specification_guid }) => {
@@ -69,7 +125,16 @@ export const cartApi = baseApi.injectEndpoints({
           method: "delete",
         };
       },
-      invalidatesTags: [{ type: "CartCard", id: "LIST" }],
+      invalidatesTags: (result) =>
+        result?.good_guid
+          ? [
+              { type: "CartCard", id: result.good_guid },
+              { type: "ProductInCart", id: result.good_guid },
+            ]
+          : [
+              { type: "CartCard", id: "LIST" },
+              { type: "ProductInCart", id: "ITEM" },
+            ],
     }),
   }),
   overrideExisting: true,

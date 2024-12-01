@@ -86,14 +86,10 @@ export {
 export { PhoneInput } from "./PhoneInput";
 export { RadioGroup, RadioGroupItem } from "./RadioGroup";
 export {
+  CustomSelect,
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "./Select";
