@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FilterRadioGroup } from "@/entities/FilterRadioGroup";
+import { FilterMultiplieAutocomplete } from "@/entities/FilterMultiplieAutocomplete";
+import { useGetProductGroupsQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import {
@@ -18,24 +19,21 @@ interface IHomeFilters {
 }
 
 export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
+  const { data: productGroups, isLoading } = useGetProductGroupsQuery();
   const [searchParams, setSearchParams] = useSearchParams();
-  const in_stock = searchParams.get("in_stock");
   const price_from = searchParams.get("price_from");
   const price_to = searchParams.get("price_to");
+  const categoriesParams = searchParams.get("categories");
 
-  const [accordionValue, setAccordionValue] = useState<string[]>(["in_stock"]);
+  const [accordionValue, setAccordionValue] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
 
-  const { selectInStock, selectPriceFrom, selectPriceTo, clearFilters } =
+  const { selectPriceFrom, selectPriceTo, selectCategories, clearFilters } =
     productListActions;
-  const { inStock, priceFrom, priceTo } = useAppSelector(
+  const { priceFrom, priceTo, categories } = useAppSelector(
     (state) => state.productListReducer,
   );
-
-  const handleInStockFilterChange = (value: string) => {
-    dispatch(selectInStock(value));
-  };
 
   const handlePriceFromFilterChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -48,9 +46,12 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
   ) => {
     dispatch(selectPriceTo(e.target.value));
   };
+
+  const handleCategoriesFilterChange = (value: string[]) => {
+    dispatch(selectCategories(value));
+  };
   const handleApplyFilters = () => {
     const vocabulary: Record<string, string | null | undefined> = {
-      in_stock: inStock,
       price_from: priceFrom,
       price_to: priceTo,
     };
@@ -62,13 +63,15 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
         searchParams.delete(key);
       }
     });
+
+    searchParams.set("categories", categories.join(","));
     searchParams.set("page", "1");
     setSearchParams(searchParams);
   };
 
   const handleClearFilters = () => {
     dispatch(clearFilters());
-    ["in_stock", "price_from", "price_to"].forEach((key) => {
+    ["price_from", "price_to", "categories"].forEach((key) => {
       searchParams.delete(key);
     });
     searchParams.set("page", "1");
@@ -76,19 +79,24 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
   };
 
   useEffect(() => {
-    if (in_stock) {
-      dispatch(selectInStock(in_stock));
-      setAccordionValue((prev) => [...prev, "in_stock"]);
-    }
     if (price_from) {
       dispatch(selectPriceFrom(price_from));
       setAccordionValue((prev) => [...prev, "price"]);
     }
     if (price_to) {
       dispatch(selectPriceTo(price_to));
-      setAccordionValue((prev) => [...prev, "price"]);
+      setAccordionValue((prev) =>
+        prev.includes("price") ? prev : [...prev, "price"],
+      );
     }
-  }, [in_stock, price_from, price_to]);
+
+    if (categoriesParams) {
+      dispatch(selectCategories(categoriesParams.split(",")));
+      setAccordionValue((prev) =>
+        prev.includes("categories") ? prev : [...prev, "categories"],
+      );
+    }
+  }, [price_from, price_to, categoriesParams]);
 
   return (
     <div
@@ -100,24 +108,18 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
         type="multiple"
         className="flex flex-col gap-[30px]"
       >
-        <AccordionItem value="in_stock">
-          <AccordionTrigger>Наличие</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-[9px]">
-            <FilterRadioGroup
-              value={inStock || in_stock || ""}
-              onValueChange={handleInStockFilterChange}
-              items={[
-                {
-                  id: "in_stock",
-                  value: "true",
-                  label: "В наличии",
-                },
-                {
-                  id: "out_of_stock",
-                  value: "false",
-                  label: "Нет в наличии",
-                },
-              ]}
+        <AccordionItem value="categories">
+          <AccordionTrigger>Категории</AccordionTrigger>
+          <AccordionContent className="flex gap-[20px]">
+            <FilterMultiplieAutocomplete
+              data={productGroups || []}
+              labelClassname="mt-2"
+              title="Категории"
+              value={categories}
+              onChange={handleCategoriesFilterChange}
+              nameExtractor="name"
+              valueExtractor="guid"
+              isLoading={isLoading}
             />
           </AccordionContent>
         </AccordionItem>

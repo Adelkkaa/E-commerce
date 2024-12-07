@@ -12,12 +12,11 @@ export const HeaderInput = () => {
   const [hintVisibility, setHintVisibility] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { selectInStock, selectName } = productListActions;
+  const { selectName } = productListActions;
   const { name } = useAppSelector((state) => state.productListReducer);
   const debouncedSearchValue = useDebounce(name, 300);
   const [searchParams] = useSearchParams();
   const nameSP = searchParams.get("name");
-
 
   const { data: productCardList } = useGetProductCardListQuery(
     {
@@ -49,7 +48,6 @@ export const HeaderInput = () => {
     if (name) {
       setHintVisibility(false);
       navigate(`/?name=${name}`);
-      dispatch(selectInStock(null));
     }
   };
 

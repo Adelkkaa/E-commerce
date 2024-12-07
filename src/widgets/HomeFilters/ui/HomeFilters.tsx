@@ -53,7 +53,7 @@ export const HomeFilters = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen} modal={false}>
             <SheetTrigger className="hidden mb:max-md:flex items-center">
               <div className="flex gap-[10px] items-center">
                 <Typography variant="titleXS">Фильтры</Typography>

@@ -1,5 +1,9 @@
 import { baseApi } from "@/shared/api/baseApi";
-import { IProductCardApiResponse, IProductCardV2 } from "@/shared/types/types";
+import {
+  IProductCardApiResponse,
+  IProductCardV2,
+  IProductGroups,
+} from "@/shared/types/types";
 
 interface IProductCardListQueryParams {
   page?: number;
@@ -9,6 +13,7 @@ interface IProductCardListQueryParams {
   price_type_guid?: string;
   price_from?: string;
   price_to?: string;
+  good_group_guids?: string;
 }
 
 export const productCardApi = baseApi.injectEndpoints({
@@ -21,6 +26,13 @@ export const productCardApi = baseApi.injectEndpoints({
         return {
           url: `goods`,
           params: params || undefined,
+        };
+      },
+    }),
+    getProductGroups: build.query<IProductGroups[], void>({
+      query: () => {
+        return {
+          url: `good-groups`,
         };
       },
     }),

@@ -17,6 +17,7 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./AlertDialog";
+export { Badge } from "./Badge";
 export {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -84,6 +85,7 @@ export {
   PaginationPrevious,
 } from "./Pagination";
 export { PhoneInput } from "./PhoneInput";
+export { Popover, PopoverContent, PopoverTrigger } from "./Popover";
 export { RadioGroup, RadioGroupItem } from "./RadioGroup";
 export {
   CustomSelect,

@@ -38,6 +38,11 @@ export type IProductCardList = Pick<
   "guid" | "name" | "type" | "image_key" | "prices"
 >;
 
+export interface IProductGroups {
+  name: string;
+  guid: string;
+}
+
 export interface IProductCardApiResponse {
   items: IProductCardList[];
   total: number;

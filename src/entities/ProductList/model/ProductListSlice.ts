@@ -1,29 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IProductListSlice {
-  inStock: string | null;
   name: string;
   priceFrom: string;
   priceTo: string;
+  categories: string[];
 }
 
 const initialState: IProductListSlice = {
-  inStock: "true",
   name: "",
   priceFrom: "",
   priceTo: "",
+  categories: [],
 };
 
 export const ProductListSlice = createSlice({
   name: "ProductList",
   initialState,
   reducers: {
-    selectInStock(state, { payload }: PayloadAction<string | null>) {
-      return {
-        ...state,
-        inStock: payload,
-      };
-    },
     selectName(state, { payload }: PayloadAction<string>) {
       return {
         ...state,
@@ -42,12 +36,18 @@ export const ProductListSlice = createSlice({
         priceTo: payload,
       };
     },
+    selectCategories(state, { payload }: PayloadAction<string[]>) {
+      return {
+        ...state,
+        categories: payload,
+      };
+    },
     clearFilters(state) {
       return {
         ...state,
-        inStock: null,
         priceFrom: "",
         priceTo: "",
+        categories: [],
       };
     },
   },
