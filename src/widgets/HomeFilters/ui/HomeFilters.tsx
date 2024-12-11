@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { HomeFilters as HomeFiltersContent } from "@/features/HomeFilters";
 import HomeFilter from "@/shared/assets/images/HomeFilter.svg";
 import HomeSort from "@/shared/assets/images/Sort.svg";
@@ -21,6 +22,15 @@ export const HomeFilters = () => {
   const { isMobile } = useBreakpoint();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const order_by = searchParams.get("order_by");
+
+  const handleSortClick = (orderBy: string) => {
+    searchParams.set("page", "1");
+    searchParams.set("order_by", orderBy);
+    setSearchParams(searchParams);
+  };
+
   return (
     <>
       {isMobile ? (
@@ -28,12 +38,10 @@ export const HomeFilters = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-[10px] text-titleXS items-center bg-transparent hover:strokeBlue p-2 outline-none">
               <HomeSort />
-              По названию
+              {order_by === "price" ? "По цене" : "По названию"}
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[260px]">
-              <DropdownMenuItem
-              // onClick={() => dispatch(selectCurrentDialog("login"))}
-              >
+              <DropdownMenuItem onClick={() => handleSortClick("name")}>
                 <Button
                   variant="ghost"
                   className="text-titleXS w-full text-center"
@@ -41,9 +49,7 @@ export const HomeFilters = () => {
                   По названию
                 </Button>
               </DropdownMenuItem>
-              <DropdownMenuItem
-              // onClick={() => dispatch(selectCurrentDialog("login"))}
-              >
+              <DropdownMenuItem onClick={() => handleSortClick("price")}>
                 <Button
                   variant="ghost"
                   className="text-titleXS w-full text-center"

@@ -14,6 +14,7 @@ interface IProductCardListQueryParams {
   price_from?: string;
   price_to?: string;
   good_group_guids?: string;
+  order_by?: string;
 }
 
 export const productCardApi = baseApi.injectEndpoints({

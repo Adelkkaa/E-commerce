@@ -13,6 +13,7 @@ export const HomeCatalog = () => {
   const price_from = searchParams.get("price_from");
   const price_to = searchParams.get("price_to");
   const categories = searchParams.get("categories");
+  const order_by = searchParams.get("order_by");
 
   const name = searchParams.get("name");
 
@@ -33,6 +34,7 @@ export const HomeCatalog = () => {
     price_from: price_from || undefined,
     price_to: price_to || undefined,
     good_group_guids: categories || undefined,
+    order_by: order_by || "name",
   });
 
   const handleClearSearchName = () => {
