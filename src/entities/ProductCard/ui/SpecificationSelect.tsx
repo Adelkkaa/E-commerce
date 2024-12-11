@@ -73,7 +73,8 @@ const SpecificationSelect = ({
                 className="!text-center !text-textM justify-center !pl-0 data-[state=checked]:bg-blueCustom data-[state=checked]:text-white"
                 value={item.specification_guid}
               >
-                {item.specification_name} {item.in_stock} шт
+                {item.specification_name}{" "}
+                {item.in_stock > 10 ? "Больше 10 шт" : `${item.in_stock} шт`}
               </SelectItem>
             ))}
           </SelectContent>

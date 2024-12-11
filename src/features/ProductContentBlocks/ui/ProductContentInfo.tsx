@@ -30,7 +30,9 @@ export const ProductContentInfo: FC<IProductContentInfoProps> = ({
       <div className="border border-grayCustom" />
       <Typography variant="textL" className="font-semibold max-md:text-titleXS">
         В наличии на складе:{" "}
-        <span className="text-blueCustom">{inStockValue} шт</span>
+        <span className="text-blueCustom">
+          {inStockValue > 10 ? "Больше 10 шт" : `${inStockValue} шт`}
+        </span>
       </Typography>
       <Typography variant="textM" className="text-textS">
         {productCard.description}
