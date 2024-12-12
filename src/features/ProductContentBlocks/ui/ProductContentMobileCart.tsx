@@ -24,7 +24,7 @@ export const ProductContentMobileCart: FC<IProductContentMobileCartProps> = ({
     <div className="sticky md:hidden bottom-[50px] gap-[123px] mt-[30px] w-full flex justify-between">
       <Button
         variant="icon"
-        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
+        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain"
       >
         <FavoritesIcon />
       </Button>
@@ -34,7 +34,7 @@ export const ProductContentMobileCart: FC<IProductContentMobileCartProps> = ({
             disabled={quantity === 0 || isDisabled}
             onClick={handleDecrementCount}
             variant="icon"
-            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-main"
           >
             <Minus />
           </Button>
@@ -48,7 +48,7 @@ export const ProductContentMobileCart: FC<IProductContentMobileCartProps> = ({
             disabled={quantity === inStockValue || isDisabled}
             onClick={handleIncrementCount}
             variant="icon"
-            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-main"
           >
             <Plus />
           </Button>
@@ -57,7 +57,7 @@ export const ProductContentMobileCart: FC<IProductContentMobileCartProps> = ({
       {quantity === 0 && (
         <Button
           onClick={handleAddProductToCart}
-          className="bg-blueCustom !text-textL text-white flex-1"
+          className="bg-main !text-textL text-white flex-1"
         >
           Добавить в заказ
         </Button>

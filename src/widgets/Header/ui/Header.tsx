@@ -30,8 +30,8 @@ export const Header = () => {
             {headerLinks.map((item) => (
               <Link
                 key={item.href}
-                className={clsx("text-[20px] hover:text-blueCustom font-bold", {
-                  "text-blueCustom": item.href === pathname,
+                className={clsx("text-[20px] hover:text-main font-bold", {
+                  "text-main": item.href === pathname,
                 })}
                 to={item.href}
               >
@@ -46,13 +46,13 @@ export const Header = () => {
           <div className="flex tb:gap-[20px] md:gap-[10px] items-center">
             <Link
               to="/favorites"
-              className="hover:strokeBlue w-[36px] h-[36px] flex justify-center items-center"
+              className="hover:strokeMain w-[36px] h-[36px] flex justify-center items-center"
             >
               <FavoritesIcon className="cursor-pointer w-[20px] h-[20px]" />
             </Link>
             <Link
               to="/cart"
-              className="hover:strokeBlue w-[36px] h-[36px] flex justify-center items-center"
+              className="hover:strokeMain w-[36px] h-[36px] flex justify-center items-center"
             >
               <CartIcon className="cursor-pointer w-[20px] h-[20px]" />
             </Link>

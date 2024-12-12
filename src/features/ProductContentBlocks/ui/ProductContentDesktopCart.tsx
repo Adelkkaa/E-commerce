@@ -28,7 +28,7 @@ export const ProductContentDesktopCart: FC<IProductContentDesktopCartProps> = ({
             disabled={quantity === 0 || isDisabled}
             onClick={handleDecrementCount}
             variant="icon"
-            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-main"
           >
             <Minus />
           </Button>
@@ -42,7 +42,7 @@ export const ProductContentDesktopCart: FC<IProductContentDesktopCartProps> = ({
             disabled={quantity === inStockValue || isDisabled}
             onClick={handleIncrementCount}
             variant="icon"
-            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-blueCustom"
+            className="shadow-custom rounded-[50%] p-[2px] w-[38px] h-[38px] cursor-pointer hover:text-main"
           >
             <Plus />
           </Button>
@@ -52,7 +52,7 @@ export const ProductContentDesktopCart: FC<IProductContentDesktopCartProps> = ({
         <Button
           onClick={handleAddProductToCart}
           disabled={isDisabled}
-          className="bg-blueCustom text-[25px] font-bold flex-1"
+          className="bg-main text-[25px] font-bold flex-1"
         >
           Добавить в заказ
         </Button>
@@ -60,7 +60,7 @@ export const ProductContentDesktopCart: FC<IProductContentDesktopCartProps> = ({
       <Button
         disabled={isDisabled}
         variant="icon"
-        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillBlue"
+        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain"
       >
         <FavoritesIcon />
       </Button>

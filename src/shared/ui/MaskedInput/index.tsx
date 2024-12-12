@@ -18,7 +18,7 @@ const MaskedInput = React.forwardRef<HTMLInputElement, InputProps>(
         mask={Number}
         // onAccept={(value) => console.log(value)}
         className={cn(
-          "flex h-10 w-full rounded-[8px] border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-10 w-full rounded-[8px] border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-main focus-visible:outline-none",
           className,
         )}
         inputRef={ref}
