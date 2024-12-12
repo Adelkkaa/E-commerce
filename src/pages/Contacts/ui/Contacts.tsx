@@ -8,7 +8,7 @@ export const Contacts = () => {
         <span className="text-textL">+7 (999) 123-45-67</span> (будние дни, с 8
         по 19:00 по московскому времени) <br /> или написать нам на почту{" "}
         <span className="text-textL">support@dvakapitana.ru</span>, или в форму{" "}
-        <span className="text-textL">Свяжитесь со мной”</span>“.
+        <span className="text-textL">"Свяжитесь со мной”</span>.
       </Typography>
       <div className="flex flex-col gap-[10px]">
         <Typography variant="textXXl">Фактический адрес</Typography>

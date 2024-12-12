@@ -6,6 +6,7 @@ import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { AgeDialog } from "@/features/AgeDialog";
+import { CookieConsent } from "@/features/CookieConsent";
 import { Loader } from "@/shared/ui";
 import { SharedDialog } from "@/widgets/Dialog";
 import { Footer } from "@/widgets/Footer";
@@ -37,6 +38,8 @@ export const Layout = () => {
           </main>
           <Toaster />
           <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
+          <CookieConsent variant="small" />
+
           <SharedDialog />
           <Footer />
         </div>
