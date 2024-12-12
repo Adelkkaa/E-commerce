@@ -15,11 +15,11 @@ import {
 } from "@/features/ProductContentBlocks";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
-import { IProductCardPriceV2, IProductCardV2 } from "@/shared/types/types";
+import { IProductCardPriceV2, ISingleProduct } from "@/shared/types/types";
 
 interface IProductContentProps {
   productId: string;
-  productCard: IProductCardV2;
+  productCard: ISingleProduct;
   selectedSpecification: IProductCardPriceV2 | null;
   setSelectedSpecification: (value: IProductCardPriceV2) => void;
   quantity: number;

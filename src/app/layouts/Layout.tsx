@@ -38,7 +38,7 @@ export const Layout = () => {
           </main>
           <Toaster />
           <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
-          <CookieConsent variant="small" />
+          <CookieConsent />
 
           <SharedDialog />
           <Footer />

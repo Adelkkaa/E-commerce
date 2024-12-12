@@ -17,7 +17,9 @@ export const HomeCatalog = () => {
 
   const name = searchParams.get("name");
 
-  const { price_type_guid } = useAppSelector((state) => state.outletsReducer);
+  const { price_type_guid, guid } = useAppSelector(
+    (state) => state.outletsReducer,
+  );
 
   const mockProductCards = Array.from({ length: 10 });
   const {
@@ -31,6 +33,7 @@ export const HomeCatalog = () => {
     in_stock: "true",
     name: name || undefined,
     price_type_guid: price_type_guid || undefined,
+    cart_outlet_guid: guid || undefined,
     price_from: price_from || undefined,
     price_to: price_to || undefined,
     good_group_guids: categories || undefined,
@@ -57,7 +60,7 @@ export const HomeCatalog = () => {
         </div>
       )}
       <div className="flex flex-wrap justify-center md:justify-normal gap-1 md:gap-4">
-        {isLoading || isFetching ? (
+        {isLoading ? (
           mockProductCards.map((_, index) => (
             <ProductCardSkeleton key={index} />
           ))

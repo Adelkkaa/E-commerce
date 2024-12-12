@@ -1,7 +1,12 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import { dialogActions } from "@/entities/Dialog";
+import { useChangeProductFavoritesMutation } from "@/entities/Favorites";
 import { getPreviewPrice } from "@/entities/ProductCard";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
+import { useToast } from "@/shared/hooks/use-toast";
+import { cn } from "@/shared/lib/utils";
 import { IProductCardList } from "@/shared/types/types";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";
 
@@ -11,11 +16,49 @@ export const ProductCard: FC<IProductCardList> = ({
   image_key,
   prices,
   type,
+  is_favorite,
 }) => {
-  const onClickFavorites = (
+  const { toast } = useToast();
+
+  const { price_type_guid, guid: outletGuid } = useAppSelector(
+    (state) => state.outletsReducer,
+  );
+
+  const dispatch = useAppDispatch();
+
+  const { selectCurrentDialog } = dialogActions;
+
+  const [changeFavorites] = useChangeProductFavoritesMutation();
+
+  const errorHandler = (error: any) => {
+    console.log(error);
+    toast({
+      title: "Произошла ошибка",
+      description: error?.data?.detail || "Попробуйте еще раз",
+      variant: "destructive",
+    });
+  };
+
+  const onClickFavorites = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
+    if (!price_type_guid || !outletGuid) {
+      dispatch(selectCurrentDialog("login"));
+      return;
+    }
+    try {
+      await changeFavorites({
+        cart_outlet_guid: outletGuid,
+        good_guid: guid,
+        isFavorite: is_favorite,
+      }).unwrap();
+      toast({
+        title: `Товар ${is_favorite ? "удален из избранного" : "добавлен в избранное"}`,
+      });
+    } catch (error: any) {
+      errorHandler(error);
+    }
   };
 
   return (
@@ -32,12 +75,19 @@ export const ProductCard: FC<IProductCardList> = ({
           ) : (
             <div className="bg-whiteBg w-full h-[198px] " />
           )}
-          <div className="flex absolute top-0 right-0 p-2 md:opacity-0 md:group-hover:opacity-100 w-full justify-end gap-[8px]">
+          <div
+            className={cn(
+              "flex absolute top-0 right-0 p-2 md:opacity-0 md:group-hover:opacity-100 w-full justify-end gap-[8px]",
+              { "!opacity-100": is_favorite },
+            )}
+          >
             <Button
               onClick={onClickFavorites}
               variant="icon"
               size="icon"
-              className="md:hover:fillMain w-[36px] h-[36px]"
+              className={cn("md:hover:fillMain w-[36px] h-[36px]", {
+                fillMain: is_favorite,
+              })}
             >
               <HeartIcon width="100%" height="100%" />
             </Button>

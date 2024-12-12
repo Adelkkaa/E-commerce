@@ -1,10 +1,10 @@
-import { IProductCardV2 } from "@/shared/types/types";
+import { ISingleProduct } from "@/shared/types/types";
 
 export const getInStockValue = ({
   productInfo,
   selectedSpecification,
 }: {
-  productInfo: IProductCardV2;
+  productInfo: ISingleProduct;
   selectedSpecification: string | null;
 }) => {
   if (

@@ -31,11 +31,12 @@ export interface IProductCard {
   image_key: string;
   storages: IProductCardStorage[];
   prices: IProductCardPrice[] | [];
+  is_favorite: boolean;
 }
 
 export type IProductCardList = Pick<
   IProductCard,
-  "guid" | "name" | "type" | "image_key" | "prices"
+  "guid" | "name" | "type" | "image_key" | "prices" | "is_favorite"
 >;
 
 export interface IProductGroups {
@@ -62,7 +63,7 @@ export type IResponseErrorPrimary = IResponseError<{
 
 export type IProductCardPriceV2 = IProductCardStorage & { price: number };
 
-export interface IProductCardV2
+export interface ISingleProduct
   extends Omit<IProductCard, "prices" | "storages" | "producing_country"> {
   specification: IProductCardPriceV2[];
 }

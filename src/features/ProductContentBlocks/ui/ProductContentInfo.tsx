@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { getPreviewPriceForSinglePage } from "@/entities/ProductCard";
-import { IProductCardPriceV2, IProductCardV2 } from "@/shared/types/types";
+import { IProductCardPriceV2, ISingleProduct } from "@/shared/types/types";
 import { Typography } from "@/shared/ui";
 
 interface IProductContentInfoProps {
-  productCard: IProductCardV2;
+  productCard: ISingleProduct;
   selectedSpecification: IProductCardPriceV2 | null;
   inStockValue: number;
 }

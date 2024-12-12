@@ -142,13 +142,13 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
       <div className="flex justify-between items-center gap-[20px]">
         <Button
           onClick={handleClearFilters}
-          className="flex-1 py-[10px] !text-buttonM text-white"
+          className="flex-1 py-[10px] !text-buttonM text-white rounded-[4px]"
         >
           Отменить
         </Button>
         <Button
           onClick={handleApplyFilters}
-          className="flex-1 py-[10px] !text-buttonM text-white"
+          className="flex-1 py-[10px] !text-buttonM text-white rounded-[4px]"
         >
           Применить
         </Button>

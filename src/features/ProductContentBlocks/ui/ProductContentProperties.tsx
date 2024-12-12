@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { cn } from "@/shared/lib/utils";
-import { IProductCardV2 } from "@/shared/types/types";
+import { ISingleProduct } from "@/shared/types/types";
 import { Typography } from "@/shared/ui";
 
 interface IProductContentPropertiesProps {
-  productCard: IProductCardV2;
+  productCard: ISingleProduct;
 }
 
 export const ProductContentProperties: FC<IProductContentPropertiesProps> = ({

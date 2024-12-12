@@ -1,8 +1,8 @@
 import { baseApi } from "@/shared/api/baseApi";
 import {
   IProductCardApiResponse,
-  IProductCardV2,
   IProductGroups,
+  ISingleProduct,
 } from "@/shared/types/types";
 
 interface IProductCardListQueryParams {
@@ -11,6 +11,7 @@ interface IProductCardListQueryParams {
   in_stock?: string;
   name?: string;
   price_type_guid?: string;
+  cart_outlet_guid?: string;
   price_from?: string;
   price_to?: string;
   good_group_guids?: string;
@@ -29,6 +30,15 @@ export const productCardApi = baseApi.injectEndpoints({
           params: params || undefined,
         };
       },
+      providesTags: (result) =>
+        result?.items.length
+          ? [
+              ...result.items.map((good) => ({
+                type: "ProductCard" as const,
+                id: good.guid,
+              })),
+            ]
+          : [{ type: "ProductCard", id: "LIST" }],
     }),
     getProductGroups: build.query<IProductGroups[], void>({
       query: () => {
@@ -38,13 +48,22 @@ export const productCardApi = baseApi.injectEndpoints({
       },
     }),
     getProductCardSingle: build.query<
-      IProductCardV2,
+      ISingleProduct,
       { guid: string; price_type_guid?: string | null }
     >({
       query: ({ guid, price_type_guid }) => ({
         url: `goods/${guid}`,
         params: { price_type_guid: price_type_guid || undefined },
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              {
+                type: "ProductCard",
+                id: result.guid,
+              },
+            ]
+          : [{ type: "ProductCard", id: "ITEM" }],
     }),
   }),
   overrideExisting: true,
