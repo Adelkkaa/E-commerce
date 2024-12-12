@@ -25,7 +25,10 @@ const AccordionTrigger = React.forwardRef<
     ref,
   ) => (
     <AccordionPrimitive.Header
-      className={cn("flex border-b-2 border-black mb-4", headerClassname)}
+      className={cn(
+        "flex border-b-2 border-black [&[data-state=open]]:border-main mb-4",
+        headerClassname,
+      )}
     >
       <AccordionPrimitive.Trigger
         ref={ref}

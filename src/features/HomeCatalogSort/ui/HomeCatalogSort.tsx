@@ -19,8 +19,8 @@ export const HomeCatalogSort = () => {
       <Button
         variant="link"
         size="link"
-        className={cn("text-textS hover:text-blueCustom hover:underline", {
-          "text-blueCustom underline": order_by !== "price",
+        className={cn("text-textS hover:text-main hover:underline", {
+          "text-main underline": order_by !== "price",
         })}
         onClick={() => handleSortClick("name")}
       >
@@ -29,8 +29,8 @@ export const HomeCatalogSort = () => {
       <Button
         variant="link"
         size="link"
-        className={cn("text-textS hover:text-blueCustom hover:underline", {
-          "text-blueCustom underline": order_by === "price",
+        className={cn("text-textS hover:text-main hover:underline", {
+          "text-main underline": order_by === "price",
         })}
         onClick={() => handleSortClick("price")}
       >

@@ -10,6 +10,7 @@ export const ProductCard: FC<IProductCardList> = ({
   name,
   image_key,
   prices,
+  type,
 }) => {
   const onClickFavorites = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -36,11 +37,20 @@ export const ProductCard: FC<IProductCardList> = ({
               onClick={onClickFavorites}
               variant="icon"
               size="icon"
-              className="md:hover:fillBlue w-[36px] h-[36px]"
+              className="md:hover:fillMain w-[36px] h-[36px]"
             >
               <HeartIcon width="100%" height="100%" />
             </Button>
           </div>
+
+          {type !== "regular" && (
+            <div className="flex absolute top-[15px] left-[7px] md:min-w-[100px] max-md:w-[60px] h-5 justify-center rounded-[4px] bg-main">
+              <Typography variant="titleXS" className="text-whiteCustom">
+                {type === "new" && "Новинка"}
+                {type === "hit" && "Хит"}
+              </Typography>
+            </div>
+          )}
         </CardContent>
         <CardFooter className="flex flex-col flex-grow max-md:grid max-md:grid-rows-2 md:justify-between items-start px-[10px] py-[8px]">
           <Typography variant="textXS" className="line-clamp-2">

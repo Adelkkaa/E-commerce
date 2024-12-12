@@ -169,6 +169,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        main: "#BE232B",
         blueCustom: "#3A71C3",
         grayCustom: "#A4B1BB",
         whiteCustom: "#F8F8F8",
@@ -253,6 +254,17 @@ module.exports = {
         ".strokeBlue svg": {
           path: {
             stroke: "#3A71C3",
+          },
+        },
+        ".fillMain svg": {
+          fill: "#BE232B",
+          path: {
+            stroke: "#BE232B",
+          },
+        },
+        ".strokeMain svg": {
+          path: {
+            stroke: "#BE232B",
           },
         },
         ".boxShadow": {

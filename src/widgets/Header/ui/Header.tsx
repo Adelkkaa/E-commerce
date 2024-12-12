@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { HeaderInput } from "@/features/HeaderInput";
 import { MenuSheet } from "@/features/MenuSheet";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
-import mainLogo from "@/shared/assets/images/MainLogo.jpg";
+import mainLogo from "@/shared/assets/images/MainLogo.png";
 import CartIcon from "@/shared/assets/images/ShoppingCart.svg";
 import { headerLinks } from "@/shared/constants/navigationLinks";
 import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
