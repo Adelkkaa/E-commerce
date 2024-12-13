@@ -1,4 +1,5 @@
 import { baseApi } from "@/shared/api/baseApi";
+import { IFavoritesItem } from "@/shared/types/types";
 
 interface IChangeProductFavoritesArgs {
   isFavorite: boolean;
@@ -10,6 +11,16 @@ type IChangeProductFavoritesResponse = Omit<
   IChangeProductFavoritesArgs,
   "isFavorite"
 >;
+
+interface IFavoritesListQueryArgs {
+  cart_outlet_guid: string;
+  price_type_guid: string;
+}
+
+interface IFavoritesListResponse {
+  cart_outlet_guid: string;
+  goods: IFavoritesItem[];
+}
 
 export const favoritesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -35,16 +46,42 @@ export const favoritesApi = baseApi.injectEndpoints({
           },
         };
       },
-      invalidatesTags: (result) =>
+      invalidatesTags: (result, _, args) =>
         result?.good_guid
           ? [
               { type: "CartCard", id: result.good_guid },
               { type: "ProductCard", id: result.good_guid },
+              args.isFavorite
+                ? { type: "FavoritesProduct", id: result.good_guid }
+                : { type: "FavoritesProduct", id: "LIST" },
             ]
           : [
               { type: "CartCard", id: "LIST" },
               { type: "ProductCard", id: "LIST" },
+              { type: "FavoritesProduct", id: "LIST" },
             ],
+    }),
+    getFavoritesList: build.query<
+      IFavoritesListResponse,
+      IFavoritesListQueryArgs
+    >({
+      query: ({ cart_outlet_guid, price_type_guid }) => {
+        return {
+          url: `outlets/${cart_outlet_guid}/favorites`,
+          params: {
+            price_type_guid,
+          },
+        };
+      },
+      providesTags: (result) =>
+        result?.goods.length
+          ? [
+              ...result.goods.map((good) => ({
+                type: "FavoritesProduct" as const,
+                id: good.guid,
+              })),
+            ]
+          : [{ type: "FavoritesProduct", id: "LIST" }],
     }),
   }),
   overrideExisting: true,

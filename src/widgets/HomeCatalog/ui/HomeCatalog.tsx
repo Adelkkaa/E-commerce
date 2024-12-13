@@ -61,7 +61,7 @@ export const HomeCatalog = () => {
         </div>
       )}
       <div className="flex flex-wrap justify-center md:justify-normal gap-1 md:gap-4">
-        {isLoading || !currentData?.items.length ? (
+        {isLoading || currentData?.items === undefined ? (
           mockProductCards.map((_, index) => (
             <ProductCardSkeleton key={index} />
           ))

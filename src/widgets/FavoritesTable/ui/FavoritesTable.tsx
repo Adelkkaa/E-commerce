@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
-import cardImage2 from "@/shared/assets/images/mockCard_2.jpg";
+import { FC } from "react";
 import { useToast } from "@/shared/hooks/use-toast";
+import { IFavoritesItem } from "@/shared/types/types";
 import {
   Button,
   Table,
@@ -12,10 +13,13 @@ import {
   Typography,
 } from "@/shared/ui";
 
-export const FavoritesTable = () => {
+interface IFavoritesTableProps {
+  favorites: IFavoritesItem[];
+}
+
+export const FavoritesTable: FC<IFavoritesTableProps> = ({ favorites }) => {
   const { toast } = useToast();
 
-  const favoritesCard = Array.from({ length: 20 });
   return (
     <>
       <Table className="text-textM ">
@@ -32,8 +36,8 @@ export const FavoritesTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {favoritesCard.map((_, index) => (
-            <TableRow key={index} className="border-none">
+          {favorites.map((item) => (
+            <TableRow key={item.guid} className="border-none">
               <TableCell
                 className="w-[34px] h-[34px]"
                 onClick={() =>
@@ -52,23 +56,23 @@ export const FavoritesTable = () => {
               </TableCell>
               <TableCell>
                 <img
-                  src={cardImage2}
+                  src={item.image_key}
                   alt="card"
                   className="w-[90px] h-[90px] md:min-w-[90px] object-contain md:min-h-[90px] max-md:min-w-[50px] max-md:min-h-[50px]"
                 />
               </TableCell>
               <TableCell className="text-center max-md:text-[12px]">
-                Элект. антитаб. устр. LUXLITE SALTERY Compact WILD BERRIES
-                (лесный ягоды)
+                {item.name}
               </TableCell>
               <TableCell className="text-center !font-semibold max-md:text-[12px]  whitespace-nowrap">
-                122.56 <span className="font-medium max-md:text-[12px]">₽</span>
+                {item.price}{" "}
+                <span className="font-medium max-md:text-[12px]">₽</span>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      {false && (
+      {favorites.length === 0 && (
         <Typography variant="textXl" className="flex mt-[30px] justify-center">
           Отсутствуют избранные товары
         </Typography>

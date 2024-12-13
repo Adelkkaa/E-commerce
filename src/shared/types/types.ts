@@ -84,3 +84,10 @@ export interface ICartList {
   goods: ICartGood[];
   total_cost: number;
 }
+
+export type IFavoritesItem = Pick<
+  IProductCard,
+  "guid" | "image_key" | "name"
+> & {
+  price: number;
+};
