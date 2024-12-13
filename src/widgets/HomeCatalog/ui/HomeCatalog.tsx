@@ -27,6 +27,7 @@ export const HomeCatalog = () => {
     isLoading,
     isFetching,
     isSuccess,
+    currentData,
   } = useGetProductCardListQuery({
     page: Number(page) || 1,
     size: 25,
@@ -60,7 +61,7 @@ export const HomeCatalog = () => {
         </div>
       )}
       <div className="flex flex-wrap justify-center md:justify-normal gap-1 md:gap-4">
-        {isLoading ? (
+        {isLoading || !currentData?.items.length ? (
           mockProductCards.map((_, index) => (
             <ProductCardSkeleton key={index} />
           ))
