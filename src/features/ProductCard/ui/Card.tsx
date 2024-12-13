@@ -1,7 +1,10 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { dialogActions } from "@/entities/Dialog";
-import { useChangeProductFavoritesMutation } from "@/entities/Favorites";
+import {
+  useChangeProductFavoritesMutation,
+  useFavorite,
+} from "@/entities/Favorites";
 import { getPreviewPrice } from "@/entities/ProductCard";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
@@ -18,49 +21,7 @@ export const ProductCard: FC<IProductCardList> = ({
   type,
   is_favorite,
 }) => {
-  const { toast } = useToast();
-
-  const { price_type_guid, guid: outletGuid } = useAppSelector(
-    (state) => state.outletsReducer,
-  );
-
-  const dispatch = useAppDispatch();
-
-  const { selectCurrentDialog } = dialogActions;
-
-  const [changeFavorites] = useChangeProductFavoritesMutation();
-
-  const errorHandler = (error: any) => {
-    console.log(error);
-    toast({
-      title: "Произошла ошибка",
-      description: error?.data?.detail || "Попробуйте еще раз",
-      variant: "destructive",
-    });
-  };
-
-  const onClickFavorites = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.preventDefault();
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await changeFavorites({
-        cart_outlet_guid: outletGuid,
-        good_guid: guid,
-        isFavorite: is_favorite,
-      }).unwrap();
-      toast({
-        title: `Товар ${is_favorite ? "удален из избранного" : "добавлен в избранное"}`,
-      });
-    } catch (error: any) {
-      errorHandler(error);
-    }
-  };
-
+  const { onChangeFavorite } = useFavorite();
   return (
     <Link target="_blank" to={`/product/${guid}`}>
       <Card className="group flex flex-col md:max-w-[230px] md:w-[230px] md:min-h-[380px] md:max-h-[380px] max-w-[190px] w-[190px] min-h-[360px] max-h-[360px] cursor-pointer ">
@@ -82,7 +43,9 @@ export const ProductCard: FC<IProductCardList> = ({
             )}
           >
             <Button
-              onClick={onClickFavorites}
+              onClick={(e) =>
+                onChangeFavorite({ e, guid, isFavorite: is_favorite })
+              }
               variant="icon"
               size="icon"
               className={cn("md:hover:fillMain w-[36px] h-[36px]", {

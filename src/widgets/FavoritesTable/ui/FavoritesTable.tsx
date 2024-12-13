@@ -1,9 +1,6 @@
 import { X } from "lucide-react";
 import { FC } from "react";
-import { dialogActions } from "@/entities/Dialog";
-import { useChangeProductFavoritesMutation } from "@/entities/Favorites";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { useToast } from "@/shared/hooks/use-toast";
+import { useFavorite } from "@/entities/Favorites";
 import { IFavoritesItem } from "@/shared/types/types";
 import {
   Button,
@@ -21,45 +18,7 @@ interface IFavoritesTableProps {
 }
 
 export const FavoritesTable: FC<IFavoritesTableProps> = ({ favorites }) => {
-  const { toast } = useToast();
-
-  const { price_type_guid, guid: outletGuid } = useAppSelector(
-    (state) => state.outletsReducer,
-  );
-
-  const { selectCurrentDialog } = dialogActions;
-
-  const dispatch = useAppDispatch();
-
-  const [changeFavorites] = useChangeProductFavoritesMutation();
-
-  const errorHandler = (error: any) => {
-    console.log(error);
-    toast({
-      title: "Произошла ошибка",
-      description: error?.data?.detail || "Попробуйте еще раз",
-      variant: "destructive",
-    });
-  };
-
-  const onDeleteFavorite = async (guid: string) => {
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await changeFavorites({
-        cart_outlet_guid: outletGuid,
-        good_guid: guid,
-        isFavorite: true,
-      }).unwrap();
-      toast({
-        title: `Товар удален из избранного}`,
-      });
-    } catch (error: any) {
-      errorHandler(error);
-    }
-  };
+  const { onChangeFavorite } = useFavorite();
 
   return (
     <>
@@ -82,7 +41,9 @@ export const FavoritesTable: FC<IFavoritesTableProps> = ({ favorites }) => {
               <TableRow key={item.guid} className="border-none">
                 <TableCell
                   className="w-[34px] h-[34px]"
-                  onClick={() => onDeleteFavorite(item.guid)}
+                  onClick={() =>
+                    onChangeFavorite({ guid: item.guid, isFavorite: true })
+                  }
                 >
                   <Button
                     variant="icon"
