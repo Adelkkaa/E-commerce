@@ -6,9 +6,11 @@ import {
   useDeleteProductMutation,
 } from "@/entities/CartCard";
 import { dialogActions } from "@/entities/Dialog";
+import { useFavorite } from "@/entities/Favorites";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
+import { cn } from "@/shared/lib/utils";
 import { Button, Loader, Typography } from "@/shared/ui";
 
 interface ICartCardProps {
@@ -18,6 +20,7 @@ interface ICartCardProps {
   name: string;
   quantity: number;
   price: number;
+  isFavorite: boolean;
 }
 
 export const CartCard: FC<ICartCardProps> = ({
@@ -27,7 +30,9 @@ export const CartCard: FC<ICartCardProps> = ({
   quantity,
   guid,
   specification_guid,
+  isFavorite,
 }) => {
+  const { onChangeFavorite } = useFavorite();
   const { toast } = useToast();
   const { price_type_guid, guid: outletGuid } = useAppSelector(
     (state) => state.outletsReducer,
@@ -146,7 +151,13 @@ export const CartCard: FC<ICartCardProps> = ({
           </Button>
           <Button
             variant="icon"
-            className="w-[24px] h-[24px] p-[2px] md:order-2 order-1 rounded-[3px] border border-grayCustom hover:fillBlue cursor-pointer"
+            onClick={(e) => onChangeFavorite({ e, guid, isFavorite })}
+            className={cn(
+              "w-[24px] h-[24px] p-[2px] md:order-2 order-1 rounded-[3px] border border-grayCustom hover:fillMain cursor-pointer",
+              {
+                fillMain: isFavorite,
+              },
+            )}
           >
             <FavoritesIcon className="max-w-[14px]" />
           </Button>

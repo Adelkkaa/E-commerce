@@ -23,6 +23,7 @@ export const Product = () => {
   } = useGetProductCardSingleQuery({
     guid: productId as string,
     price_type_guid,
+    cart_outlet_guid: guid,
   });
 
   const { data: productInCart, isLoading: isProductInCartLoading } =

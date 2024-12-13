@@ -5,6 +5,7 @@ import {
   useDeleteProductMutation,
 } from "@/entities/CartCard";
 import { dialogActions } from "@/entities/Dialog";
+import { useFavorite } from "@/entities/Favorites";
 import { getInStockValue, SpecificationSelect } from "@/entities/ProductCard";
 import {
   ProductContentDesktopCart,
@@ -148,6 +149,15 @@ export const ProductContent: FC<IProductContentProps> = ({
       errorHandler(error);
     }
   };
+
+  const { onChangeFavorite } = useFavorite();
+
+  const handleChangeFavorite = () => {
+    onChangeFavorite({
+      guid: productId,
+      isFavorite: productCard.is_favorite,
+    });
+  };
   const inStockValue = getInStockValue({
     productInfo: productCard,
     selectedSpecification: selectedSpecification?.specification_guid || null,
@@ -198,6 +208,8 @@ export const ProductContent: FC<IProductContentProps> = ({
                 isAddProductToCartLoading
               }
               inStockValue={inStockValue}
+              isFavorite={productCard.is_favorite}
+              handleChangeFavorite={handleChangeFavorite}
             />
           )}
 
@@ -213,6 +225,8 @@ export const ProductContent: FC<IProductContentProps> = ({
                 isAddProductToCartLoading
               }
               inStockValue={inStockValue}
+              isFavorite={productCard.is_favorite}
+              handleChangeFavorite={handleChangeFavorite}
             />
           )}
         </div>
@@ -224,6 +238,7 @@ export const ProductContent: FC<IProductContentProps> = ({
 
       <ProductContentMobileCart
         quantity={quantity}
+        handleChangeFavorite={handleChangeFavorite}
         handleAddProductToCart={handleAddProductToCart}
         handleDecrementCount={handleDecrementCount}
         handleIncrementCount={handleIncrementCount}
@@ -233,6 +248,7 @@ export const ProductContent: FC<IProductContentProps> = ({
           isAddProductToCartLoading
         }
         inStockValue={inStockValue}
+        isFavorite={productCard.is_favorite}
       />
     </>
   );

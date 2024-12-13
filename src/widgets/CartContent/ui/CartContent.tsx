@@ -21,6 +21,7 @@ export const CartContent: FC<ICartContentProps> = ({ cartGoods }) => {
               name={item.name}
               price={item.price}
               quantity={item.quantity}
+              isFavorite={item.is_favorite}
             />
           ))
         ) : (

@@ -1,6 +1,7 @@
 import { Minus, Plus } from "lucide-react";
 import { FC } from "react";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
+import { cn } from "@/shared/lib/utils";
 import { Button, Typography } from "@/shared/ui";
 
 interface IProductContentTabletCartProps {
@@ -8,22 +9,30 @@ interface IProductContentTabletCartProps {
   handleDecrementCount: () => Promise<void>;
   handleIncrementCount: () => Promise<void>;
   handleAddProductToCart: () => Promise<void>;
+  handleChangeFavorite: () => void;
   isDisabled: boolean;
   inStockValue: number;
+  isFavorite: boolean;
 }
 
 export const ProductContentTabletCart: FC<IProductContentTabletCartProps> = ({
   handleDecrementCount,
   handleIncrementCount,
   handleAddProductToCart,
+  handleChangeFavorite,
   inStockValue,
   isDisabled,
   quantity,
+  isFavorite,
 }) => {
   return (
     <div className="hidden md:max-tb:flex flex-col gap-[20px]">
-      <div className="flex w-full justify-between">
-        {quantity && (
+      <div
+        className={cn("flex w-full justify-between", {
+          "justify-end": quantity === 0,
+        })}
+      >
+        {quantity > 0 && (
           <div className="flex justify-center items-center gap-[30px] !h-full">
             <Button
               disabled={quantity === 0 || isDisabled}
@@ -48,7 +57,13 @@ export const ProductContentTabletCart: FC<IProductContentTabletCartProps> = ({
         )}
         <Button
           variant="icon"
-          className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain"
+          onClick={handleChangeFavorite}
+          className={cn(
+            "shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain",
+            {
+              fillMain: isFavorite,
+            },
+          )}
         >
           <FavoritesIcon />
         </Button>

@@ -1,14 +1,8 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
-import {
-  useChangeProductFavoritesMutation,
-  useFavorite,
-} from "@/entities/Favorites";
+import { useFavorite } from "@/entities/Favorites";
 import { getPreviewPrice } from "@/entities/ProductCard";
 import HeartIcon from "@/shared/assets/images/Heart.svg";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { useToast } from "@/shared/hooks/use-toast";
 import { cn } from "@/shared/lib/utils";
 import { IProductCardList } from "@/shared/types/types";
 import { Button, Card, CardContent, CardFooter, Typography } from "@/shared/ui";

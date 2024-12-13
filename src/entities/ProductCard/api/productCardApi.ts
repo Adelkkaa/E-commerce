@@ -49,11 +49,18 @@ export const productCardApi = baseApi.injectEndpoints({
     }),
     getProductCardSingle: build.query<
       ISingleProduct,
-      { guid: string; price_type_guid?: string | null }
+      {
+        guid: string;
+        price_type_guid?: string | null;
+        cart_outlet_guid?: string | null;
+      }
     >({
-      query: ({ guid, price_type_guid }) => ({
+      query: ({ guid, price_type_guid, cart_outlet_guid }) => ({
         url: `goods/${guid}`,
-        params: { price_type_guid: price_type_guid || undefined },
+        params: {
+          price_type_guid: price_type_guid || undefined,
+          cart_outlet_guid: cart_outlet_guid || undefined,
+        },
       }),
       providesTags: (result) =>
         result

@@ -1,6 +1,7 @@
 import { Minus, Plus } from "lucide-react";
 import { FC } from "react";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
+import { cn } from "@/shared/lib/utils";
 import { Button, Typography } from "@/shared/ui";
 
 interface IProductContentMobileCartProps {
@@ -8,23 +9,33 @@ interface IProductContentMobileCartProps {
   handleDecrementCount: () => Promise<void>;
   handleIncrementCount: () => Promise<void>;
   handleAddProductToCart: () => Promise<void>;
+  handleChangeFavorite: () => void;
   isDisabled: boolean;
   inStockValue: number;
+  isFavorite: boolean;
 }
 
 export const ProductContentMobileCart: FC<IProductContentMobileCartProps> = ({
   handleAddProductToCart,
   handleDecrementCount,
   handleIncrementCount,
+  handleChangeFavorite,
   inStockValue,
   isDisabled,
   quantity,
+  isFavorite,
 }) => {
   return (
     <div className="sticky md:hidden bottom-[50px] gap-[123px] mt-[30px] w-full flex justify-between">
       <Button
+        onClick={handleChangeFavorite}
         variant="icon"
-        className="shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain"
+        className={cn(
+          "shadow-custom border border-grayCustom p-[2px] w-[60px] h-[60px] cursor-pointer hover:fillMain",
+          {
+            fillMain: isFavorite,
+          },
+        )}
       >
         <FavoritesIcon />
       </Button>
