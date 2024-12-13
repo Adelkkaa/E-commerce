@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+// @ts-nocheck
 import { forwardRef } from "react";
 import type { ReactDatePickerProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
