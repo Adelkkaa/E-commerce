@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FilterMultiplieAutocomplete } from "@/entities/FilterMultiplieAutocomplete";
+import { FilterCheckbox } from "@/entities/FilterCheckbox";
 import { useGetProductGroupsQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
@@ -16,10 +16,14 @@ import {
 
 interface IHomeFilters {
   wrapperClassname?: string;
+  onClickButton?: () => void;
 }
 
-export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
-  const { data: productGroups, isLoading } = useGetProductGroupsQuery();
+export const HomeFilters: FC<IHomeFilters> = ({
+  wrapperClassname,
+  onClickButton,
+}) => {
+  const { data: productGroups } = useGetProductGroupsQuery();
   const [searchParams, setSearchParams] = useSearchParams();
   const price_from = searchParams.get("price_from");
   const price_to = searchParams.get("price_to");
@@ -47,8 +51,12 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
     dispatch(selectPriceTo(e.target.value));
   };
 
-  const handleCategoriesFilterChange = (value: string[]) => {
-    dispatch(selectCategories(value));
+  const handleCategoriesFilterChange = (value: string) => {
+    if (categories.includes(value)) {
+      dispatch(selectCategories(categories.filter((item) => item !== value)));
+    } else {
+      dispatch(selectCategories([...categories, value]));
+    }
   };
   const handleApplyFilters = () => {
     const vocabulary: Record<string, string | null | undefined> = {
@@ -67,6 +75,9 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
     searchParams.set("categories", categories.join(","));
     searchParams.set("page", "1");
     setSearchParams(searchParams);
+    if (onClickButton) {
+      onClickButton();
+    }
   };
 
   const handleClearFilters = () => {
@@ -76,6 +87,9 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
     });
     searchParams.set("page", "1");
     setSearchParams(searchParams);
+    if (onClickButton) {
+      onClickButton();
+    }
   };
 
   useEffect(() => {
@@ -110,17 +124,17 @@ export const HomeFilters: FC<IHomeFilters> = ({ wrapperClassname }) => {
       >
         <AccordionItem value="categories">
           <AccordionTrigger>Категории</AccordionTrigger>
-          <AccordionContent className="flex gap-[20px]">
-            <FilterMultiplieAutocomplete
-              data={productGroups || []}
-              labelClassname="mt-2"
-              title="Категории"
-              value={categories}
-              onChange={handleCategoriesFilterChange}
-              nameExtractor="name"
-              valueExtractor="guid"
-              isLoading={isLoading}
-            />
+          <AccordionContent className="flex flex-col gap-[20px]">
+            {productGroups?.map((item) => (
+              <FilterCheckbox
+                key={item.guid}
+                id={item.guid}
+                label={item.name}
+                value={item.guid}
+                checked={categories.includes(item.guid)}
+                onChange={handleCategoriesFilterChange}
+              />
+            ))}
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="price">

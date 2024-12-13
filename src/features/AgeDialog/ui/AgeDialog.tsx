@@ -11,7 +11,7 @@ import {
 
 interface IAgeDialog {
   setIsVerified: (arg: boolean) => void;
-  isVerified: boolean;
+  isVerified: boolean | null;
 }
 
 export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified, isVerified }) => {
@@ -26,7 +26,6 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified, isVerified }) => {
   const handleClickButton = (result: boolean) => {
     localStorage.setItem("isVerifiedAge", String(result));
     setIsVerified(result);
-    console.log(result);
     if (result) {
       setShowAgeDialog(false);
     }
@@ -38,7 +37,7 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified, isVerified }) => {
           <AlertDialogDescription className="text-textAlertTitle !text-blueCustom max-md:text-[180px] mb-7 max-md:mb-[10px] select-none">
             18+
           </AlertDialogDescription>
-          {isVerified ? (
+          {!isVerified ? (
             <AlertDialogDescription className="text-textM max-md:text-[16px] max-md:mt-0 !text-black select-none">
               Сайт содержит информацию для лиц совершеннолетнего возраста.
               <br />
@@ -52,7 +51,7 @@ export const AgeDialog: FC<IAgeDialog> = ({ setIsVerified, isVerified }) => {
             </AlertDialogDescription>
           )}
         </AlertDialogHeader>
-        {isVerified && (
+        {isVerified === null && (
           <AlertDialogFooter className="flex items-center !justify-center gap-7 mb:max-md:gap-[16px] mb:max-md:flex-row">
             <AlertDialogAction
               onClick={() => handleClickButton(true)}

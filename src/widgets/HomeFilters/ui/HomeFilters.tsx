@@ -59,7 +59,7 @@ export const HomeFilters = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen} modal={false}>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen} modal={true}>
             <SheetTrigger className="hidden mb:max-md:flex items-center">
               <div className="flex gap-[10px] items-center">
                 <Typography variant="titleXS">Фильтры</Typography>
@@ -68,12 +68,15 @@ export const HomeFilters = () => {
             </SheetTrigger>
             <SheetContent
               side="top"
-              className="w-full min-h-full flex flex-col justify-start  items-center"
+              className="w-full min-h-full max-h-screen overflow-y-scroll flex flex-col justify-start items-center pb-[90px]"
             >
               <SheetHeader>
                 <SheetTitle className="!text-textL">Фильтры</SheetTitle>
               </SheetHeader>
-              <HomeFiltersContent wrapperClassname="w-full" />
+              <HomeFiltersContent
+                onClickButton={() => setIsSheetOpen(false)}
+                wrapperClassname="w-full"
+              />
             </SheetContent>
           </Sheet>
         </div>

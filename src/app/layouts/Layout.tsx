@@ -23,7 +23,7 @@ registerLocale("ru", ru);
 setDefaultLocale("ru");
 
 export const Layout = () => {
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified, setIsVerified] = useState<boolean | null>(null);
 
   return (
     <Provider store={store}>
@@ -38,8 +38,7 @@ export const Layout = () => {
           </main>
           <Toaster />
           <AgeDialog isVerified={isVerified} setIsVerified={setIsVerified} />
-          <CookieConsent />
-
+          {isVerified && <CookieConsent />}
           <SharedDialog />
           <Footer />
         </div>
