@@ -1,5 +1,5 @@
 import { CookieIcon } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui";
 

@@ -1,6 +1,5 @@
 import { Minus, Plus } from "lucide-react";
 import { FC } from "react";
-import { useFavorite } from "@/entities/Favorites";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { cn } from "@/shared/lib/utils";
 import { Button, Typography } from "@/shared/ui";
@@ -26,7 +25,6 @@ export const ProductContentDesktopCart: FC<IProductContentDesktopCartProps> = ({
   inStockValue,
   isFavorite,
 }) => {
-  const { onChangeFavorite } = useFavorite();
   return (
     <div className="hidden tb:flex justify-between gap-[50px]">
       {quantity > 0 && (
