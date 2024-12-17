@@ -15,7 +15,7 @@ export const HeaderInput = () => {
   const { selectName } = productListActions;
   const { name } = useAppSelector((state) => state.productListReducer);
   const debouncedSearchValue = useDebounce(name, 300);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const nameSP = searchParams.get("name");
 
   const { data: productCardList } = useGetProductCardListQuery(
@@ -47,7 +47,13 @@ export const HeaderInput = () => {
   const handleSearch = () => {
     if (name) {
       setHintVisibility(false);
-      navigate(`/?name=${name}`);
+      searchParams.set("page", "1");
+      navigate(
+        `/?${searchParams.toString().length > 0 ? `${searchParams.toString()}&` : ""}name=${name}`,
+      );
+    } else {
+      searchParams.delete("name");
+      setSearchParams(searchParams);
     }
   };
 

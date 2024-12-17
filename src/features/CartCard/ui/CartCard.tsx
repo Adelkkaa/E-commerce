@@ -116,11 +116,7 @@ export const CartCard: FC<ICartCardProps> = ({
     }
   };
   return (
-    <Link
-      to={`/product/${guid}`}
-      target="_blank"
-      className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]"
-    >
+    <div className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]">
       <div className="flex gap-[15px]">
         <img
           src={image_key}
@@ -131,12 +127,14 @@ export const CartCard: FC<ICartCardProps> = ({
           <Typography variant="textL" className="max-md:text-[16px]">
             {price} <span className="text-textM max-md:text-[16px]">₽</span>
           </Typography>
-          <Typography
-            variant="tableText"
-            className="max-md:text-modalDesc max-md:font-medium"
-          >
-            {name}
-          </Typography>
+          <Link to={`/product/${guid}`} target="_blank">
+            <Typography
+              variant="tableText"
+              className="max-md:text-modalDesc max-md:font-medium"
+            >
+              {name}
+            </Typography>
+          </Link>
         </div>
       </div>
       <div className="flex flex-row md:flex-col md:items-end max-md:justify-between items-center">
@@ -187,6 +185,6 @@ export const CartCard: FC<ICartCardProps> = ({
           </Button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

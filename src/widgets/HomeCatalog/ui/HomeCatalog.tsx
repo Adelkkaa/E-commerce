@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { useGetProductCardListQuery } from "@/entities/ProductCard";
 import { ProductCardSkeleton } from "@/entities/ProductCardSkeleton";
+import { productListActions } from "@/entities/ProductList";
 import { HomeCatalogSort } from "@/features/HomeCatalogSort";
 import { ProductCard } from "@/features/ProductCard";
 import { ProductsPagination } from "@/features/ProductsPagination";
-import { useAppSelector } from "@/shared/hooks/use-redux";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { Button, Typography } from "@/shared/ui";
 
 export const HomeCatalog = () => {
@@ -16,6 +17,9 @@ export const HomeCatalog = () => {
   const order_by = searchParams.get("order_by");
 
   const name = searchParams.get("name");
+
+  const dispatch = useAppDispatch();
+  const { selectName } = productListActions;
 
   const { price_type_guid, guid } = useAppSelector(
     (state) => state.outletsReducer,
@@ -42,6 +46,7 @@ export const HomeCatalog = () => {
   });
 
   const handleClearSearchName = () => {
+    dispatch(selectName(""));
     searchParams.delete("name");
     searchParams.set("page", "1");
     setSearchParams(searchParams);

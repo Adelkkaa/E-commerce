@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { useFavorite } from "@/entities/Favorites";
 import { IFavoritesItem } from "@/shared/types/types";
 import {
@@ -60,7 +61,9 @@ export const FavoritesTable: FC<IFavoritesTableProps> = ({ favorites }) => {
                   />
                 </TableCell>
                 <TableCell className="text-center max-md:text-[12px]">
-                  {item.name}
+                  <Link to={`/product/${item.guid}`} target="_blank">
+                    {item.name}
+                  </Link>
                 </TableCell>
                 <TableCell className="text-center !font-semibold max-md:text-[12px]  whitespace-nowrap">
                   {item.price}{" "}
