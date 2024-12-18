@@ -4,7 +4,7 @@ import { ProductCardSkeleton } from "@/entities/ProductCardSkeleton";
 import { productListActions } from "@/entities/ProductList";
 import { HomeCatalogSort } from "@/features/HomeCatalogSort";
 import { ProductCard } from "@/features/ProductCard";
-import { ProductsPagination } from "@/features/ProductsPagination";
+import { PaginationComponent } from "@/features/ProductsPagination";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { Button, Typography } from "@/shared/ui";
 
@@ -81,7 +81,7 @@ export const HomeCatalog = () => {
         )}
       </div>
       {isSuccess && !isFetching && productCardList.items.length > 0 && (
-        <ProductsPagination
+        <PaginationComponent
           activePage={page ? Number(page) : 1}
           totalPages={Number(productCardList.pages)}
         />

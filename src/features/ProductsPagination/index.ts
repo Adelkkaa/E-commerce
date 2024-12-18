@@ -1,1 +1,1 @@
-export { ProductsPagination } from "./ui/ProductsPagination";
+export { PaginationComponent } from "./ui/PaginationComponent";

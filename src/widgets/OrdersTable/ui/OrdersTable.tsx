@@ -1,5 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useGetOrderListQuery } from "@/entities/Orders";
+import { PaginationComponent } from "@/features/ProductsPagination";
+import { useAppSelector } from "@/shared/hooks/use-redux";
+import { formatDate } from "@/shared/lib/utils";
 import {
+  Loader,
   Table,
   TableBody,
   TableCell,
@@ -11,65 +16,74 @@ import {
 
 export const OrdersTable = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page");
 
-  const ordersCard = Array.from({ length: 20 });
+  const { guid } = useAppSelector((state) => state.outletsReducer);
+
+  const { data: orderList, isLoading } = useGetOrderListQuery(
+    {
+      cart_outlet_guid: guid as string,
+      page: Number(page) || 1,
+      size: 5,
+    },
+    { skip: !guid },
+  );
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
-      <Table className="text-textM ">
-        <TableHeader>
-          <TableRow className="border-none bg-whiteBg rounded-[10px]">
-            <TableHead className="rounded-tl-[10px] rounded-bl-[10px] text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
-              Заказ
-            </TableHead>
-            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
-              Дата заказа
-            </TableHead>
-            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
-              Дата доставки
-            </TableHead>
-            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
-              Статус
-            </TableHead>
-            <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px] rounded-tr-[10px] rounded-br-[10px] whitespace-nowrap">
-              Сумма
-            </TableHead>
-            {/* <TableHead className="max-md:hidden text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px] rounded-tr-[10px] rounded-br-[10px]">
-              Детали
-            </TableHead> */}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {ordersCard.map((_, index) => (
-            <TableRow
-              key={index}
-              onClick={() => navigate("/orders/123")}
-              className="border-none text-tableText text-center cursor-pointer hover:bg-whiteBg hover:rounded-[10px]"
-            >
-              <TableCell className="max-md:text-[12px] rounded-tl-[10px] rounded-bl-[10px]">
-                #123435
-              </TableCell>
-              <TableCell className="max-md:text-[12px]">25.05.2024</TableCell>
-              <TableCell className="max-md:text-[12px]">27.05.2024</TableCell>
-              <TableCell className="max-md:text-[12px]">
-                Ожидает доставки
-              </TableCell>
-              <TableCell className="max-md:text-[12px] whitespace-nowrap rounded-tr-[10px] rounded-br-[10px]">
-                50 240.40 <span className="font-medium"> ₽</span>
-              </TableCell>
-              {/* <TableCell className="flex justify-center max-md:hidden">
-                <Link
-                  to="/orders/123"
-                  className="hover:strokeBlue hover:border-blueCustom flex justify-center w-[70px] h-[30px] border-2 rounded-[10px]"
+      {orderList && orderList.items.length > 0 ? (
+        <div className="flex flex-col justify-between gap-8">
+          <Table className="text-textM ">
+            <TableHeader>
+              <TableRow className="border-none bg-whiteBg rounded-[10px]">
+                <TableHead className="rounded-tl-[10px] rounded-bl-[10px] text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
+                  Заказ
+                </TableHead>
+                <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
+                  Дата заказа
+                </TableHead>
+                <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px]">
+                  Статус
+                </TableHead>
+                <TableHead className="text-center !text-textL max-md:text-[12px] !text-black max-md:py-[11px] md:py-[28px] rounded-tr-[10px] rounded-br-[10px] whitespace-nowrap">
+                  Сумма
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {orderList.items.map((item) => (
+                <TableRow
+                  key={item.guid}
+                  onClick={() => navigate(`/orders/${item.id}`)}
+                  className="border-none text-tableText text-center cursor-pointer hover:bg-whiteBg hover:rounded-[10px]"
                 >
-                  <EyeIcon className="w-[24px] h-[24px] [&_path]:stroke-grayCustom" />
-                </Link>
-              </TableCell> */}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      {false && (
+                  <TableCell className="max-md:text-[12px] rounded-tl-[10px] rounded-bl-[10px]">
+                    #{item.id}
+                  </TableCell>
+                  <TableCell className="max-md:text-[12px]">
+                    {formatDate(item.created_at)}
+                  </TableCell>
+                  <TableCell className="max-md:text-[12px]">
+                    {item.status}
+                  </TableCell>
+                  <TableCell className="max-md:text-[12px] whitespace-nowrap rounded-tr-[10px] rounded-br-[10px]">
+                    {item.total_cost} <span className="font-medium"> ₽</span>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <PaginationComponent
+            activePage={page ? Number(page) : 1}
+            totalPages={orderList.pages}
+          />
+        </div>
+      ) : (
         <Typography variant="textXl" className="flex mt-[30px] justify-center">
           Список заказов пуст
         </Typography>

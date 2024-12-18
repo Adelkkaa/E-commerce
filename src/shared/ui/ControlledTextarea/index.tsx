@@ -43,7 +43,7 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
             labelClassname,
             {
               "border-red-600": error?.message,
-              "bg-grayCustom": disabled,
+              "opacity-50": disabled,
             },
           )}
         >
@@ -59,6 +59,7 @@ const ControlledTextarea = React.forwardRef<HTMLTextAreaElement, TTextField>(
             {labelText}
           </span>
           <textarea
+            disabled={disabled}
             className={cn(
               "resize-none min-h-[70px] py-1 !text-black text-textM placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               className,

@@ -3,7 +3,10 @@ import clsx from "clsx";
 import { FC } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { dialogActions } from "@/entities/Dialog";
-import { useAppDispatch } from "@/shared/hooks/use-redux";
+import { useAddOrderMutation } from "@/entities/Orders";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
+import { useToast } from "@/shared/hooks/use-toast";
+import { ICartGood } from "@/shared/types/types";
 import {
   Button,
   ControlledTextarea,
@@ -21,6 +24,7 @@ interface ICartInfoProps {
   onCloseSheet?: () => void;
   totalCost: number;
   outletName: string;
+  goods: ICartGood[];
 }
 
 export const CartInfo: FC<ICartInfoProps> = ({
@@ -28,8 +32,12 @@ export const CartInfo: FC<ICartInfoProps> = ({
   onCloseSheet,
   outletName,
   totalCost,
+  goods,
 }) => {
+  const { toast } = useToast();
   const { selectCurrentDialog } = dialogActions;
+  const { guid } = useAppSelector((state) => state.outletsReducer);
+
   const dispatch = useAppDispatch();
   const methods = useForm<
     ICartInfoSchemaInitialType,
@@ -44,11 +52,41 @@ export const CartInfo: FC<ICartInfoProps> = ({
   });
   const { handleSubmit } = methods;
 
+  const [addOrder, { isLoading: isAddOrderLoading }] = useAddOrderMutation();
+
+  const errorHandler = (error: any) => {
+    console.log(error);
+    toast({
+      title: "Произошла ошибка",
+      description: error?.data?.detail || "Попробуйте еще раз",
+      variant: "destructive",
+    });
+  };
+
   const onSubmit: SubmitHandler<ICartInfoSchemaType> = async (newData) => {
-    console.log("Form Data", newData);
-    dispatch(selectCurrentDialog("cartSuccess"));
-    if (onCloseSheet) {
-      onCloseSheet();
+    try {
+      console.log("Form Data", newData);
+      const preparedProducts = goods.map(
+        ({ guid, specification_guid, quantity, price }) => ({
+          good_guid: guid,
+          specification_guid,
+          quantity,
+          price,
+        }),
+      );
+      await addOrder({
+        cart_outlet_guid: guid as string,
+        body: {
+          goods: preparedProducts,
+        },
+      }).unwrap();
+      dispatch(selectCurrentDialog("cartSuccess"));
+      if (onCloseSheet) {
+        onCloseSheet();
+      }
+    } catch (error) {
+      console.log(error);
+      errorHandler(error);
     }
   };
   return (
@@ -73,12 +111,14 @@ export const CartInfo: FC<ICartInfoProps> = ({
           className="flex flex-col gap-8"
         >
           <DatePicker
+            disabled={isAddOrderLoading}
             name="date"
             label="Дата доставки"
             placeholderText="ДД.ММ.ГГГГ"
             startDate={new Date()}
           />
           <ControlledTextarea
+            disabled={isAddOrderLoading}
             className="min-h-[173px]"
             name="comment"
             labelText="Комментарий"
@@ -88,6 +128,8 @@ export const CartInfo: FC<ICartInfoProps> = ({
           <Button
             type="submit"
             className="flex-1 w-full min-h-[50px] !text-textL text-white !rounded-[8px]"
+            withLoading={isAddOrderLoading}
+            disabled={isAddOrderLoading}
           >
             Заказать
           </Button>

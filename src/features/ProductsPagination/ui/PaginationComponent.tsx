@@ -11,12 +11,12 @@ import {
   PaginationPrevious,
 } from "@/shared/ui";
 
-interface IProductsPaginationProps {
+interface IPaginationComponentProps {
   activePage: number;
   totalPages: number;
 }
 
-export const ProductsPagination: FC<IProductsPaginationProps> = ({
+export const PaginationComponent: FC<IPaginationComponentProps> = ({
   activePage,
   totalPages,
 }) => {

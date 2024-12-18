@@ -6,6 +6,7 @@ const tagTypes = [
   "ProductInCart",
   "ProductCard",
   "FavoritesProduct",
+  "Orders",
 ] as const;
 export type ITagType = (typeof tagTypes)[number];
 

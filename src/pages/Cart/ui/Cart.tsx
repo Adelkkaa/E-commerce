@@ -53,6 +53,7 @@ export const Cart = () => {
             {cartData && cartData.goods.length > 0 && (
               <CartInfo
                 outletName={name}
+                goods={cartData.goods}
                 totalCost={cartData.total_cost}
                 containerClassName="max-md:hidden flex basis-[25%]"
               />

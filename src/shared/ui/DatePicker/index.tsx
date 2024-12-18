@@ -1,5 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // eslint-disable-next-line
 // @ts-nocheck
+
+// Очень сильно не нравится этот список игноров, но react-datepicker выдаёт странное поведение с точки зрения логики и версионности библиотеки
+
 import { forwardRef } from "react";
 import type { ReactDatePickerProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
@@ -43,12 +47,13 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
     return (
       <div className="flex flex-col gap-2">
         <label
+          onClick={(e) => e.preventDefault()}
           className={cn(
             "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer bg-white",
             labelClassname,
             {
               "border-red-600": error?.message,
-              "bg-grayCustom": disabled,
+              "opacity-50": disabled,
             },
           )}
         >
@@ -66,7 +71,9 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
           <ReactDatePicker
             {...field}
             {...props}
+            disabled={disabled}
             ref={ref}
+            shouldCloseOnSelect
             name={name}
             value={value}
             selected={value}

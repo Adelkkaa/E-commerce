@@ -3,6 +3,14 @@ interface IProductCardProperty {
   value: string;
 }
 
+export interface IGetAllApiResponse<T> {
+  items: T[];
+  page: number;
+  size: number;
+  pages: number;
+  total: number;
+}
+
 export interface IProductCardStorage {
   good_guid: string;
   in_stock: number;
@@ -44,13 +52,7 @@ export interface IProductGroups {
   guid: string;
 }
 
-export interface IProductCardApiResponse {
-  items: IProductCardList[];
-  total: number;
-  page: number;
-  size: number;
-  pages: number;
-}
+export type IProductCardApiResponse = IGetAllApiResponse<IProductCardList>;
 
 export interface IResponseError<T> {
   status: number;
