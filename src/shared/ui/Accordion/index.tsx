@@ -1,5 +1,5 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Minus, Plus } from "lucide-react";
+import { ChevronDown, Minus, Plus } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/shared/lib/utils";
 
@@ -17,11 +17,19 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
     withIcon?: boolean;
+    iconVariant?: "plus" | "chevron";
     headerClassname?: string;
   }
 >(
   (
-    { className, children, withIcon = true, headerClassname, ...props },
+    {
+      className,
+      children,
+      withIcon = true,
+      iconVariant = "plus",
+      headerClassname,
+      ...props
+    },
     ref,
   ) => (
     <AccordionPrimitive.Header
@@ -39,10 +47,15 @@ const AccordionTrigger = React.forwardRef<
         {...props}
       >
         {children}
-        {withIcon && (
+        {withIcon && iconVariant === "plus" && (
           <>
             <Plus className="h-[20px] w-[20px] shrink-0 transition-transform duration-200 group-data-[state=open]:hidden" />
             <Minus className="h-[20px] w-[20px] shrink-0 transition-transform duration-200 group-data-[state=closed]:hidden" />
+          </>
+        )}
+        {withIcon && iconVariant === "chevron" && (
+          <>
+            <ChevronDown className="h-[20px] w-[20px] shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
           </>
         )}
       </AccordionPrimitive.Trigger>

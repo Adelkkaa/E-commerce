@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FilterCheckbox } from "@/entities/FilterCheckbox";
 import { useGetProductGroupsQuery } from "@/entities/ProductCard";
 import { productListActions } from "@/entities/ProductList";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
+import { IProductGroups } from "@/shared/types/types";
 import {
   Accordion,
   AccordionContent,
@@ -13,6 +13,11 @@ import {
   Button,
   MaskedInput,
 } from "@/shared/ui";
+import {
+  handleInitializeOpenState,
+  prepareAddCategoriesData,
+  renderProductGroups,
+} from "../model/helper";
 
 interface IHomeFilters {
   wrapperClassname?: string;
@@ -23,7 +28,7 @@ export const HomeFilters: FC<IHomeFilters> = ({
   wrapperClassname,
   onClickButton,
 }) => {
-  const { data: productGroups } = useGetProductGroupsQuery();
+  const { data: productGroups, isSuccess } = useGetProductGroupsQuery();
   const [searchParams, setSearchParams] = useSearchParams();
   const price_from = searchParams.get("price_from");
   const price_to = searchParams.get("price_to");
@@ -55,7 +60,12 @@ export const HomeFilters: FC<IHomeFilters> = ({
     if (categories.includes(value)) {
       dispatch(selectCategories(categories.filter((item) => item !== value)));
     } else {
-      dispatch(selectCategories([...categories, value]));
+      const preparedCategories = prepareAddCategoriesData({
+        categories,
+        guid: value,
+        productGroups: productGroups as IProductGroups[],
+      });
+      dispatch(selectCategories([...preparedCategories, value]));
     }
   };
   const handleApplyFilters = () => {
@@ -87,6 +97,7 @@ export const HomeFilters: FC<IHomeFilters> = ({
     });
     searchParams.set("page", "1");
     setSearchParams(searchParams);
+    setAccordionValue([]);
     if (onClickButton) {
       onClickButton();
     }
@@ -104,13 +115,19 @@ export const HomeFilters: FC<IHomeFilters> = ({
       );
     }
 
-    if (categoriesParams) {
+    if (categoriesParams && isSuccess) {
       dispatch(selectCategories(categoriesParams.split(",")));
+      const categories = handleInitializeOpenState(
+        productGroups,
+        categoriesParams.split(","),
+      );
       setAccordionValue((prev) =>
-        prev.includes("categories") ? prev : [...prev, "categories"],
+        prev.includes("categories")
+          ? [...prev, ...categories]
+          : [...prev, "categories", ...categories],
       );
     }
-  }, [price_from, price_to, categoriesParams]);
+  }, [isSuccess]);
 
   return (
     <div
@@ -118,23 +135,22 @@ export const HomeFilters: FC<IHomeFilters> = ({
     >
       <Accordion
         value={accordionValue}
-        onValueChange={setAccordionValue}
+        onValueChange={(value) => {
+          console.log(value);
+          setAccordionValue(value);
+        }}
         type="multiple"
         className="flex flex-col gap-[30px]"
       >
         <AccordionItem value="categories">
           <AccordionTrigger>Категории</AccordionTrigger>
           <AccordionContent className="flex flex-col gap-[20px]">
-            {productGroups?.map((item) => (
-              <FilterCheckbox
-                key={item.guid}
-                id={item.guid}
-                label={item.name}
-                value={item.guid}
-                checked={categories.includes(item.guid)}
-                onChange={handleCategoriesFilterChange}
-              />
-            ))}
+            {renderProductGroups({
+              categories,
+              handleCategoriesFilterChange,
+              nesting: 0,
+              productGroups: productGroups || [],
+            })}
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="price">

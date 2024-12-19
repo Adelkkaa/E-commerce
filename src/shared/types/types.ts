@@ -50,6 +50,8 @@ export type IProductCardList = Pick<
 export interface IProductGroups {
   name: string;
   guid: string;
+  parent_group_guid: string | null;
+  child_groups: IProductGroups[];
 }
 
 export type IProductCardApiResponse = IGetAllApiResponse<IProductCardList>;

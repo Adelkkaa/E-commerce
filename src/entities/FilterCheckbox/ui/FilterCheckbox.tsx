@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { cn } from "@/shared/lib/utils";
 import { Checkbox } from "@/shared/ui";
 
 interface IFilterCheckboxProps {
@@ -7,6 +8,7 @@ interface IFilterCheckboxProps {
   onChange: (value: string) => void;
   value: string;
   checked: boolean;
+  className?: string;
 }
 
 export const FilterCheckbox: FC<IFilterCheckboxProps> = ({
@@ -15,9 +17,10 @@ export const FilterCheckbox: FC<IFilterCheckboxProps> = ({
   value,
   onChange,
   checked,
+  className,
 }) => {
   return (
-    <div className="flex items-center">
+    <div className={cn("flex items-center", className)}>
       <Checkbox
         value={value}
         checked={checked}
