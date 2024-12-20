@@ -17,8 +17,8 @@ export const Footer = () => {
           <Typography variant="titleXS">Поддержка</Typography>
           <div className="flex gap-[48px]">
             <div className="flex flex-col">
-              <a href="tel:+79991234567" className="text-titleXS">
-                +7 (999) 123-45-67
+              <a href="tel:+79897598000" className="text-titleXS">
+                +7 (989) 759-80-00
               </a>
               <Typography variant="textXXS">
                 звоните в будние дни,
@@ -53,6 +53,15 @@ export const Footer = () => {
                 </Link>
               </li>
             ))}
+            <li key="Свяжитесь с нами">
+              <Button
+                onClick={() => dispatch(selectCurrentDialog("contact"))}
+                variant="ghost"
+                className="p-0 hover:bg-transparent text-titleXS font-bold"
+              >
+                Форма связи
+              </Button>
+            </li>
           </ul>
         </div>
       </div>
@@ -61,8 +70,8 @@ export const Footer = () => {
         <Typography variant="titleXS">Поддержка</Typography>
         <div className="grid grid-cols-3 gap-[15px] justify-center">
           <div className="flex flex-col text-center ">
-            <a href="tel:+79991234567" className="text-titleXS text-blueCustom">
-              +7 (999) 123-45-67
+            <a href="tel:+79897598000" className="text-titleXS text-blueCustom">
+              +7 (989) 759-80-00
             </a>
             <Typography variant="textXXS">
               звоните в будние дни,

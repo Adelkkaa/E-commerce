@@ -38,7 +38,9 @@ export const HomeFilters = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-[10px] text-titleXS items-center bg-transparent hover:strokeBlue p-2 outline-none">
               <HomeSort />
-              {order_by === "price" ? "По цене" : "По названию"}
+              {order_by === "name" && "По названию"}
+              {order_by === "price" && "По цене"}
+              {!order_by && "Сортировка"}
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[260px]">
               <DropdownMenuItem onClick={() => handleSortClick("name")}>

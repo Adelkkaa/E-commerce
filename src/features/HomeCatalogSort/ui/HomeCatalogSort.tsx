@@ -20,7 +20,7 @@ export const HomeCatalogSort = () => {
         variant="link"
         size="link"
         className={cn("text-textS hover:text-main hover:underline", {
-          "text-main underline": order_by !== "price",
+          "text-main underline": order_by === "name",
         })}
         onClick={() => handleSortClick("name")}
       >

@@ -94,7 +94,7 @@ export const ContactForm = () => {
           <ControlledCheckbox
             disabled={isCreateApplicationLoading}
             id="is_company"
-            label="Я компания"
+            label="Юридическое лицо"
             name="is_company"
             withIcon
           />

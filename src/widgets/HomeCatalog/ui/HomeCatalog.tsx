@@ -42,7 +42,7 @@ export const HomeCatalog = () => {
     price_from: price_from || undefined,
     price_to: price_to || undefined,
     good_group_guids: categories || undefined,
-    order_by: order_by || "name",
+    order_by: order_by || undefined,
   });
 
   const handleClearSearchName = () => {
