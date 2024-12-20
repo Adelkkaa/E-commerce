@@ -7,6 +7,7 @@ type ICurrentDialog =
   | "contact"
   | "contactSuccess"
   | "cartSuccess"
+  | "development"
   | null;
 
 interface IDialogSlice {

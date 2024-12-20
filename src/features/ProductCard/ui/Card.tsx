@@ -63,10 +63,7 @@ export const ProductCard: FC<IProductCardList> = ({
           <Typography variant="textXS" className="line-clamp-2">
             {name}
           </Typography>
-          <Typography variant="titleS">
-            {prices[0].price_type.name !== "Розничная" && "от"}{" "}
-            {getPreviewPrice(prices)}
-          </Typography>
+          <Typography variant="titleS">{getPreviewPrice(prices)}</Typography>
         </CardFooter>
       </Card>
     </Link>

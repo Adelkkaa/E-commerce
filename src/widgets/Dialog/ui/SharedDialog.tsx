@@ -1,6 +1,7 @@
 import { CartSuccess } from "@/features/CartSuccess";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
+import { DevelopmentDialog } from "@/features/DevelopmentDialog";
 import { LoginForm } from "@/features/LoginForm";
 import { OutletsDialog } from "@/features/OutletsDialog";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
@@ -28,7 +29,9 @@ export const SharedDialog = () => {
         className={cn(
           "!max-w-500 px-[20px] gap-[30px] max-md:max-w-[96%] max-md:py-[30px] max-md:px-[10px] max-md:rounded-[10px]",
           {
-            "!max-w-[550px]": currentDialog === "contactSuccess",
+            "!max-w-[550px]":
+              currentDialog === "contactSuccess" ||
+              currentDialog === "development",
           },
         )}
       >
@@ -39,6 +42,7 @@ export const SharedDialog = () => {
           <OutletsDialog />
         )}
         {currentDialog === "cartSuccess" && <CartSuccess />}
+        {currentDialog === "development" && <DevelopmentDialog />}
       </DialogContent>
     </Dialog>
   );

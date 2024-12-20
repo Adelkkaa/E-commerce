@@ -19,7 +19,7 @@ import {
 } from "@/shared/ui";
 
 export const OutletsDialog = () => {
-  const { selectIsOpen } = dialogActions;
+  const { selectIsOpen, selectCurrentDialog } = dialogActions;
   const { setOutlet } = outletsActions;
 
   const { guid } = useAppSelector((state) => state.outletsReducer);
@@ -46,6 +46,7 @@ export const OutletsDialog = () => {
     );
     dispatch(setOutlet(currentOutlet as IOutletsItem));
     dispatch(selectIsOpen(false));
+    dispatch(selectCurrentDialog("development"));
   };
 
   const selectData =
