@@ -5,7 +5,7 @@ interface ICartListQueryArgs {
   cart_outlet_guid: string;
 }
 
-interface IChangeProductCountResponse {
+export interface IChangeProductCountResponse {
   good_guid: string;
   price_type_guid: string;
   quantity: number;

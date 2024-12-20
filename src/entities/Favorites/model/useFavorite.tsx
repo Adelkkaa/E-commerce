@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import { dialogActions } from "@/shared/ui";
-import { useChangeProductFavoritesMutation } from "..";
+import { useChangeProductFavoritesMutation } from "../api";
 
 export const useFavorite = () => {
   const { toast } = useToast();

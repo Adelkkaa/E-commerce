@@ -1,9 +1,5 @@
 import { FC } from "react";
-import {
-  useAddProductToCartMutation,
-  useChangeProductCountMutation,
-  useDeleteProductMutation,
-} from "@/entities/CartCard";
+import { useCart } from "@/entities/CartCard";
 import { useFavorite } from "@/entities/Favorites";
 import { getInStockValue, SpecificationSelect } from "@/entities/ProductCard";
 import {
@@ -13,10 +9,7 @@ import {
   ProductContentProperties,
   ProductContentTabletCart,
 } from "@/features/ProductContentBlocks";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { useToast } from "@/shared/hooks/use-toast";
 import { IProductCardPriceV2, ISingleProduct } from "@/shared/types/types";
-import { dialogActions } from "@/shared/ui";
 
 interface IProductContentProps {
   productId: string;
@@ -33,124 +26,39 @@ export const ProductContent: FC<IProductContentProps> = ({
   selectedSpecification,
   setSelectedSpecification,
 }) => {
-  const { toast } = useToast();
-  const { price_type_guid, guid: outletGuid } = useAppSelector(
-    (state) => state.outletsReducer,
-  );
-  const dispatch = useAppDispatch();
-  const { selectCurrentDialog } = dialogActions;
+  const {
+    addProductToCart,
+    decrementCount,
+    incrementCount,
+    isAddProductToCartLoading,
+    isChangeProductCountLoading,
+    isDeleteProductLoading,
+  } = useCart();
+  const { onChangeFavorite } = useFavorite();
 
-  const [changeProductCount, { isLoading: isChangeProductCountLoading }] =
-    useChangeProductCountMutation();
-  const [addProductToCart, { isLoading: isAddProductToCartLoading }] =
-    useAddProductToCartMutation();
-  const [deleteProduct, { isLoading: isDeleteProductLoading }] =
-    useDeleteProductMutation();
-
-  const errorHandler = (error: any) => {
-    console.log(error);
-    toast({
-      title: "Произошла ошибка",
-      description: error?.data?.detail || "Попробуйте еще раз",
-      variant: "destructive",
+  const handleAddProductToCart = async () => {
+    await addProductToCart({
+      quantity: 1,
+      specification_guid: selectedSpecification?.specification_guid as string,
+      good_guid: productId,
     });
   };
 
-  const handleAddProductToCart = async () => {
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await addProductToCart({
-        cart_outlet_guid: outletGuid,
-        body: {
-          specification_guid:
-            selectedSpecification?.specification_guid as string,
-          quantity: 1,
-          price_type_guid,
-          good_guid: productId,
-        },
-      }).unwrap();
-      toast({
-        title: "Товар добавлен в корзину",
-      });
-    } catch (error: any) {
-      errorHandler(error);
-    }
-  };
   const handleIncrementCount = async () => {
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await changeProductCount({
-        cart_outlet_guid: outletGuid,
-        body: {
-          specification_guid:
-            selectedSpecification?.specification_guid as string,
-          quantity: quantity + 1,
-          price_type_guid,
-          good_guid: productId,
-        },
-      }).unwrap();
-      toast({
-        title: "Товар добавлен в корзину",
-      });
-    } catch (error: any) {
-      errorHandler(error);
-    }
+    await incrementCount({
+      quantity,
+      specification_guid: selectedSpecification?.specification_guid as string,
+      good_guid: productId,
+    });
   };
 
   const handleDecrementCount = async () => {
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    if (quantity > 1) {
-      try {
-        await changeProductCount({
-          cart_outlet_guid: outletGuid,
-          body: {
-            specification_guid:
-              selectedSpecification?.specification_guid as string,
-            quantity: quantity - 1,
-            price_type_guid,
-            good_guid: productId,
-          },
-        }).unwrap();
-        toast({
-          title: "Товар удален из корзины",
-        });
-      } catch (error: any) {
-        errorHandler(error);
-      }
-    } else {
-      handleDeleteProduct();
-    }
+    await decrementCount({
+      quantity,
+      specification_guid: selectedSpecification?.specification_guid as string,
+      good_guid: productId,
+    });
   };
-
-  const handleDeleteProduct = async () => {
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await deleteProduct({
-        cart_outlet_guid: outletGuid,
-        good_guid: productId,
-        specification_guid: selectedSpecification?.specification_guid as string,
-      }).unwrap();
-      toast({
-        title: "Товар удален из корзины",
-      });
-    } catch (error: any) {
-      errorHandler(error);
-    }
-  };
-
-  const { onChangeFavorite } = useFavorite();
 
   const handleChangeFavorite = () => {
     onChangeFavorite({

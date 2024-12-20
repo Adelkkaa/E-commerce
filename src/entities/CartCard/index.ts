@@ -1,9 +1,8 @@
-import { cartApi } from "./api/cartApi";
-
-export const {
-  useGetCartListQuery,
-  useGetProductInCartQuery,
+export {
+  useAddProductToCartMutation,
   useChangeProductCountMutation,
   useDeleteProductMutation,
-  useAddProductToCartMutation,
-} = cartApi;
+  useGetCartListQuery,
+  useGetProductInCartQuery,
+} from "./api";
+export { useCart } from "./model/useCart";

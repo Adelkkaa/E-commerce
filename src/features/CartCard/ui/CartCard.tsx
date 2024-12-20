@@ -1,16 +1,11 @@
 import { Minus, Plus, X } from "lucide-react";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import {
-  useChangeProductCountMutation,
-  useDeleteProductMutation,
-} from "@/entities/CartCard";
+import { useCart } from "@/entities/CartCard";
 import { useFavorite } from "@/entities/Favorites";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { useToast } from "@/shared/hooks/use-toast";
 import { cn } from "@/shared/lib/utils";
-import { Button, dialogActions, Loader, Typography } from "@/shared/ui";
+import { Button, Loader, Typography } from "@/shared/ui";
 
 interface ICartCardProps {
   guid: string;
@@ -32,88 +27,37 @@ export const CartCard: FC<ICartCardProps> = ({
   isFavorite,
 }) => {
   const { onChangeFavorite } = useFavorite();
-  const { toast } = useToast();
-  const { price_type_guid, guid: outletGuid } = useAppSelector(
-    (state) => state.outletsReducer,
-  );
-  const dispatch = useAppDispatch();
-  const { selectCurrentDialog } = dialogActions;
+  const {
+    incrementCount,
+    decrementCount,
+    deleteProduct,
+    isChangeProductCountLoading,
+    isDeleteProductLoading,
+  } = useCart();
 
-  const [changeProductCount, { isLoading: isChangeProductCountLoading }] =
-    useChangeProductCountMutation();
-  const [deleteProduct, { isLoading: isDeleteProductLoading }] =
-    useDeleteProductMutation();
-
-  const errorHandler = (error: any) => {
-    console.log(error);
-    toast({
-      title: "Произошла ошибка",
-      description: error?.data?.detail || "Попробуйте еще раз",
-      variant: "destructive",
+  const handleDeleteProduct = async () => {
+    await deleteProduct({
+      specification_guid,
+      good_guid: guid,
     });
   };
-  const handleIncrementCount = async (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await changeProductCount({
-        cart_outlet_guid: outletGuid,
-        body: {
-          specification_guid,
-          quantity: quantity + 1,
-          price_type_guid,
-          good_guid: guid,
-        },
-      }).unwrap();
-    } catch (error: any) {
-      errorHandler(error);
-    }
+
+  const handleIncrementCount = async () => {
+    await incrementCount({
+      quantity,
+      specification_guid,
+      good_guid: guid,
+    });
   };
 
-  const handleDecrementCount = async (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    if (quantity > 1) {
-      try {
-        await changeProductCount({
-          cart_outlet_guid: outletGuid,
-          body: {
-            specification_guid,
-            quantity: quantity - 1,
-            price_type_guid,
-            good_guid: guid,
-          },
-        }).unwrap();
-      } catch (error: any) {
-        errorHandler(error);
-      }
-    } else {
-      handleDeleteProduct();
-    }
+  const handleDecrementCount = async () => {
+    await decrementCount({
+      quantity,
+      specification_guid,
+      good_guid: guid,
+    });
   };
 
-  const handleDeleteProduct = async (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    if (!price_type_guid || !outletGuid) {
-      dispatch(selectCurrentDialog("login"));
-      return;
-    }
-    try {
-      await deleteProduct({
-        cart_outlet_guid: outletGuid,
-        good_guid: guid,
-        specification_guid,
-      }).unwrap();
-    } catch (error: any) {
-      errorHandler(error);
-    }
-  };
   return (
     <div className="w-full rounded-[10px] boxShadow bg-white flex md:flex-row max-md:gap-[5px] flex-col justify-between p-[5px]">
       <div className="flex gap-[15px]">

@@ -1,6 +1,5 @@
-import { favoritesApi } from "./api/favoritesApi";
-
-export const { useChangeProductFavoritesMutation, useGetFavoritesListQuery } =
-  favoritesApi;
-
+export {
+  useChangeProductFavoritesMutation,
+  useGetFavoritesListQuery,
+} from "./api";
 export { useFavorite } from "./model/useFavorite";
