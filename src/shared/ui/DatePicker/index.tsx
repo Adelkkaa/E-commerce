@@ -1,10 +1,9 @@
+// Очень сильно не нравится этот список игноров, но react-datepicker выдаёт странное поведение с точки зрения логики и версионности библиотеки
+
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // eslint-disable-next-line
 // @ts-nocheck
-
-// Очень сильно не нравится этот список игноров, но react-datepicker выдаёт странное поведение с точки зрения логики и версионности библиотеки
-
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import type { ReactDatePickerProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 import type { FieldPath, FieldValues } from "react-hook-form";
@@ -44,10 +43,12 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
       name,
     });
 
+    const [open, setOpen] = useState<boolean>(false);
+
     return (
       <div className="flex flex-col gap-2">
         <label
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => open && e.preventDefault()}
           className={cn(
             "relative flex flex-col gap-[0.5rem] w-full rounded-[8px] border-[2px] bg-background px-[33px] py-[10px] text-textL ring-offset-background text-grayCustom cursor-pointer bg-white",
             labelClassname,
@@ -71,7 +72,10 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
           <ReactDatePicker
             {...field}
             {...props}
+            onCalendarOpen={() => setOpen(true)}
+            onSelect={() => setOpen(false)}
             disabled={disabled}
+            autoComplete="off"
             ref={ref}
             shouldCloseOnSelect
             name={name}
@@ -85,6 +89,7 @@ export const DatePicker = forwardRef<ReactDatePicker, TDatePicker>(
                 definitions={{
                   "#": /[0-9]/,
                 }}
+                autoComplete="off"
                 mask="##.##.####"
               />
             }

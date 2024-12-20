@@ -5,13 +5,12 @@ import {
   useChangeProductCountMutation,
   useDeleteProductMutation,
 } from "@/entities/CartCard";
-import { dialogActions } from "@/entities/Dialog";
 import { useFavorite } from "@/entities/Favorites";
 import FavoritesIcon from "@/shared/assets/images/Favorites.svg";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import { cn } from "@/shared/lib/utils";
-import { Button, Loader, Typography } from "@/shared/ui";
+import { Button, dialogActions, Loader, Typography } from "@/shared/ui";
 
 interface ICartCardProps {
   guid: string;

@@ -1,8 +1,7 @@
 import { useGetCartListQuery } from "@/entities/CartCard";
-import { dialogActions } from "@/entities/Dialog";
 import { CartInfo } from "@/features/CartInfo";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { Loader, Typography } from "@/shared/ui";
+import { dialogActions, Loader, Typography } from "@/shared/ui";
 import { BottomCartSheet } from "@/widgets/BottomCartSheet";
 import { CartContent } from "@/widgets/CartContent";
 

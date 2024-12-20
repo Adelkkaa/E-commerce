@@ -78,10 +78,12 @@ export const OrdersTable = () => {
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent
-            activePage={page ? Number(page) : 1}
-            totalPages={orderList.pages}
-          />
+          {orderList.pages > 1 && (
+            <PaginationComponent
+              activePage={page ? Number(page) : 1}
+              totalPages={orderList.pages}
+            />
+          )}
         </div>
       ) : (
         <Typography variant="textXl" className="flex mt-[30px] justify-center">

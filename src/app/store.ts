@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { dialogReducer } from "@/entities/Dialog";
 import { outletsReducer } from "@/entities/Outlets";
 import { productListReducer } from "@/entities/ProductList";
 import { baseApi } from "@/shared/api/baseApi";
+import { dialogReducer } from "@/shared/ui";
 
 export const store = configureStore({
   reducer: {

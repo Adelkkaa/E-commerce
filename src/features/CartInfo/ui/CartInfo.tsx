@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { FC } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { dialogActions } from "@/entities/Dialog";
 import { useAddOrderMutation } from "@/entities/Orders";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
@@ -11,6 +10,7 @@ import {
   Button,
   ControlledTextarea,
   DatePicker,
+  dialogActions,
   Typography,
 } from "@/shared/ui";
 import {
@@ -50,7 +50,7 @@ export const CartInfo: FC<ICartInfoProps> = ({
       date: null,
     },
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const [addOrder, { isLoading: isAddOrderLoading }] = useAddOrderMutation();
 
@@ -77,10 +77,13 @@ export const CartInfo: FC<ICartInfoProps> = ({
       await addOrder({
         cart_outlet_guid: guid as string,
         body: {
+          delivery_date: newData.date as string,
+          message: newData.comment || "",
           goods: preparedProducts,
         },
       }).unwrap();
       dispatch(selectCurrentDialog("cartSuccess"));
+      reset();
       if (onCloseSheet) {
         onCloseSheet();
       }

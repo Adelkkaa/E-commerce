@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { dialogActions } from "@/entities/Dialog";
 import {
   ILoginFormSchemaInitialType,
   ILoginFormSchemaType,
@@ -12,6 +11,7 @@ import { useToast } from "@/shared/hooks/use-toast";
 import {
   Button,
   ControlledInput,
+  dialogActions,
   DialogDescription,
   DialogFooter,
   DialogHeader,

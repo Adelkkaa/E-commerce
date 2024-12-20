@@ -2,6 +2,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/shared/lib/utils";
+import { dialogActions, dialogReducer, DialogSlice } from "./model/DialogSlice";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -107,6 +108,7 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {
   Dialog,
+  dialogActions,
   DialogClose,
   DialogContent,
   DialogDescription,
@@ -114,6 +116,8 @@ export {
   DialogHeader,
   DialogOverlay,
   DialogPortal,
+  dialogReducer,
+  DialogSlice,
   DialogTitle,
   DialogTrigger,
 };

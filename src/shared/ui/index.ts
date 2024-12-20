@@ -45,6 +45,7 @@ export { ControlledTextarea } from "./ControlledTextarea";
 export { DatePicker } from "./DatePicker";
 export {
   Dialog,
+  dialogActions,
   DialogClose,
   DialogContent,
   DialogDescription,
@@ -52,6 +53,8 @@ export {
   DialogHeader,
   DialogOverlay,
   DialogPortal,
+  dialogReducer,
+  DialogSlice,
   DialogTitle,
   DialogTrigger,
 } from "./Dialog";

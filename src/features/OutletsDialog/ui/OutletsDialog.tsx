@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { dialogActions } from "@/entities/Dialog";
 import {
   IOutletsDialogSchemaInitialType,
   IOutletsDialogSchemaType,
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import {
   Button,
   ControlledSelect,
+  dialogActions,
   DialogFooter,
   DialogHeader,
   DialogTitle,

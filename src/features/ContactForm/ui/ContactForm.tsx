@@ -7,13 +7,13 @@ import {
   IContactFormSchemaType,
   useCreateNewApplicationMutation,
 } from "@/entities/ContactForm";
-import { dialogActions } from "@/entities/Dialog";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import {
   Button,
   ControlledCheckbox,
   ControlledInput,
+  dialogActions,
   DialogDescription,
   DialogFooter,
   DialogHeader,

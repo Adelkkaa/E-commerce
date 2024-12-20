@@ -4,7 +4,6 @@ import {
   useChangeProductCountMutation,
   useDeleteProductMutation,
 } from "@/entities/CartCard";
-import { dialogActions } from "@/entities/Dialog";
 import { useFavorite } from "@/entities/Favorites";
 import { getInStockValue, SpecificationSelect } from "@/entities/ProductCard";
 import {
@@ -17,6 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import { IProductCardPriceV2, ISingleProduct } from "@/shared/types/types";
+import { dialogActions } from "@/shared/ui";
 
 interface IProductContentProps {
   productId: string;

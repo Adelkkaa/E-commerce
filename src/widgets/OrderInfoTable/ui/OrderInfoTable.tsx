@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleOrderQuery } from "@/entities/Orders";
+import { useForbiddenRedirect } from "@/shared/hooks/use-forbiddenRedirect";
 import { useAppSelector } from "@/shared/hooks/use-redux";
 import {
   Loader,
@@ -15,8 +16,11 @@ export const OrderInfoTable = () => {
   const { orderId } = useParams();
 
   const { guid, name } = useAppSelector((state) => state.outletsReducer);
-
-  const { data: orderInfo, isLoading } = useGetSingleOrderQuery(
+  const {
+    data: orderInfo,
+    isLoading,
+    error,
+  } = useGetSingleOrderQuery(
     {
       cart_outlet_guid: guid as string,
       id: Number(orderId),
@@ -24,8 +28,18 @@ export const OrderInfoTable = () => {
     { skip: !orderId },
   );
 
+  useForbiddenRedirect({ error, redirectPath: "/orders" });
+
   if (isLoading) {
     return <Loader />;
+  }
+
+  if ((error as any)?.status === 404) {
+    return (
+      <div className="text-center text-textM">
+        <span>Заказ не найден</span>
+      </div>
+    );
   }
 
   return (
@@ -98,7 +112,7 @@ export const OrderInfoTable = () => {
                   <img
                     src={item.image_key}
                     alt="card"
-                    className="w-[90px] h-[90px] min-w-[90px] min-h-[90px]"
+                    className="w-[90px] h-[90px] min-w-[90px] min-h-[90px] object-contain"
                   />
                 </TableCell>
                 <TableCell className="max-md:text-[12px]">

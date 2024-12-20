@@ -1,7 +1,6 @@
-import { dialogActions } from "@/entities/Dialog";
 import { useGetFavoritesListQuery } from "@/entities/Favorites";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { Loader, Typography } from "@/shared/ui";
+import { dialogActions, Loader, Typography } from "@/shared/ui";
 import { FavoritesTable } from "@/widgets/FavoritesTable";
 
 export const Favorites = () => {

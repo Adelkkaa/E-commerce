@@ -43,6 +43,8 @@ export interface IAddOrderProduct {
 export interface IAddOrderArgs {
   cart_outlet_guid: string;
   body: {
+    message: string;
+    delivery_date: string;
     goods: IAddOrderProduct[];
   };
 }

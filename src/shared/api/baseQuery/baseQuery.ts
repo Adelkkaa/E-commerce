@@ -1,6 +1,6 @@
 import { BaseQueryFn, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { dialogActions } from "@/entities/Dialog/model/DialogSlice";
 import { outletsActions } from "@/entities/Outlets/model/OutletsSlice";
+import { dialogActions } from "@/shared/ui";
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: "/api/v1/",
@@ -17,8 +17,7 @@ export const baseQueryWithReauth: BaseQueryFn = async (
   if (result.error) {
     const { status } = result.error;
 
-    if (status === 401 || status === 403) {
-      console.log("hello");
+    if (status === 401) {
       api.dispatch(outletsActions.resetOutlets());
       if (api.type === "mutation") {
         api.dispatch(dialogActions.selectCurrentDialog("login"));

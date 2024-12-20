@@ -23,7 +23,7 @@ export const CartInfoSchema = z.object({
     }),
   comment: z
     .string({ required_error: "Поле обязательно для заполнения" })
-    .min(3, "Поле обязательно для заполнения"),
+    .optional(),
 });
 
 export type ICartInfoSchemaInitialType = z.input<typeof CartInfoSchema>;

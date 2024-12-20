@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
 import { useLogoutMutation } from "@/entities/LoginForm";
 import { mobileHeaderLinks } from "@/shared/constants/navigationLinks";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
@@ -13,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   Button,
+  dialogActions,
   Sheet,
   SheetContent,
   SheetHeader,

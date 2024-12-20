@@ -1,8 +1,8 @@
-import { dialogActions } from "@/entities/Dialog";
 import ProfileIcon from "@/shared/assets/images/Profile.svg";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
 import {
   Button,
+  dialogActions,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,

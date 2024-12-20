@@ -1,4 +1,3 @@
-import { dialogActions } from "@/entities/Dialog";
 import { CartSuccess } from "@/features/CartSuccess";
 import { ContactForm } from "@/features/ContactForm";
 import { ContactSuccess } from "@/features/ContactSuccess";
@@ -6,7 +5,7 @@ import { LoginForm } from "@/features/LoginForm";
 import { OutletsDialog } from "@/features/OutletsDialog";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { cn } from "@/shared/lib/utils";
-import { Dialog, DialogContent } from "@/shared/ui";
+import { Dialog, dialogActions, DialogContent } from "@/shared/ui";
 
 export const SharedDialog = () => {
   const { selectIsOpen } = dialogActions;

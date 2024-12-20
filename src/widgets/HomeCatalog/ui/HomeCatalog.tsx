@@ -80,12 +80,15 @@ export const HomeCatalog = () => {
           </Typography>
         )}
       </div>
-      {isSuccess && !isFetching && productCardList.items.length > 0 && (
-        <PaginationComponent
-          activePage={page ? Number(page) : 1}
-          totalPages={Number(productCardList.pages)}
-        />
-      )}
+      {isSuccess &&
+        !isFetching &&
+        productCardList.items.length > 0 &&
+        productCardList.pages > 1 && (
+          <PaginationComponent
+            activePage={page ? Number(page) : 1}
+            totalPages={Number(productCardList.pages)}
+          />
+        )}
     </div>
   );
 };

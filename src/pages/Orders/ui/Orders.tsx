@@ -1,12 +1,12 @@
-import { Suspense } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
+import { Suspense, useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
-import { Loader, Typography } from "@/shared/ui";
+import { dialogActions, Loader, Typography } from "@/shared/ui";
 import { OrdersTable } from "@/widgets/OrdersTable";
 
 export const Orders = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const { guid, name } = useAppSelector((state) => state.outletsReducer);
   const { selectCurrentDialog } = dialogActions;
@@ -16,6 +16,12 @@ export const Orders = () => {
   const handleAuthClick = () => {
     dispatch(selectCurrentDialog("login"));
   };
+
+  useEffect(() => {
+    if (!guid || !name) {
+      navigate("/orders");
+    }
+  }, [guid, name]);
 
   if (!guid || !name) {
     return (

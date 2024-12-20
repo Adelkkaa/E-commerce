@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
 import { useLogoutMutation } from "@/entities/LoginForm";
 import ProfileIcon from "@/shared/assets/images/Profile.svg";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/use-redux";
 import { useToast } from "@/shared/hooks/use-toast";
 import {
+  dialogActions,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -37,7 +37,7 @@ export const ProfileDropdownMenuAuth = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="bg-transparent hover:strokeBlue w-[36px] h-[36px] p-2 outline-none">
+      <DropdownMenuTrigger className="bg-transparent hover:strokeMain w-[36px] h-[36px] p-2 outline-none">
         <ProfileIcon className="cursor-pointer w-full h-full" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[260px]">

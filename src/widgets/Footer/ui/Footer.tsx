@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { dialogActions } from "@/entities/Dialog";
 import { useAppDispatch } from "@/shared/hooks/use-redux";
-import { Button, Typography } from "@/shared/ui";
+import { Button, dialogActions, Typography } from "@/shared/ui";
 import {
   firstFooterLinks,
   footerLinks,
