@@ -67,9 +67,15 @@ export type IResponseErrorPrimary = IResponseError<{
 
 export type IProductCardPriceV2 = IProductCardStorage & { price: number };
 
+export interface IProductPackage {
+  name: string;
+  value: string;
+}
+
 export interface ISingleProduct
   extends Omit<IProductCard, "prices" | "storages" | "producing_country"> {
   specification: IProductCardPriceV2[];
+  package: IProductPackage[];
 }
 
 export interface ICartGood {

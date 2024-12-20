@@ -5,7 +5,7 @@ import { useGetProductCardSingleQuery } from "@/entities/ProductCard";
 import { ProductSkeleton } from "@/entities/ProductSkeleton";
 import { useAppSelector } from "@/shared/hooks/use-redux";
 import { scrollToTop } from "@/shared/lib/scrollToTop";
-import { IProductCardPriceV2 } from "@/shared/types/types";
+import { IProductCardPriceV2, IProductPackage } from "@/shared/types/types";
 import { ProductContent } from "@/widgets/ProductContent";
 
 export const Product = () => {
@@ -15,6 +15,8 @@ export const Product = () => {
   const { price_type_guid, guid } = useAppSelector(
     (state) => state.outletsReducer,
   );
+  const [selectedPackage, setSelectedPackage] =
+    useState<IProductPackage | null>(null);
 
   const {
     data: productCard,
@@ -48,6 +50,7 @@ export const Product = () => {
   useEffect(() => {
     if (isSuccess) {
       setSelectedSpecification(productCard.specification[0]);
+      setSelectedPackage(productCard.package[0]);
     }
   }, [isSuccess]);
 
@@ -61,8 +64,10 @@ export const Product = () => {
             quantity={productInCart?.quantity || 0}
             productId={productId as string}
             productCard={productCard}
+            selectedPackage={selectedPackage}
             selectedSpecification={selectedSpecification}
             setSelectedSpecification={setSelectedSpecification}
+            setSelectedPackage={setSelectedPackage}
           />
         )
       )}

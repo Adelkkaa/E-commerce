@@ -1,7 +1,11 @@
 import { FC } from "react";
 import { useCart } from "@/entities/CartCard";
 import { useFavorite } from "@/entities/Favorites";
-import { getInStockValue, SpecificationSelect } from "@/entities/ProductCard";
+import {
+  getInStockValue,
+  PackageSelect,
+  SpecificationSelect,
+} from "@/entities/ProductCard";
 import {
   ProductContentDesktopCart,
   ProductContentInfo,
@@ -9,12 +13,18 @@ import {
   ProductContentProperties,
   ProductContentTabletCart,
 } from "@/features/ProductContentBlocks";
-import { IProductCardPriceV2, ISingleProduct } from "@/shared/types/types";
+import {
+  IProductCardPriceV2,
+  IProductPackage,
+  ISingleProduct,
+} from "@/shared/types/types";
 
 interface IProductContentProps {
   productId: string;
   productCard: ISingleProduct;
   selectedSpecification: IProductCardPriceV2 | null;
+  selectedPackage: IProductPackage | null;
+  setSelectedPackage: (value: IProductPackage) => void;
   setSelectedSpecification: (value: IProductCardPriceV2) => void;
   quantity: number;
 }
@@ -25,6 +35,8 @@ export const ProductContent: FC<IProductContentProps> = ({
   productCard,
   selectedSpecification,
   setSelectedSpecification,
+  selectedPackage,
+  setSelectedPackage,
 }) => {
   const {
     addProductToCart,
@@ -38,7 +50,10 @@ export const ProductContent: FC<IProductContentProps> = ({
 
   const handleAddProductToCart = async () => {
     await addProductToCart({
-      quantity: 1,
+      quantity:
+        selectedPackage && !isNaN(Number(selectedPackage.value))
+          ? Number(selectedPackage.value)
+          : 1,
       specification_guid: selectedSpecification?.specification_guid as string,
       good_guid: productId,
     });
@@ -49,6 +64,10 @@ export const ProductContent: FC<IProductContentProps> = ({
       quantity,
       specification_guid: selectedSpecification?.specification_guid as string,
       good_guid: productId,
+      incrementValue:
+        selectedPackage && !isNaN(Number(selectedPackage.value))
+          ? Number(selectedPackage.value)
+          : 1,
     });
   };
 
@@ -57,6 +76,10 @@ export const ProductContent: FC<IProductContentProps> = ({
       quantity,
       specification_guid: selectedSpecification?.specification_guid as string,
       good_guid: productId,
+      incrementValue:
+        selectedPackage && !isNaN(Number(selectedPackage.value))
+          ? Number(selectedPackage.value)
+          : 1,
     });
   };
 
@@ -90,19 +113,32 @@ export const ProductContent: FC<IProductContentProps> = ({
             selectedSpecification={selectedSpecification}
           />
 
-          {(productCard.specification.length > 1 ||
-            (productCard.specification.length === 1 &&
-              productCard.specification[0].specification_guid !==
-                "нет характеристики")) && (
-            <SpecificationSelect
-              disabled={isChangeProductCountLoading || isDeleteProductLoading}
-              options={productCard.specification}
-              value={selectedSpecification?.specification_guid || ""}
-              labelText="МРЦ"
-              placeholder="Выберите МРЦ"
-              onChange={setSelectedSpecification}
-            />
-          )}
+          <div className="flex flex-col gap-[20px]">
+            {(productCard.specification.length > 1 ||
+              (productCard.specification.length === 1 &&
+                productCard.specification[0].specification_guid !==
+                  "нет характеристики")) && (
+              <SpecificationSelect
+                disabled={isChangeProductCountLoading || isDeleteProductLoading}
+                options={productCard.specification}
+                value={selectedSpecification?.specification_guid || ""}
+                labelText="МРЦ"
+                placeholder="Выберите МРЦ"
+                onChange={setSelectedSpecification}
+              />
+            )}
+
+            {productCard.package.length > 1 && (
+              <PackageSelect
+                disabled={isChangeProductCountLoading || isDeleteProductLoading}
+                options={productCard.package}
+                value={selectedPackage?.value || ""}
+                labelText="Количество"
+                placeholder="Выберите количество"
+                onChange={setSelectedPackage}
+              />
+            )}
+          </div>
 
           {selectedSpecification && (
             <ProductContentDesktopCart

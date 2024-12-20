@@ -49,9 +49,9 @@ export const LoginForm = () => {
       const errorMessage =
         error?.data?.detail === "Not Found"
           ? "Неверный логин или пароль"
-          : "Что-то пошло не так, попробуйте позже";
+          : (error?.data?.detail as string);
       toast({
-        title: errorMessage,
+        title: errorMessage ? errorMessage : "Произошла ошибка",
         variant: "destructive",
       });
     }
@@ -106,7 +106,7 @@ export const LoginForm = () => {
             </Typography>
             <Button
               variant="link"
-              className="!text-modalDesc max-ml:!text-[12px] items-start !p-0 !pl-1 h-auto"
+              className="!text-modalDesc max-ml:!text-[12px] items-start !gap-0 !p-0 !pl-1 h-auto"
               onClick={() => dispatch(selectCurrentDialog("contact"))}
             >
               <span className="text-blueCustom underline">

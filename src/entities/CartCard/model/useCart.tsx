@@ -8,6 +8,10 @@ import {
 } from "../api";
 import { IChangeProductCountResponse } from "../api/cartApi";
 
+type IChangeCountArgs = Omit<IChangeProductCountResponse, "price_type_guid"> & {
+  incrementValue?: number;
+};
+
 export const useCart = () => {
   const { toast } = useToast();
 
@@ -67,7 +71,8 @@ export const useCart = () => {
     quantity,
     specification_guid,
     good_guid,
-  }: Omit<IChangeProductCountResponse, "price_type_guid">) => {
+    incrementValue = 1,
+  }: IChangeCountArgs) => {
     if (!price_type_guid || !outletGuid) {
       dispatch(selectCurrentDialog("login"));
       return;
@@ -77,7 +82,7 @@ export const useCart = () => {
         cart_outlet_guid: outletGuid,
         body: {
           specification_guid,
-          quantity: quantity + 1,
+          quantity: quantity + incrementValue,
           price_type_guid,
           good_guid,
         },
@@ -94,18 +99,19 @@ export const useCart = () => {
     quantity,
     specification_guid,
     good_guid,
-  }: Omit<IChangeProductCountResponse, "price_type_guid">) => {
+    incrementValue = 1,
+  }: IChangeCountArgs) => {
     if (!price_type_guid || !outletGuid) {
       dispatch(selectCurrentDialog("login"));
       return;
     }
-    if (quantity > 1) {
+    if (quantity > incrementValue) {
       try {
         await changeProductCountMutation({
           cart_outlet_guid: outletGuid,
           body: {
             specification_guid,
-            quantity: quantity - 1,
+            quantity: quantity - incrementValue,
             price_type_guid,
             good_guid,
           },

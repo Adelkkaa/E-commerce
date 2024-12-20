@@ -23,6 +23,7 @@ export const OutletsDialog = () => {
   const { setOutlet } = outletsActions;
 
   const { guid } = useAppSelector((state) => state.outletsReducer);
+  const { currentDialog } = useAppSelector((state) => state.dialogReducer);
 
   const dispatch = useAppDispatch();
   const { data: outlets, isLoading } = useGetOutletsQuery();
@@ -46,7 +47,10 @@ export const OutletsDialog = () => {
     );
     dispatch(setOutlet(currentOutlet as IOutletsItem));
     dispatch(selectIsOpen(false));
-    dispatch(selectCurrentDialog("development"));
+
+    if (currentDialog === "outlets-auth") {
+      dispatch(selectCurrentDialog("development"));
+    }
   };
 
   const selectData =
