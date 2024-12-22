@@ -118,7 +118,9 @@ export const OrderInfoTable = () => {
                 <TableCell className="max-md:text-[12px]">
                   {item.name}
                 </TableCell>
-                <TableCell className="max-md:text-[12px]">3 шт</TableCell>
+                <TableCell className="max-md:text-[12px]">
+                  {item.quantity} шт
+                </TableCell>
                 <TableCell className="max-md:text-[12px] whitespace-nowrap">
                   {item.price} ₽
                 </TableCell>
