@@ -51,8 +51,18 @@ export const ProductCard: FC<IProductCardList> = ({
           </div>
 
           {type !== "regular" && (
-            <div className="flex absolute top-[15px] left-[7px] md:min-w-[100px] max-md:w-[60px] h-5 justify-center rounded-[4px] bg-main">
-              <Typography variant="titleXS" className="text-whiteCustom">
+            <div
+              className={cn(
+                "flex absolute top-[15px] left-[7px] md:min-w-[100px] max-md:w-[60px] h-5 justify-center rounded-[4px] bg-main",
+                { "bg-yellowCustom": type === "hit" },
+              )}
+            >
+              <Typography
+                variant="titleXS"
+                className={cn("text-whiteCustom", {
+                  "text-black": type === "hit",
+                })}
+              >
                 {type === "new" && "Новинка"}
                 {type === "hit" && "Хит"}
               </Typography>

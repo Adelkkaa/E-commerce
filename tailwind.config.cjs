@@ -175,6 +175,7 @@ module.exports = {
         whiteCustom: "#F8F8F8",
         blackCustom: "#000000",
         whiteBg: "#EFEFEF",
+        yellowCustom: "#CDCB10",
       },
       borderRadius: {
         lg: "var(--radius)",
