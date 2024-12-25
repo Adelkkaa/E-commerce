@@ -6,3 +6,5 @@ services:
     ports:
       - "80:80"
     restart: unless-stopped
+    environment:
+      - API_URL=${VITE_API_URL}

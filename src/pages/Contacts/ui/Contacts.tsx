@@ -5,9 +5,9 @@ export const Contacts = () => {
     <section className="px-[10px] my-[40px] flex flex-col gap-[30px]">
       <Typography variant="textM">
         Если у Вас возникли вопросы, то можете позвонить по телефону{" "}
-        <span className="text-textL">+7 (989) 759-80-00</span> (будние дни, с 8
+        <span className="text-textL">+7 (918) 940-70-00</span> (будние дни, с 8
         по 19:00 по московскому времени) <br /> или написать нам на почту{" "}
-        <span className="text-textL">support@dvakapitana.ru</span>, или в форму{" "}
+        <span className="text-textL">info@dk-ltd.ru</span>, или в форму{" "}
         <span className="text-textL">"Свяжитесь со мной”</span>.
       </Typography>
       <div className="flex flex-col gap-[10px]">

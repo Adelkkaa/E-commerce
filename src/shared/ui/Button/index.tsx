@@ -40,6 +40,8 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   withLoading?: boolean;
+  icon?: React.ReactNode;
+  iconDirection?: "left" | "right";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -51,6 +53,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       withLoading,
       children,
       asChild = false,
+      iconDirection = "left",
+      icon,
       ...props
     },
     ref,
@@ -65,8 +69,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
+        {iconDirection === "left" && icon && icon}
         {children}
-        {withLoading && (
+        {iconDirection === "right" && icon && icon}
+        {!icon && withLoading && (
           <Loader2 width={16} height={16} className="animate-spin" />
         )}
       </Comp>

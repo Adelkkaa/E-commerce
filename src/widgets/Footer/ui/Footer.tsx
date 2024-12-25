@@ -17,8 +17,8 @@ export const Footer = () => {
           <Typography variant="titleXS">Поддержка</Typography>
           <div className="flex gap-[48px]">
             <div className="flex flex-col">
-              <a href="tel:+79897598000" className="text-titleXS">
-                +7 (989) 759-80-00
+              <a href="tel:+79189407000" className="text-titleXS">
+                +7 (918) 940-70-00
               </a>
               <Typography variant="textXXS">
                 звоните в будние дни,
@@ -26,8 +26,8 @@ export const Footer = () => {
               </Typography>
             </div>
             <div className="flex flex-col">
-              <a href="mailto:support@dvakapitana.ru" className="text-titleXS">
-                support@dvakapitana.ru
+              <a href="mailto:info@dk-ltd.ru" className="text-titleXS">
+                info@dk-ltd.ru
               </a>
               <Typography variant="textXXS">или можете написать нам</Typography>
             </div>
@@ -70,8 +70,8 @@ export const Footer = () => {
         <Typography variant="titleXS">Поддержка</Typography>
         <div className="grid grid-cols-3 gap-[15px] justify-center">
           <div className="flex flex-col text-center ">
-            <a href="tel:+79897598000" className="text-titleXS text-blueCustom">
-              +7 (989) 759-80-00
+            <a href="tel:+79189407000" className="text-titleXS text-blueCustom">
+              +7 (918) 940-70-00
             </a>
             <Typography variant="textXXS">
               звоните в будние дни,
@@ -80,10 +80,10 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col text-center">
             <a
-              href="mailto:support@dvakapitana.ru"
+              href="mailto:info@dk-ltd.ru"
               className="text-titleXS text-blueCustom"
             >
-              support@dvakapitana.ru
+              info@dk-ltd.ru
             </a>
             <Typography variant="textXXS">или можете написать нам</Typography>
           </div>

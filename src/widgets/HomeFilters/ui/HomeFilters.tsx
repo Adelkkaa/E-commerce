@@ -25,9 +25,13 @@ export const HomeFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const order_by = searchParams.get("order_by");
 
-  const handleSortClick = (orderBy: string) => {
+  const handleSortClick = (orderBy: string | null) => {
     searchParams.set("page", "1");
-    searchParams.set("order_by", orderBy);
+    if (orderBy) {
+      searchParams.set("order_by", orderBy);
+    } else {
+      searchParams.delete("order_by");
+    }
     setSearchParams(searchParams);
   };
 
@@ -38,25 +42,51 @@ export const HomeFilters = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-[10px] text-titleXS items-center bg-transparent hover:strokeBlue p-2 outline-none">
               <HomeSort />
-              {order_by === "name" && "По названию"}
-              {order_by === "price" && "По цене"}
-              {!order_by && "Сортировка"}
+              {order_by === "+price" && "По цене: по возрастанию"}
+              {order_by === "-price" && "По цене: по убыванию"}
+              {order_by === "+name" && "По названию: по возрастанию"}
+              {order_by === "-name" && "По названию: по убыванию"}
+              {!order_by && "По типу"}
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[260px]">
-              <DropdownMenuItem onClick={() => handleSortClick("name")}>
+              <DropdownMenuItem onClick={() => handleSortClick("+price")}>
                 <Button
                   variant="ghost"
                   className="text-titleXS w-full text-center"
                 >
-                  По названию
+                  По цене: по возрастанию
                 </Button>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleSortClick("price")}>
+              <DropdownMenuItem onClick={() => handleSortClick("-price")}>
                 <Button
                   variant="ghost"
                   className="text-titleXS w-full text-center"
                 >
-                  По цене
+                  По цене: по убыванию
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSortClick("+name")}>
+                <Button
+                  variant="ghost"
+                  className="text-titleXS w-full text-center"
+                >
+                  По названию: по возрастанию
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSortClick("-name")}>
+                <Button
+                  variant="ghost"
+                  className="text-titleXS w-full text-center"
+                >
+                  По названию: по убыванию
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSortClick(null)}>
+                <Button
+                  variant="ghost"
+                  className="text-titleXS w-full text-center"
+                >
+                  По типу
                 </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
