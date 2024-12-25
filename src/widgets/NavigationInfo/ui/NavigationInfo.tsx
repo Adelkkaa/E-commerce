@@ -1,5 +1,4 @@
 import { useLocation, useParams } from "react-router-dom";
-// import { CustomBreadcrumb } from "@/features/Breadcrumb";
 import { Breadcrumbs } from "@/features/Breadcrumb";
 import { allLinks } from "@/shared/constants/navigationLinks";
 import useDocumentTitle from "@/shared/hooks/use-documentTitle";
@@ -13,13 +12,12 @@ export const NavigationInfo = () => {
       Object.entries(params).length > 0
         ? Object.keys(params)[0] === link.searchBreadcrumb
         : link.href === pathname,
-    )?.description || "404";
+    )?.description || "Такой страницы не существует";
   useDocumentTitle(currentDesc || "e-commerce");
 
   return (
     <div className="fullWidth md:py-[49px] py-[26px] bg-blueCustom ">
       <div className="subContainer flex flex-col">
-        {/* <Breadcrumb /> */}
         <Breadcrumbs />
         <Typography
           variant="h1"

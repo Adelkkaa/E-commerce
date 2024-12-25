@@ -13,6 +13,7 @@ const Policy = lazy(() => import("@/pages/Policy"));
 const Favorites = lazy(() => import("@/pages/Favorites"));
 const Orders = lazy(() => import("@/pages/Orders"));
 const OrderInfo = lazy(() => import("@/pages/OrderInfo"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const routes: RouteObject[] = [
   {
@@ -30,14 +31,22 @@ const routes: RouteObject[] = [
         path: "/cart",
         element: <Cart />,
         handle: {
-          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Корзина</Typography>,
+          crumb: () => (
+            <Typography variant="buttonM" className="max-md:text-[12px]">
+              Корзина
+            </Typography>
+          ),
         },
       },
       {
         path: "/contacts",
         element: <Contacts />,
         handle: {
-          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Контакты</Typography>,
+          crumb: () => (
+            <Typography variant="buttonM" className="max-md:text-[12px]">
+              Контакты
+            </Typography>
+          ),
         },
       },
       {
@@ -45,7 +54,9 @@ const routes: RouteObject[] = [
         element: <Product />,
         handle: {
           crumb: () => (
-            <Typography variant="buttonM" className="max-md:text-[12px]">Информация о товаре</Typography>
+            <Typography variant="buttonM" className="max-md:text-[12px]">
+              Информация о товаре
+            </Typography>
           ),
         },
       },
@@ -75,7 +86,11 @@ const routes: RouteObject[] = [
         path: "/favorites",
         element: <Favorites />,
         handle: {
-          crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Избранное</Typography>,
+          crumb: () => (
+            <Typography variant="buttonM" className="max-md:text-[12px]">
+              Избранное
+            </Typography>
+          ),
         },
       },
       {
@@ -89,7 +104,11 @@ const routes: RouteObject[] = [
             path: "/orders/:orderId",
             element: <OrderInfo />,
             handle: {
-              crumb: () => <Typography variant="buttonM" className="max-md:text-[12px]">Заказ</Typography>,
+              crumb: () => (
+                <Typography variant="buttonM" className="max-md:text-[12px]">
+                  Заказ
+                </Typography>
+              ),
             },
           },
         ],
@@ -101,7 +120,7 @@ const routes: RouteObject[] = [
   },
   {
     path: "*",
-    element: <Typography variant="h1">404</Typography>,
+    element: <NotFound />,
   },
 ];
 
