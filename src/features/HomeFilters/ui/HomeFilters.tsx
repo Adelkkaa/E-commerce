@@ -136,7 +136,6 @@ export const HomeFilters: FC<IHomeFilters> = ({
       <Accordion
         value={accordionValue}
         onValueChange={(value) => {
-          console.log(value);
           setAccordionValue(value);
         }}
         type="multiple"

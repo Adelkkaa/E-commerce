@@ -65,7 +65,6 @@ export const CartInfo: FC<ICartInfoProps> = ({
 
   const onSubmit: SubmitHandler<ICartInfoSchemaType> = async (newData) => {
     try {
-      console.log("Form Data", newData);
       const preparedProducts = goods.map(
         ({ guid, specification_guid, quantity, price }) => ({
           good_guid: guid,

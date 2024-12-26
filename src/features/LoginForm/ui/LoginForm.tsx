@@ -40,7 +40,6 @@ export const LoginForm = () => {
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<ILoginFormSchemaType> = async (newData) => {
-    console.log("Form Data", newData);
     try {
       await login(newData).unwrap();
       dispatch(selectCurrentDialog("outlets-auth"));

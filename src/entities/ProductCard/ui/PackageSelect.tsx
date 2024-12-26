@@ -37,7 +37,6 @@ const PackageSelect = ({
       (item) => item.value === value,
     ) as IProductPackage;
 
-    console.log(preparedOption);
     onChange(preparedOption);
   };
   return (
