@@ -13,7 +13,7 @@ export const NavigationInfo = () => {
         ? Object.keys(params)[0] === link.searchBreadcrumb
         : link.href === pathname,
     )?.description || "Такой страницы не существует";
-  useDocumentTitle(currentDesc || "e-commerce");
+  useDocumentTitle(currentDesc || "Два капитана");
 
   return (
     <div className="fullWidth md:py-[49px] py-[26px] bg-blueCustom ">
